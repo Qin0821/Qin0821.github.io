@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 刘亲的学习笔记
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
+author: Qin
 language: en
 timezone: ''
 
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yun
+theme: tree
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
