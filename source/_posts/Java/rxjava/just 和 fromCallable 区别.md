@@ -60,3 +60,5 @@ start subscribing
 1729786515
 ```
 复制代码对于 just 在调用 subscribe 之前打印了 -Generating-，而 fromCallable 是在调用 subscribe 之后才打印 -Generating-。
+
+[参考链接](https://juejin.im/post/6844904168583331854#heading-12)
