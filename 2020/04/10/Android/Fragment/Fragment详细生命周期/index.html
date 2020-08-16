@@ -9,9 +9,9 @@
 	
 	<title>
 	
-		Hello World | 
+		Android/Fragment/Fragment详细生命周期 | 
 	 
-	刘亲的学习笔记
+	亲临其境
 	</title>
 	
 	<!-- keywords,description -->
@@ -60,7 +60,7 @@
 
 <body>
 	<header id="header">
-    <a id="title" href="/" class="logo">刘亲的学习笔记</a>
+    <a id="title" href="/" class="logo">亲临其境</a>
 
 	<ul id="menu">
 		<li class="menu-item">
@@ -99,25 +99,16 @@
 									</a>
 									
 							<ul>
-								<li class="file">
-									<a href="/2020/04/03/Android/hello-world/">
-										hello-world
-									</a>
-								</li>
-								<div class="article-toc" style="display: none;"></div>
-							</ul>
-			
-							<ul>
 								<li class="directory">
 									<a href="#" class="directory">
 										<i class="fa fa-plus-square-o"></i>
-										性能优化
+										Fragment
 									</a>
 									
 							<ul>
-								<li class="file">
-									<a href="/2020/04/03/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/hello-world/">
-										hello-world
+								<li class="file active">
+									<a href="/2020/04/10/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+										Fragment详细生命周期
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -151,37 +142,20 @@
 								<li class="directory">
 									<a href="#" class="directory">
 										<i class="fa fa-plus-square-o"></i>
-										瘦身
+										版本适配
 									</a>
 									
-							<ul>
-								<li class="file">
-									<a href="/2020/04/03/Android/%E7%98%A6%E8%BA%AB/hello-world/">
-										hello-world
-									</a>
-								</li>
-								<div class="article-toc" style="display: none;"></div>
-							</ul>
-			
-								</li>
-								
-							</ul>
-			
-								</li>
-								
-							</ul>
-			
 							<ul>
 								<li class="directory">
 									<a href="#" class="directory">
 										<i class="fa fa-plus-square-o"></i>
-										Flutter
+										Android 10
 									</a>
 									
 							<ul>
 								<li class="file">
-									<a href="/2020/04/03/Flutter/hello-world/">
-										hello-world
+									<a href="/2020/04/17/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/Android%2010/Android%2010%E9%80%82%E9%85%8D/">
+										Android 10适配
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -191,20 +165,8 @@
 								
 							</ul>
 			
-							<ul>
-								<li class="directory">
-									<a href="#" class="directory">
-										<i class="fa fa-plus-square-o"></i>
-										Github Pages + Hexo搭建个人博客
-									</a>
-									
-							<ul>
-								<li class="file">
-									<a href="/2020/04/03/Github%20Pages%20+%20Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/hello-world/">
-										hello-world
-									</a>
 								</li>
-								<div class="article-toc" style="display: none;"></div>
+								
 							</ul>
 			
 								</li>
@@ -231,26 +193,6 @@
 								
 							</ul>
 			
-							<ul>
-								<li class="directory">
-									<a href="#" class="directory">
-										<i class="fa fa-plus-square-o"></i>
-										数据结构与算法
-									</a>
-									
-							<ul>
-								<li class="file active">
-									<a href="/2020/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/hello-world/">
-										hello-world
-									</a>
-								</li>
-								<div class="article-toc" style="display: none;"></div>
-							</ul>
-			
-								</li>
-								
-							</ul>
-			
 		</div>
 	</div>
 </div>
@@ -259,12 +201,12 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	hello-world
+	Fragment详细生命周期
 </h1>
 <div class="article-meta">
 	
 	<span>Qin</span>
-	<span>2020-04-03 17:51:56</span>
+	<span>2020-04-10 11:14:15</span>
     
 		<div id="article-categories">
             
@@ -273,19 +215,109 @@
 </div>
 
 <div id="article-content">
-	<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+	<h3 id="Fragment详细生命周期"><a href="#Fragment详细生命周期" class="headerlink" title="Fragment详细生命周期"></a>Fragment详细生命周期</h3><h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><table>
+<thead>
+<tr>
+<th align="center">无</th>
+<th align="center">创建</th>
+<th align="center">按Home键</th>
+<th align="center">按Home键之后切回应用</th>
+<th align="center">按返回键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">onAttach</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onCreate</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onCreateView</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onActivityCreated</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onStart</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onResume</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onPause</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onStop</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onDestroyView</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onDestroy</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onDetach</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+</tbody></table>
+<p>在下列方法中可以用Bundle对象保存fragment对象，以供场景还原等操作：</p>
+<ul>
+<li>onCreate()</li>
+<li>onCreateView()</li>
+<li>onActivityCreated()</li>
+</ul>
+<p>fragments的大部分状态都和activitie很相似，但fragment有一些新的状态。</p>
+<ul>
+<li>onAttached() —— 当fragment和activity关联之后，调用这个方法。</li>
+<li>onCreateView() —— 创建fragment中的视图的时候，调用这个方法。</li>
+<li>onActivityCreated() —— 当activity的onCreate()方法被返回之后，调用这个方法。</li>
+<li>onDestroyView() —— 当fragment中的视图被移除的时候，调用这个方法。</li>
+<li>onDetach() —— 当fragment和activity分离的时候，调用这个方法。</li>
+</ul>
+<p><a href="https://blog.csdn.net/asdf717/article/details/51383750" target="_blank" rel="noopener">https://blog.csdn.net/asdf717/article/details/51383750</a></p>
 
 </div>
 
@@ -293,13 +325,18 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/04/03/Android/hello-world/">
+              <a href="/2020/04/17/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/Android%2010/Android%2010%E9%80%82%E9%85%8D/">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  hello-world
+                  Android 10
               </a>
             
         </div>
         <div class="item right">
+            
+              <a href="/2020/04/10/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
+                
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
             
         </div>
     </div>
