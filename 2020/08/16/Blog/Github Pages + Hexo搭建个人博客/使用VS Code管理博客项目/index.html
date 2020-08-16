@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		Android/数据库/Room、greenDao对比 | 
+		Blog/Github Pages + Hexo搭建个人博客/使用VS Code管理博客项目 | 
 	 
 	亲临其境
 	</title>
@@ -126,7 +126,7 @@
 									</a>
 									
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/04/09/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
 										Room、greenDao对比
 									</a>
@@ -188,7 +188,7 @@
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/08/16/Blog/Github%20Pages%20+%20Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E4%BD%BF%E7%94%A8VS%20Code%E7%AE%A1%E7%90%86%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/">
 										使用VS Code管理博客项目
 									</a>
@@ -263,12 +263,12 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	Room、greenDao对比
+	使用VS Code管理博客项目
 </h1>
 <div class="article-meta">
 	
 	<span>Qin</span>
-	<span>2020-04-09 15:53:41</span>
+	<span>2020-08-16 16:48:38</span>
     
 		<div id="article-categories">
             
@@ -277,154 +277,40 @@
 </div>
 
 <div id="article-content">
-	<h2 id="greenDao、Room对比"><a href="#greenDao、Room对比" class="headerlink" title="greenDao、Room对比"></a>greenDao、Room对比</h2><h3 id="CURD效率对比"><a href="#CURD效率对比" class="headerlink" title="CURD效率对比"></a>CURD效率对比</h3><p>十万条数据进行批量的插入、查询、删除操作，取五次操作平均值，得出如下统计数据</p>
-<table>
-<thead>
-<tr>
-<th align="center">操作(单位: ms)</th>
-<th align="center">greenDao</th>
-<th align="center">Room</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">insertAll</td>
-<td align="center">1651.2</td>
-<td align="center">1603.8</td>
-</tr>
-<tr>
-<td align="center">selectAll</td>
-<td align="center">874</td>
-<td align="center">1287.4</td>
-</tr>
-<tr>
-<td align="center">deleteAll</td>
-<td align="center">669.8</td>
-<td align="center">49.5</td>
-</tr>
-</tbody></table>
-<h3 id="数据库版本升级对比"><a href="#数据库版本升级对比" class="headerlink" title="数据库版本升级对比"></a>数据库版本升级对比</h3><h4 id="greenDao"><a href="#greenDao" class="headerlink" title="greenDao"></a>greenDao</h4><p>greenDao的数据库版本可以在app的build.gradle中指定，如：</p>
-<pre><code class="groovy">android {
-
-    greendao {
-        //指定数据库schema版本号，迁移等操作会用到
-        schemaVersion 1
-        //DaoSession、DaoMaster以及所有实体类的dao生成的目录
-        //daoPackage 包名
-        daoPackage &#39;com.example.liaoshouwang.dbdemo.greendaodb&#39;
-        //工程路径
-        targetGenDir &#39;src/main/java&#39;
-    }
-}</code></pre>
-<p>处理升级需继承 DaoMaster.OpenHelper，重写onUpgrade方法，在onUpgrade方法中实现所需的升级操作。 greenDao中有默认的OpenHelper实现类，其内部实现如下：</p>
-<pre><code class="java">//默认每次升级会把数据库中的数据清除
-/** WARNING: Drops all table on Upgrade! Use only during development. */
-    public static class DevOpenHelper extends OpenHelper {
-        public DevOpenHelper(Context context, String name) {
-            super(context, name);
-        }
-
-        public DevOpenHelper(Context context, String name, CursorFactory factory) {
-            super(context, name, factory);
-        }
-
-        @Override
-        public void onUpgrade(Database db, int oldVersion, int newVersion) {
-            Log.i(&quot;greenDAO&quot;, &quot;Upgrading schema from version &quot; + oldVersion + &quot; to &quot; + newVersion + &quot; by dropping all tables&quot;);
-            dropAllTables(db, true);
-            onCreate(db);
-        }
-    }</code></pre>
-<h4 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h4><p>Room的数据库升级也需要手动添加代码处理，否则也是会默认清除数据库里的数据。</p>
-<pre><code class="java">Room.databaseBuilder(getApplicationContext(), MyDb.class, &quot;database-name&quot;)
-        .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
-
-//1，2是对应的旧、新的数据库版本
-static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-    @Override
-    public void migrate(SupportSQLiteDatabase database) {
-        database.execSQL(&quot;CREATE TABLE `Fruit` (`id` INTEGER, &quot;
-                + &quot;`name` TEXT, PRIMARY KEY(`id`))&quot;);
-    }
-};
-
-static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-    @Override
-    public void migrate(SupportSQLiteDatabase database) {
-        database.execSQL(&quot;ALTER TABLE Book &quot;
-                + &quot; ADD COLUMN pub_year INTEGER&quot;);
-    }
-};</code></pre>
-<h3 id="自定义SQL语句的支持程度"><a href="#自定义SQL语句的支持程度" class="headerlink" title="自定义SQL语句的支持程度"></a>自定义SQL语句的支持程度</h3><h4 id="greenDao-1"><a href="#greenDao-1" class="headerlink" title="greenDao"></a>greenDao</h4><p>greenDao有两种办法嵌入自定义的SQL语句，分别是通过queryRaw和queryRawCreate</p>
-<pre><code class="java">/** A raw-style query where you can pass any WHERE clause and arguments. */
-    public List&lt;T&gt; queryRaw(String where, String... selectionArg) {
-        Cursor cursor = db.rawQuery(statements.getSelectAll() + where, selectionArg);
-        return loadAllAndCloseCursor(cursor);
-    }
-
-    /**
-     * Creates a repeatable {@link Query} object based on the given raw SQL where you can pass any WHERE clause and
-     * arguments.
-     */
-    public Query&lt;T&gt; queryRawCreate(String where, Object... selectionArg) {
-        List&lt;Object&gt; argList = Arrays.asList(selectionArg);
-        return queryRawCreateListArgs(where, argList);
-    }</code></pre>
-<p>可以看到的是，这两个方法对于自定义的SQL语句，其实是WHERE后面的那部分，让我们来看看statements.getSelectAll()返回的是什么。</p>
-<pre><code class="sql">SELECT T.&quot;_id&quot;,T.&quot;NAME&quot;,T.&quot;AGE&quot; FROM &quot;GREEN_USER&quot; T </code></pre>
-<p>GREEN_USER是Demo中的表名，也就是说greenDao会在我们的SQL语句前面<strong>自动</strong>拼接上上面的这段SQL，这段SQL其实是相对于SELECT * FROM tablename</p>
-<h4 id="Room-1"><a href="#Room-1" class="headerlink" title="Room"></a>Room</h4><p>Room对于自定义SQL可以说是支持得非常完美，因为Room的Dao中所有的CRUD方法都是通过我们自己写SQL去实现的，比如Demo中的RoomUserDao:</p>
-<pre><code class="java">@Dao
-interface RoomUserDao {
-
-    @Query(&quot;SELECT * FROM ROOM_USER&quot;)
-    fun getRoomUsers(): List&lt;RoomUser&gt;
-
-    @Insert
-    fun insertAll(users:List&lt;RoomUser&gt;)
-
-    @Query(&quot;DELETE FROM ROOM_USER&quot;)
-    fun deleteAll()
-}</code></pre>
-<p>更复杂一点的SQL，也是没问题的：</p>
-<pre><code class="java">@Dao
-interface MyAppReportDataDao {
-
-    //本周每天的点击次数，intervalDay栗子：-7 day 指定的日期往前回滚7天，
-    //datetime(&#39;now&#39;,&#39;start of day&#39;,:intervalDay)，当前日期往前回滚intervalDay天
-    @Query(&quot;SELECT count(*) as times ,time_date as date &quot; +
-            &quot;FROM ( SELECT * FROM MY_APP_REPORT_DATA WHERE time_date&gt;=datetime(&#39;now&#39;,&#39;start of day&#39;,:intervalDay) &quot; +
-            &quot;AND time_date&lt;=datetime(&#39;now&#39;,&#39;localtime&#39;)) WHERE time_date&gt;=datetime(time_date,&#39;start of day&#39;,&#39;+0 day&#39;) &quot; +
-            &quot;AND time_date&lt;datetime(time_date,&#39;start of day&#39;,&#39;+1 day&#39;) group by date(time_date)&quot;)
-    fun getLineDataByWeek(intervalDay:String):LiveData&lt;List&lt;ReportLineData&gt;&gt;</code></pre>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
-<thead>
-<tr>
-<th align="center">操作类型</th>
-<th align="center">greenDao</th>
-<th align="center">Room</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">批量插入</td>
-<td align="center">==</td>
-<td align="center">==</td>
-</tr>
-<tr>
-<td align="center">批量选择</td>
-<td align="center">✅</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">批量删除</td>
-<td align="center"></td>
-<td align="center">✅</td>
-</tr>
-<tr>
-<td align="center">支持LiveData</td>
-<td align="center"></td>
-<td align="center">✅</td>
-</tr>
-</tbody></table>
+	<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>VS Code作为一款轻量级，但功能又强大的开发工具，用来管理个人博客小项目实在再合适不过了。</p>
+<h3 id="1-导入项目"><a href="#1-导入项目" class="headerlink" title="1.导入项目"></a>1.导入项目</h3><p>首先导入项目<code>File -&gt; Add Folder to Workspace...</code>然后保存为工作区<code>File -&gt; Save Workspace As...</code>这里我命名为GITHUB BLOG。以后就直接打开GITHUB BLOG就可以更新博客了。</p>
+<h3 id="2-下载插件"><a href="#2-下载插件" class="headerlink" title="2.下载插件"></a>2.下载插件</h3><h4 id="1-Markdown-Preview-Enhanced"><a href="#1-Markdown-Preview-Enhanced" class="headerlink" title="1. Markdown Preview Enhanced"></a>1. Markdown Preview Enhanced</h4><p><a href="https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/" target="_blank" rel="noopener">Markdown Preview Enhanced</a> 是一款为 Atom 以及 Visual Studio Code 编辑器编写的超级强大的 Markdown 插件。 </p>
+<ul>
+<li>自动编辑器及预览滑动同步</li>
+<li>导入外部文件</li>
+<li>Code Chunk</li>
+<li>Pandoc</li>
+<li>Prince</li>
+<li>电子书</li>
+<li>幻灯片</li>
+<li>可扩展性</li>
+<li>LaTeX 数学</li>
+<li>导出 PDF, PNG, 以及 JPEG 凭借 Puppeteer</li>
+<li>导出漂亮的 HTML（移动端支持）</li>
+<li>编译到 GitHub Flavored Markdown</li>
+<li>自定义预览 CSS</li>
+<li>TOC 生成</li>
+<li>流程图 / 时序图 以及各种其他种类的图形</li>
+<li>嵌入 LaTeX, 渲染 TikZ, Chemfig 等图形</li>
+<li>Task List (Github Flavored)</li>
+<li>图片助手</li>
+<li>脚注</li>
+<li>Front Matter</li>
+<li>等等。。。</li>
+</ul>
+<p>以上我基本都没用过，总之很强大很好用就是了。满足日常基本需求是完全没问题的，高级用法参见官方文档。</p>
+<h3 id="3-待更新"><a href="#3-待更新" class="headerlink" title="3.待更新"></a>3.待更新</h3><p>想要优化的有：</p>
+<ul>
+<li>VS Code打开命令行不方便</li>
+<li>一键更新hexo本地预览</li>
+<li>一键发布等</li>
+<li>想到再写</li>
+</ul>
 
 </div>
 
@@ -432,13 +318,13 @@ interface MyAppReportDataDao {
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/04/10/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  
-              </a>
-            
         </div>
         <div class="item right">
+            
+              <a href="/2020/08/16/Java/rxjava/just%20%E5%92%8C%20fromCallable%20%E5%8C%BA%E5%88%AB/">
+                just 和 fromCallable 区别
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
             
         </div>
     </div>

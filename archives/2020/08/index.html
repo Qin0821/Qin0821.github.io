@@ -8,8 +8,6 @@
 	<!-- title -->
 	
 	<title>
-	
-		命令行/解决mac中zsh的 adb command not found 问题 | 
 	 
 	亲临其境
 	</title>
@@ -243,7 +241,7 @@
 									</a>
 									
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/04/10/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
 										解决mac中zsh的 adb command not found 问题
 									</a>
@@ -261,62 +259,54 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<h1 id="article-title">
-
-	解决mac中zsh的 adb command not found 问题
-</h1>
-<div class="article-meta">
+		<div id="index">
 	
-	<span>Qin</span>
-	<span>2020-04-10 10:35:44</span>
-    
-		<div id="article-categories">
-            
-		</div>
-    
+		<div class="index-li">
+			<a href="/2020/08/16/Blog/Github%20Pages%20+%20Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E4%BD%BF%E7%94%A8VS%20Code%E7%AE%A1%E7%90%86%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/">
+				<h2 class="index-title">
+					使用VS Code管理博客项目
+				</h2>
+				<div class="index-brief">
+					前言VS Code作为一款轻量级，但功能又强大的开发工具，用来管理个人博客小项目实在再合适不过了。
+1.导入项目首先导入项目File -&gt; Add Folder to Workspace...然后保存为工作区File -&gt; Save Workspace As...这里我命名为GITHUB
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-08-16</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2020/08/16/Java/rxjava/just%20%E5%92%8C%20fromCallable%20%E5%8C%BA%E5%88%AB/">
+				<h2 class="index-title">
+					just 和 fromCallable 区别
+				</h2>
+				<div class="index-brief">
+					1. 值获取来源不一样just 值从外部获取的，而 fromCallable 值来自于内部生成，为了更清楚的了解，我们来看一下下面的代码：
+println(&quot;From Just&quot;)
+val justSingle = Single.just(Random.nextInt())
+ju
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-08-16</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+	
+	<div id="index-paginator">
+		
+	</div>
 </div>
 
-<div id="article-content">
-	<h3 id="解决mac中zsh的-adb-command-not-found-问题"><a href="#解决mac中zsh的-adb-command-not-found-问题" class="headerlink" title="解决mac中zsh的 adb: command not found 问题"></a>解决mac中zsh的 adb: command not found 问题</h3><h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><p>zsh没有配置Android环境变量。</p>
-<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><p>打开终端，输入下列命令：</p>
-<pre><code>touch ~/.zshrc</code></pre><p>如果当前没有这个文件,则会默认创建。</p>
-<pre><code>open ~/.zshrc</code></pre><p>如果是第一次创建,则默认为空白的文件。</p>
-<p>在打开的文件中输入，可以加在最后一行。</p>
-<pre><code>export ANDROID_HOME=/Users/qin/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools</code></pre><p>这里的export ANDROID_HOME=你的安卓sdk路径。<br>打开android studio，使用快捷键Command + ,打开设置，如下图找到路径替换即可。</p>
-<p><img src="image-20200410104359634.png" alt="复制SDK路径"></p>
-<p>保存，随后在终端输入一下命令即可配置成功</p>
-<pre><code>source ~/.zshrc</code></pre>
-</div>
-
-
-    <div class="post-guide">
-        <div class="item left">
-            
-              <a href="/2020/04/10/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  Fragment
-              </a>
-            
-        </div>
-        <div class="item right">
-            
-              <a href="/2020/04/09/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
-                数据库
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-              </a>
-            
-        </div>
-    </div>
-
-
-
-
-<script>
-	
-	
-</script>
 	</div>
 	<div id="footer">
 	<p>
