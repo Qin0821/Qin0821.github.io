@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		Android/数据库/Room、greenDao对比 | 
 	 
 	亲临其境
 	</title>
@@ -123,7 +125,7 @@
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/04/11/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
 										Room、greenDao对比
 									</a>
@@ -316,52 +318,211 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+
+	Room、greenDao对比
+</h1>
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2020/04/11/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
-				<h2 class="index-title">
-					Room、greenDao对比
-				</h2>
-				<div class="index-brief">
-					greenDao、Room对比CURD效率对比十万条数据进行批量的插入、查询、删除操作，取五次操作平均值，得出如下统计数据
-
-
-
-操作(单位: ms)
-greenDao
-Room
-
-
-
-insertAll
-1651.2
-1603.8
-
-
-selectAll
-874
-1287.4
-
-
-deleteAl
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-04-11</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-	
-	<div id="index-paginator">
-		
-	</div>
+	<span>Qin</span>
+	<span>2020-04-11 22:54:24</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
 </div>
 
+<div id="article-content">
+	<h2 id="greenDao、Room对比"><a href="#greenDao、Room对比" class="headerlink" title="greenDao、Room对比"></a>greenDao、Room对比</h2><h3 id="CURD效率对比"><a href="#CURD效率对比" class="headerlink" title="CURD效率对比"></a>CURD效率对比</h3><p>十万条数据进行批量的插入、查询、删除操作，取五次操作平均值，得出如下统计数据</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作(单位: ms)</th>
+<th align="center">greenDao</th>
+<th align="center">Room</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">insertAll</td>
+<td align="center">1651.2</td>
+<td align="center">1603.8</td>
+</tr>
+<tr>
+<td align="center">selectAll</td>
+<td align="center">874</td>
+<td align="center">1287.4</td>
+</tr>
+<tr>
+<td align="center">deleteAll</td>
+<td align="center">669.8</td>
+<td align="center">49.5</td>
+</tr>
+</tbody></table>
+<h3 id="数据库版本升级对比"><a href="#数据库版本升级对比" class="headerlink" title="数据库版本升级对比"></a>数据库版本升级对比</h3><h4 id="greenDao"><a href="#greenDao" class="headerlink" title="greenDao"></a>greenDao</h4><p>greenDao的数据库版本可以在app的build.gradle中指定，如：</p>
+<pre><code class="groovy">android {
+
+    greendao {
+        //指定数据库schema版本号，迁移等操作会用到
+        schemaVersion 1
+        //DaoSession、DaoMaster以及所有实体类的dao生成的目录
+        //daoPackage 包名
+        daoPackage &#39;com.example.liaoshouwang.dbdemo.greendaodb&#39;
+        //工程路径
+        targetGenDir &#39;src/main/java&#39;
+    }
+}</code></pre>
+<p>处理升级需继承 DaoMaster.OpenHelper，重写onUpgrade方法，在onUpgrade方法中实现所需的升级操作。 greenDao中有默认的OpenHelper实现类，其内部实现如下：</p>
+<pre><code class="java">//默认每次升级会把数据库中的数据清除
+/** WARNING: Drops all table on Upgrade! Use only during development. */
+    public static class DevOpenHelper extends OpenHelper {
+        public DevOpenHelper(Context context, String name) {
+            super(context, name);
+        }
+
+        public DevOpenHelper(Context context, String name, CursorFactory factory) {
+            super(context, name, factory);
+        }
+
+        @Override
+        public void onUpgrade(Database db, int oldVersion, int newVersion) {
+            Log.i(&quot;greenDAO&quot;, &quot;Upgrading schema from version &quot; + oldVersion + &quot; to &quot; + newVersion + &quot; by dropping all tables&quot;);
+            dropAllTables(db, true);
+            onCreate(db);
+        }
+    }</code></pre>
+<h4 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h4><p>Room的数据库升级也需要手动添加代码处理，否则也是会默认清除数据库里的数据。</p>
+<pre><code class="java">Room.databaseBuilder(getApplicationContext(), MyDb.class, &quot;database-name&quot;)
+        .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
+
+//1，2是对应的旧、新的数据库版本
+static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+    @Override
+    public void migrate(SupportSQLiteDatabase database) {
+        database.execSQL(&quot;CREATE TABLE `Fruit` (`id` INTEGER, &quot;
+                + &quot;`name` TEXT, PRIMARY KEY(`id`))&quot;);
+    }
+};
+
+static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+    @Override
+    public void migrate(SupportSQLiteDatabase database) {
+        database.execSQL(&quot;ALTER TABLE Book &quot;
+                + &quot; ADD COLUMN pub_year INTEGER&quot;);
+    }
+};</code></pre>
+<h3 id="自定义SQL语句的支持程度"><a href="#自定义SQL语句的支持程度" class="headerlink" title="自定义SQL语句的支持程度"></a>自定义SQL语句的支持程度</h3><h4 id="greenDao-1"><a href="#greenDao-1" class="headerlink" title="greenDao"></a>greenDao</h4><p>greenDao有两种办法嵌入自定义的SQL语句，分别是通过queryRaw和queryRawCreate</p>
+<pre><code class="java">/** A raw-style query where you can pass any WHERE clause and arguments. */
+    public List&lt;T&gt; queryRaw(String where, String... selectionArg) {
+        Cursor cursor = db.rawQuery(statements.getSelectAll() + where, selectionArg);
+        return loadAllAndCloseCursor(cursor);
+    }
+
+    /**
+     * Creates a repeatable {@link Query} object based on the given raw SQL where you can pass any WHERE clause and
+     * arguments.
+     */
+    public Query&lt;T&gt; queryRawCreate(String where, Object... selectionArg) {
+        List&lt;Object&gt; argList = Arrays.asList(selectionArg);
+        return queryRawCreateListArgs(where, argList);
+    }</code></pre>
+<p>可以看到的是，这两个方法对于自定义的SQL语句，其实是WHERE后面的那部分，让我们来看看statements.getSelectAll()返回的是什么。</p>
+<pre><code class="sql">SELECT T.&quot;_id&quot;,T.&quot;NAME&quot;,T.&quot;AGE&quot; FROM &quot;GREEN_USER&quot; T </code></pre>
+<p>GREEN_USER是Demo中的表名，也就是说greenDao会在我们的SQL语句前面<strong>自动</strong>拼接上上面的这段SQL，这段SQL其实是相对于SELECT * FROM tablename</p>
+<h4 id="Room-1"><a href="#Room-1" class="headerlink" title="Room"></a>Room</h4><p>Room对于自定义SQL可以说是支持得非常完美，因为Room的Dao中所有的CRUD方法都是通过我们自己写SQL去实现的，比如Demo中的RoomUserDao:</p>
+<pre><code class="java">@Dao
+interface RoomUserDao {
+
+    @Query(&quot;SELECT * FROM ROOM_USER&quot;)
+    fun getRoomUsers(): List&lt;RoomUser&gt;
+
+    @Insert
+    fun insertAll(users:List&lt;RoomUser&gt;)
+
+    @Query(&quot;DELETE FROM ROOM_USER&quot;)
+    fun deleteAll()
+}</code></pre>
+<p>更复杂一点的SQL，也是没问题的：</p>
+<pre><code class="java">@Dao
+interface MyAppReportDataDao {
+
+    //本周每天的点击次数，intervalDay栗子：-7 day 指定的日期往前回滚7天，
+    //datetime(&#39;now&#39;,&#39;start of day&#39;,:intervalDay)，当前日期往前回滚intervalDay天
+    @Query(&quot;SELECT count(*) as times ,time_date as date &quot; +
+            &quot;FROM ( SELECT * FROM MY_APP_REPORT_DATA WHERE time_date&gt;=datetime(&#39;now&#39;,&#39;start of day&#39;,:intervalDay) &quot; +
+            &quot;AND time_date&lt;=datetime(&#39;now&#39;,&#39;localtime&#39;)) WHERE time_date&gt;=datetime(time_date,&#39;start of day&#39;,&#39;+0 day&#39;) &quot; +
+            &quot;AND time_date&lt;datetime(time_date,&#39;start of day&#39;,&#39;+1 day&#39;) group by date(time_date)&quot;)
+    fun getLineDataByWeek(intervalDay:String):LiveData&lt;List&lt;ReportLineData&gt;&gt;</code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
+<thead>
+<tr>
+<th align="center">操作类型</th>
+<th align="center">greenDao</th>
+<th align="center">Room</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">批量插入</td>
+<td align="center">==</td>
+<td align="center">==</td>
+</tr>
+<tr>
+<td align="center">批量选择</td>
+<td align="center">✅</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">批量删除</td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">支持LiveData</td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+</tbody></table>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2020/08/16/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  Fragment详细生命周期
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
 	</div>
 	<div id="footer">
 	<p>

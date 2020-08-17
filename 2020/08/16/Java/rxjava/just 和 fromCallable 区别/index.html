@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		Java/rxjava/just 和 fromCallable 区别 | 
 	 
 	亲临其境
 	</title>
@@ -225,7 +227,7 @@
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/08/16/Java/rxjava/just%20%E5%92%8C%20fromCallable%20%E5%8C%BA%E5%88%AB/">
 										just 和 fromCallable 区别
 									</a>
@@ -316,52 +318,117 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+
+	just 和 fromCallable 区别
+</h1>
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2020/04/11/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
-				<h2 class="index-title">
-					Room、greenDao对比
-				</h2>
-				<div class="index-brief">
-					greenDao、Room对比CURD效率对比十万条数据进行批量的插入、查询、删除操作，取五次操作平均值，得出如下统计数据
-
-
-
-操作(单位: ms)
-greenDao
-Room
-
-
-
-insertAll
-1651.2
-1603.8
-
-
-selectAll
-874
-1287.4
-
-
-deleteAl
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-04-11</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-	
-	<div id="index-paginator">
-		
-	</div>
+	<span>Qin</span>
+	<span>2020-08-16 22:22:17</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
 </div>
 
+<div id="article-content">
+	<h3 id="1-值获取来源不一样"><a href="#1-值获取来源不一样" class="headerlink" title="1. 值获取来源不一样"></a>1. 值获取来源不一样</h3><p>just 值从外部获取的，而 fromCallable 值来自于内部生成，为了更清楚的了解，我们来看一下下面的代码：</p>
+<pre><code class="java">println(&quot;From Just&quot;)
+val justSingle = Single.just(Random.nextInt())
+justSingle.subscribe{ it -&gt; println(it) }
+justSingle.subscribe{ it -&gt; println(it) }
+
+println(&quot;\nFrom Callable&quot;)
+val callableSingle = Single.fromCallable { Random.nextInt() }
+callableSingle.subscribe{ it -&gt; println(it) }
+callableSingle.subscribe{ it -&gt; println(it) }</code></pre>
+<p>复制代码对于 Just 和 fromCallable 分别调用 2 次 subscribe 执行结果如下所示：</p>
+<pre><code class="java">From Just
+801570614
+801570614
+
+From Callable
+1251601849
+2033593269</code></pre>
+<p>复制代码你会发现对于 just 无论 subscribe 多少次，生成的随机值都保持不变，因为该值是从 Observable 外部生成的，而 Observable 只是将其存储供以后使用。<br>但是对于 fromCallable 它是从 Observable 内部生成的，每次 subscribe 都会都会生成一个新的随机数。</p>
+<h3 id="2-立即执行和延迟执行"><a href="#2-立即执行和延迟执行" class="headerlink" title="2. 立即执行和延迟执行"></a>2. 立即执行和延迟执行</h3><p>just 在调用 subscribe 方法之前值已经生成了，属于立即执行。<br>而 fromCallable 是调用 subscribe 方法之后执行的，属于延迟执行。</p>
+<p>为了更清楚的了解，我们来看一下下面的代码：</p>
+<pre><code class="java">fun main() {
+    println(&quot;From Just&quot;)
+    val justSingle = Single.just(getRandomMessage())
+    println(&quot;start subscribing&quot;)
+    justSingle.subscribe{ it -&gt; println(it) }
+
+    println(&quot;\nFrom Callable&quot;)
+    val callableSingle = Single.fromCallable { getRandomMessage() }
+    println(&quot;start subscribing&quot;)
+    callableSingle.subscribe{ it -&gt; println(it) }
+}
+
+fun getRandomMessage(): Int {
+    println(&quot;-Generating-&quot;)
+    return Random.nextInt()
+}</code></pre>
+<p>复制代码结果如下所示：</p>
+<pre><code class="java">From Just
+-Generating-
+start subscribing
+1778320787
+
+From Callable
+start subscribing
+-Generating-
+1729786515</code></pre>
+<p>复制代码对于 just 在调用 subscribe 之前打印了 -Generating-，而 fromCallable 是在调用 subscribe 之后才打印 -Generating-。</p>
+<p><a href="https://juejin.im/post/6844904168583331854#heading-12" target="_blank" rel="noopener">参考链接</a></p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2020/08/16/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/08/16/Blog/Markdown%E8%AF%AD%E6%B3%95/">
+                
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
 	</div>
 	<div id="footer">
 	<p>

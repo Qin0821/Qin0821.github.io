@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		Android/Fragment/Fragment详细生命周期 | 
 	 
 	亲临其境
 	</title>
@@ -103,7 +105,7 @@
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/08/16/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
 										Fragment详细生命周期
 									</a>
@@ -316,52 +318,171 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+
+	Fragment详细生命周期
+</h1>
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2020/04/11/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
-				<h2 class="index-title">
-					Room、greenDao对比
-				</h2>
-				<div class="index-brief">
-					greenDao、Room对比CURD效率对比十万条数据进行批量的插入、查询、删除操作，取五次操作平均值，得出如下统计数据
-
-
-
-操作(单位: ms)
-greenDao
-Room
-
-
-
-insertAll
-1651.2
-1603.8
-
-
-selectAll
-874
-1287.4
-
-
-deleteAl
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-04-11</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-	
-	<div id="index-paginator">
-		
-	</div>
+	<span>Qin</span>
+	<span>2020-08-16 22:22:17</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
 </div>
 
+<div id="article-content">
+	<h3 id="Fragment详细生命周期"><a href="#Fragment详细生命周期" class="headerlink" title="Fragment详细生命周期"></a>Fragment详细生命周期</h3><h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><table>
+<thead>
+<tr>
+<th align="center">无</th>
+<th align="center">创建</th>
+<th align="center">按Home键</th>
+<th align="center">按Home键之后切回应用</th>
+<th align="center">按返回键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">onAttach</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onCreate</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onCreateView</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onActivityCreated</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onStart</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onResume</td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">onPause</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onStop</td>
+<td align="center"></td>
+<td align="center">✅</td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onDestroyView</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onDestroy</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="center">onDetach</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✅</td>
+</tr>
+</tbody></table>
+<p>在下列方法中可以用Bundle对象保存fragment对象，以供场景还原等操作：</p>
+<ul>
+<li>onCreate()</li>
+<li>onCreateView()</li>
+<li>onActivityCreated()</li>
+</ul>
+<p>fragments的大部分状态都和activitie很相似，但fragment有一些新的状态。</p>
+<ul>
+<li>onAttached() —— 当fragment和activity关联之后，调用这个方法。</li>
+<li>onCreateView() —— 创建fragment中的视图的时候，调用这个方法。</li>
+<li>onActivityCreated() —— 当activity的onCreate()方法被返回之后，调用这个方法。</li>
+<li>onDestroyView() —— 当fragment中的视图被移除的时候，调用这个方法。</li>
+<li>onDetach() —— 当fragment和activity分离的时候，调用这个方法。</li>
+</ul>
+<p><a href="https://blog.csdn.net/asdf717/article/details/51383750" target="_blank" rel="noopener">https://blog.csdn.net/asdf717/article/details/51383750</a></p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2020/08/16/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/Android%2010/Android%2010%E9%80%82%E9%85%8D/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  Android 10
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/04/11/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
+                Room、greenDao对比
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
 	</div>
 	<div id="footer">
 	<p>
