@@ -8,7 +8,7 @@ subtitle: ''
 description: ''
 keywords:
 author: Qin
-language: en
+language: zh
 timezone: ''
 
 # URL
@@ -114,7 +114,7 @@ live2d:
   model:
     use: live2d-widget-model-shizuku
   display:
-    position: left
+    position: right
     width: 150
     height: 300
     hOffset: 50
