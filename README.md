@@ -20,7 +20,12 @@ git pull
 
 也就是说只需要维护hexo分支即可，master分支由`hexo d`命令自动提交上传。
 
+可以通过`hexo clean && hexo g && hexo d`一键生成并发布 blog
+
 ##### 文本编辑
+
+##### 加密
+https://github.com/D0n9X1n/hexo-blog-encrypt/blob/master/ReadMe.zh.md
 
 ###### 图片
 博客有两种插入图片的方式：`url`、`base64`
