@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		Android 文件系统：原理 / 存储位置 / 常用 API / 常见坑 | 
+	 
+	亲临其境
+	</title>
+	
+	<!-- keywords,description -->
+	
+	
+
+	<!-- favicon -->
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+	
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">亲临其境</a>
+
+	<ul id="menu">
+    
+
+    
+
+    
+
+    
+  
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="Press Enter to search">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AI
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/AI/Codex%E3%80%81Trae%E3%80%81DeepSeek%20Harness%E5%AF%B9%E6%AF%94/">
+                     
+										    Codex、Trae、DeepSeek Harness对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AndroidStudio
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/Windows%E9%80%82%E9%85%8DMacOS%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    Windows适配MacOS快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/%E5%A5%BD%E7%94%A8Plugin%E6%8E%A8%E8%8D%90/">
+                     
+										    好用Plugin推荐
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Flow
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Flow/Kotlin%20Flow%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Kotlin Flow原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Fragment
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										DialogFragment
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/DialogFragment/%E4%BC%98%E9%9B%85%E8%A7%A3%E5%86%B3DialogFragment%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    优雅解决DialogFragment常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+                     
+										    Fragment详细生命周期
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										IPC
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/IPC/Android%E8%B7%A8%E8%BF%9B%E7%A8%8BIPC/">
+                     
+										    Android跨进程IPC
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Jetpack
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Jetpack/Navigation/">
+                     
+										    Navigation
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Koin
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Koin/Koin%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Koin依赖注入原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										LRU
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/LRU/LRU%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    LRU原理与应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Media
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Media/Media3-ExoPlayer%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%9E%E6%88%98/">
+                     
+										    Media3-ExoPlayer介绍与实战
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Popup
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Popup/%E8%83%8C%E6%99%AF%E5%8F%98%E6%9A%97/">
+                     
+										    背景变暗
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										RecycleView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/RecycleView/RecycleView%20Feed%20%E6%B5%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                     
+										    RecycleView Feed 流性能优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/RecycleView/RecycleView%E7%BC%93%E5%AD%98%E5%92%8C%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6/">
+                     
+										    RecycleView缓存和复用机制
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Retrofit
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Retrofit/Retrofit%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Retrofit原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Room
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Room/Room%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Room原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Service
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Service/Android%20Service/">
+                     
+										    Android Service
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										TextView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/TextView/%E4%BD%BF%E7%94%A8%E5%AD%97%E4%BD%93%E6%8E%A7%E5%88%B6%E6%96%87%E5%AD%97%E7%B2%97%E7%BB%86/">
+                     
+										    使用字体控制文字粗细
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										UI开发
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/ConstraintLayout%E8%AF%A6%E8%A7%A3/">
+                     
+										    ConstraintLayout详解
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/merge%E7%9B%B8%E5%85%B3123/">
+                     
+										    merge相关123
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E5%A6%82%E4%BD%95%E5%85%A8%E5%B1%80%E5%8A%A8%E6%80%81%E8%AE%BE%E7%BD%AEFLAG_SECURE/">
+                     
+										    如何全局动态设置FLAG_SECURE
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E7%88%B6%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4clip%E7%AD%96%E7%95%A5%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/">
+                     
+										    父布局调整clip策略提高开发效率
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E8%AE%BE%E7%BD%AEView%E8%83%8C%E6%99%AF%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+                     
+										    设置View背景最佳实践
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										adb
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/adb/%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8BTopActivity/">
+                     
+										    一行命令查看TopActivity
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										动画
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/MotionLayout%E5%8A%A8%E7%94%BB%EF%BC%88%E4%B8%80%EF%BC%89/">
+                     
+										    MotionLayout动画（一）
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/%E4%BD%BF%E7%94%A8MotionLayout%E5%AE%9E%E7%8E%B0Tab/">
+                     
+										    使用MotionLayout实现Tab
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										协程
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E5%8D%8F%E7%A8%8B/Kotlin%E5%8D%8F%E7%A8%8B%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Kotlin协程原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										反编译
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8F%8D%E7%BC%96%E8%AF%91/%E5%8F%8D%E7%BC%96%E8%AF%91NewsBreak/">
+                     
+										    反编译NewsBreak
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图片加载
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/Glide%E4%B8%8ECoil%E5%AF%B9%E6%AF%94/">
+                     
+										    Glide与Coil对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图表
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E8%A1%A8/MPAndroidChart%E4%BD%BF%E7%94%A8/">
+                     
+										    MPAndroidChart使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										奇怪的问题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/%E5%91%BD%E5%90%8D%E5%86%B2%E7%AA%81/">
+                     
+										    命名冲突
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										弱网优化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E5%BC%B1%E7%BD%91%E4%BC%98%E5%8C%96/%E5%BC%B1%E7%BD%91%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">
+                     
+										    弱网优化策略
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										性能优化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%90%AF%E5%8A%A8%E9%A1%B5%E4%BC%98%E5%8C%96/">
+                     
+										    启动页优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E6%89%8B%E6%9C%BA%E6%A2%B5%E8%AE%AFApplication%E5%88%9D%E5%A7%8B%E5%8C%96%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/">
+                     
+										    手机梵讯Application初始化速度优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										数据库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
+                     
+										    Room、greenDao对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										文件系统
+									</a>
+									
+							<ul>
+								<li class="file active">
+									<a href="/2026/10/21/Android/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/Android%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                     
+										    Android文件系统
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										时间格式化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/JodaTime/">
+                     
+										    JodaTime
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										权限管理
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/Android%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">
+                     
+										    Android权限管理
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										测试
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%B5%8B%E8%AF%95/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">
+                     
+										    弱网测试工具
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										热修复
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%83%AD%E4%BF%AE%E5%A4%8D/Android%E4%B8%BB%E6%B5%81%E7%83%AD%E4%BF%AE%E5%A4%8D/">
+                     
+										    Android主流热修复
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										版本适配
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android 10
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/Android%2010/Android%2010%E9%80%82%E9%85%8D/">
+                     
+										    Android 10适配
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/xapk%E5%AE%89%E8%A3%85%E5%8C%85%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85/">
+                     
+										    xapk安装包如何安装
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										网络
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%BD%91%E7%BB%9C/Windows%E3%80%81MacOS%E4%B8%ADCharles%E6%8A%93%E5%8C%85%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    Windows、MacOS中Charles抓包常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										规范
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%A7%84%E8%8C%83/Android%20Log%E8%A7%84%E8%8C%83/">
+                     
+										    Android Log规范
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										设计模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%AE%89%E5%8D%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    安卓设计模式常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                     
+										    常见的设计模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%B6%A3%E8%A7%A3%E5%B7%A5%E5%8E%82%E4%B8%89%E6%A8%A1%E5%BC%8F/">
+                     
+										    趣解工厂三模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										软件架构模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/Google%E6%8E%A8%E8%8D%90%E6%9E%B6%E6%9E%84%E5%88%86%E4%BA%AB/">
+                     
+										    Google推荐架构分享
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/MVC%E3%80%81MVP%E3%80%81MVVM%E3%80%81MVI/">
+                     
+										    MVC、MVP、MVVM、MVI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										面试题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/23%E4%B8%AD%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    23中设计模式及其应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Handler/">
+                     
+										    Handler
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/LinearLayout%E3%80%81RelativeLayout%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94/">
+                     
+										    LinearLayout、RelativeLayout性能对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Retrofit%E3%80%81okhttp/">
+                     
+										    Retrofit、okhttp
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/eventBus/">
+                     
+										    eventBus
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/glide/">
+                     
+										    glide
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%8E%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                     
+										    组件化与模块化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%87%AA%E5%AE%9A%E4%B9%89View/">
+                     
+										    自定义View
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%93%BE%E6%8E%A5%E6%B1%87%E6%80%BB/">
+                     
+										    面试题链接汇总
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Blog
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Github Pages + Hexo搭建个人博客
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Github%20Pages%20+%20Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E4%BD%BF%E7%94%A8VS%20Code%E7%AE%A1%E7%90%86%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/">
+                     
+										    使用VS Code管理博客项目
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Markdown%E8%AF%AD%E6%B3%95/">
+                     
+										    Markdown语法
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Game
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/Game/%E5%A7%94%E6%89%98%E4%B8%AD%E5%BF%83/">
+                     
+										    委托中心
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Git
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E7%BB%A9%E6%95%88%E5%BF%85%E5%A4%87%E7%BB%9F%E8%AE%A1%E5%91%BD%E4%BB%A4/">
+                     
+										    绩效必备统计命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E9%85%8D%E7%BD%AE.ignore/">
+                     
+										    配置.ignore
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										GrantEvents
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用第三方短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/GrantEvents/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用阿里云短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E6%8A%A5%E5%90%8D%E9%82%80%E8%AF%B7%E5%87%BD/">
+                     
+										    快速搭建简单报名邀请函
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										HormanyOS
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/KMP%E9%A1%B9%E7%9B%AE%E9%80%82%E9%85%8DHormanyOS/">
+                     
+										    KMP项目适配HormanyOS
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/%E4%BF%A1%E9%80%9A%E5%8D%AB%E5%A3%AB%E9%B8%BF%E8%92%99%E7%89%88%E6%9E%B6%E6%9E%84/">
+                     
+										    信通卫士鸿蒙版架构
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										rxjava
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Java/rxjava/just%20%E5%92%8C%20fromCallable%20%E5%8C%BA%E5%88%AB/">
+                     
+										    just 和 fromCallable 区别
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										VPN
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/VPN/Panda%20VPM/">
+                     
+										    Panda VPM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Web
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Web/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E5%8A%A8%E6%80%81%E7%BD%91%E7%AB%99/">
+                     
+										    静态网站动态网站
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Windows
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Windows/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%89%8D%E5%90%8E%E7%BC%80%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8Dbat%E6%89%B9%E5%A4%84%E7%90%86%E4%BB%A3%E7%A0%81/">
+                     
+										    文件加前后缀批量重命名bat批处理代码
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										ios
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/ios/%E5%88%9A%E4%B8%8B%E8%BD%BD%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E9%A2%84%E8%A7%88UI/">
+                     
+										    刚下载的项目无法预览UI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										命令行
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                     
+										    mac 常用命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
+                     
+										    解决mac中zsh的 adb command not found 问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										编译器
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20MD%20%E6%8F%92%E4%BB%B6/">
+                     
+										    VS Code MD 插件
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    VS Code 快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										老爸的文章
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										童年往事
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%90%83%E7%B3%96/">
+                     
+										    吃糖
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%99%A9%E6%A2%A6/">
+                     
+										    噩梦
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E8%BF%9C%E9%97%A8/">
+                     
+										    第一次出远门
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%90%BD%E6%B0%B4/">
+                     
+										    第一次落水
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content" class="content">
+		<h1 id="article-title">
+	Android 文件系统：原理 / 存储位置 / 常用 API / 常见坑
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>Qin</span>
+	<span>2026-10-21 00:26:32</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<h1 id="Android-文件系统：原理-存储位置-常用-API-常见坑"><a href="#Android-文件系统：原理-存储位置-常用-API-常见坑" class="headerlink" title="Android 文件系统：原理 / 存储位置 / 常用 API / 常见坑"></a>Android 文件系统：原理 / 存储位置 / 常用 API / 常见坑</h1><blockquote>
+<p>一句话定位：Android 的文件系统就是 Linux 目录树加”每个 App 一个沙箱目录”，而外部存储其实是”模拟出来的共享分区”；Android 10 起分区存储把”随便用路径读写共享盘”改成了”自己的随便写、别人的得走 MediaStore 或 SAF 拿授权”。<br>版本口径：重点覆盖 Android 10（API 29）分区存储到 Android 14（API 34）媒体权限的变化，老版本行为会写明”哪个版本之前”。</p>
+</blockquote>
+<hr>
+<h2 id="一、Android-文件系统是什么（原理）"><a href="#一、Android-文件系统是什么（原理）" class="headerlink" title="一、Android 文件系统是什么（原理）"></a>一、Android 文件系统是什么（原理）</h2><h3 id="1-1-底座：Linux-目录树-应用沙箱"><a href="#1-1-底座：Linux-目录树-应用沙箱" class="headerlink" title="1.1 底座：Linux 目录树 + 应用沙箱"></a>1.1 底座：Linux 目录树 + 应用沙箱</h3><p>Android 的文件系统完全是 Linux 那一套：一棵从 <code>/</code> 开始的目录树，权限靠 uid/gid 控制。对 App 来说只有两类存储：</p>
+<ul>
+<li><strong>内部存储（internal storage）</strong>：App 私有目录，路径 <code>/data/data/&lt;包名&gt;/</code>（真实路径是 <code>/data/user/0/&lt;包名&gt;/</code>，<code>/data/data</code> 只是指向它的软链接，<code>0</code> 代表主用户）。<strong>别的 App 看不到、不需要任何权限、卸载即删。</strong></li>
+<li><strong>外部存储（external storage）</strong>：历史上是可插拔的 SD 卡，现在是<strong>模拟出来的共享分区（emulated storage）</strong>，路径 <code>/storage/emulated/0/</code>（<code>/sdcard</code> 是指向它的软链接，<code>0</code> 是用户编号，多用户下是 <code>/storage/emulated/10</code>）。<strong>所有 App 都看得见，历史上人人都能读写。</strong></li>
+</ul>
+<p>关键认知：<strong>所谓”外部存储”在现代手机上大多是内部闪存模拟出来的一个共享分区，并不是真的 SD 卡</strong>——但它的”共享、所有人都能看见”这个语义被完整保留了，这正是后面一堆问题的根源。</p>
+<h3 id="1-2-分区存储（Scoped-Storage）：Android-10-的分水岭"><a href="#1-2-分区存储（Scoped-Storage）：Android-10-的分水岭" class="headerlink" title="1.2 分区存储（Scoped Storage）：Android 10 的分水岭"></a>1.2 分区存储（Scoped Storage）：Android 10 的分水岭</h3><p>在 Android 10 之前，App 只要拿到 <code>WRITE_EXTERNAL_STORAGE</code>，就能用文件路径 <code>/storage/emulated/0/xxx</code> <strong>随便读写整个共享盘</strong>。结果是目录乱建、垃圾文件残留、隐私数据被别家 App 偷读。</p>
+<p><strong>Android 10（API 29）起引入分区存储（Scoped Storage）</strong>：</p>
+<ul>
+<li>App 默认<strong>只能自由访问自己的应用专属外部目录</strong>（<code>/storage/emulated/0/Android/data/&lt;包名&gt;/</code>）和自己的私有目录；</li>
+<li>要往共享目录（相册、下载等）写自己的媒体，<strong>走 MediaStore</strong>，不再需要存储权限；</li>
+<li>要读别的 App 写的共享文件，通过 <strong>MediaStore 查询</strong>（配合 <code>READ_MEDIA_*</code> 等权限），或让用户用 <strong>SAF</strong> 选文件并授权；</li>
+<li>Android 10 允许用 <code>requestLegacyExternalStorage</code> 临时退回旧行为；<strong>Android 11（API 30）起强制分区存储，该开关被忽略</strong>，只有文件管理器类 App 可申请 <code>MANAGE_EXTERNAL_STORAGE</code>。</li>
+</ul>
+<h3 id="1-3-两种视角：File-路径-vs-content-URI"><a href="#1-3-两种视角：File-路径-vs-content-URI" class="headerlink" title="1.3 两种视角：File 路径 vs content:// URI"></a>1.3 两种视角：<code>File</code> 路径 vs <code>content://</code> URI</h3><p>这是理解 Android 文件系统最重要的一次思维切换：</p>
+<table>
+<thead>
+<tr>
+<th>视角</th>
+<th>长这样</th>
+<th>能力</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>文件路径（File）</strong></td>
+<td><code>/storage/emulated/0/DCIM/a.jpg</code></td>
+<td>直接 <code>File</code> 读写，但<strong>只有自己沙箱和专属目录才保证有权限</strong></td>
+<td>App 私有目录、应用专属外部目录</td>
+</tr>
+<tr>
+<td><strong>内容 URI（content://）</strong></td>
+<td><code>content://media/external/images/media/123</code></td>
+<td>通过 <code>ContentResolver</code> 读写，<strong>权限由 URI 授权（grant）决定，不需要存储权限</strong></td>
+<td>共享媒体、SAF 用户选的文件、跨 App 分享</td>
+</tr>
+</tbody></table>
+<p>一句话记忆：<strong>在分区存储时代，”能拿到路径”不代表”能读写”，”拿到一个被授权的 content:// URI”才真正代表你有权限。</strong> 所以新代码里凡是涉及共享文件，第一反应应该是”用 Uri 而不是用路径”。</p>
+<h3 id="1-4-几个容易搞混的路径"><a href="#1-4-几个容易搞混的路径" class="headerlink" title="1.4 几个容易搞混的路径"></a>1.4 几个容易搞混的路径</h3><table>
+<thead>
+<tr>
+<th>你以为的路径</th>
+<th>实际含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/data/data/&lt;包名&gt;/</code></td>
+<td>软链接，真实是 <code>/data/user/0/&lt;包名&gt;/</code>；<code>0</code> 是主用户，多用户是 <code>/data/user/10/...</code></td>
+</tr>
+<tr>
+<td><code>/sdcard/</code></td>
+<td>软链接，指向 <code>/storage/emulated/0/</code>（或当前用户的 self 目录）</td>
+</tr>
+<tr>
+<td><code>/storage/emulated/0/Android/data/&lt;包名&gt;/</code></td>
+<td><strong>应用专属外部目录</strong>，其他 App 在较新版本上访问受限，卸载即删</td>
+</tr>
+<tr>
+<td><code>/storage/emulated/0/DCIM</code>、<code>Pictures</code>、<code>Download</code></td>
+<td><strong>共享目录</strong>，属于用户，卸载 App 不会删，通过 MediaStore 访问</td>
+</tr>
+</tbody></table>
+<h2 id="二、存储位置对照表（必背）"><a href="#二、存储位置对照表（必背）" class="headerlink" title="二、存储位置对照表（必背）"></a>二、存储位置对照表（必背）</h2><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>获取方式</th>
+<th>路径</th>
+<th>需要权限吗</th>
+<th>卸载是否删除</th>
+<th>系统是否会清理</th>
+<th>备份行为（Auto Backup）</th>
+<th>适合放什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>内部私有文件</strong></td>
+<td><code>context.filesDir</code></td>
+<td><code>/data/user/0/&lt;pkg&gt;/files</code></td>
+<td>不需要</td>
+<td>删除</td>
+<td>不清理</td>
+<td><strong>默认包含</strong></td>
+<td>用户数据、配置、小文件</td>
+</tr>
+<tr>
+<td><strong>内部缓存</strong></td>
+<td><code>context.cacheDir</code></td>
+<td><code>/data/user/0/&lt;pkg&gt;/cache</code></td>
+<td>不需要</td>
+<td>删除</td>
+<td><strong>空间不足时系统可能清理</strong></td>
+<td><strong>不包含</strong></td>
+<td>可重建的缓存（图片/网络缓存）</td>
+</tr>
+<tr>
+<td><strong>不备份私有目录</strong></td>
+<td><code>context.noBackupFilesDir</code></td>
+<td><code>/data/user/0/&lt;pkg&gt;/no_backup</code></td>
+<td>不需要</td>
+<td>删除</td>
+<td>不清理</td>
+<td><strong>不包含</strong></td>
+<td>不希望被备份的敏感/可重建数据（token、临时态）</td>
+</tr>
+<tr>
+<td><strong>代码缓存</strong></td>
+<td><code>context.codeCacheDir</code></td>
+<td><code>/data/user/0/&lt;pkg&gt;/code_cache</code></td>
+<td>不需要</td>
+<td>删除</td>
+<td>可能清理</td>
+<td>不包含</td>
+<td>JIT/编译产物（一般由运行时管理，App 很少直接用）</td>
+</tr>
+<tr>
+<td><strong>外部专属文件</strong></td>
+<td><code>getExternalFilesDir(type)</code></td>
+<td><code>/storage/emulated/0/Android/data/&lt;pkg&gt;/files/&lt;type&gt;</code></td>
+<td><strong>Android 4.4 起不需要</strong>（专属目录）</td>
+<td>删除</td>
+<td>不清理</td>
+<td>不包含</td>
+<td>大文件、媒体、不想占内部空间的数据</td>
+</tr>
+<tr>
+<td><strong>外部专属缓存</strong></td>
+<td><code>getExternalCacheDir()</code></td>
+<td><code>/storage/emulated/0/Android/data/&lt;pkg&gt;/cache</code></td>
+<td>同上，不需要</td>
+<td>删除</td>
+<td>可能清理</td>
+<td>不包含</td>
+<td>大体积缓存</td>
+</tr>
+<tr>
+<td><strong>共享媒体目录</strong></td>
+<td>MediaStore</td>
+<td><code>/storage/emulated/0/Pictures</code>、<code>DCIM</code>、<code>Download</code> 等</td>
+<td>写自己的媒体：<strong>Android 10+ 不需要</strong>；读别人的：需 <code>READ_MEDIA_*</code>（13+）或 <code>READ_EXTERNAL_STORAGE</code>（≤12）</td>
+<td><strong>不删除</strong>（属于用户）</td>
+<td>不清理</td>
+<td>不包含</td>
+<td>保存到相册、导出下载文件</td>
+</tr>
+<tr>
+<td><strong>SAF 用户选择的位置</strong></td>
+<td><code>ACTION_OPEN_DOCUMENT</code> / <code>ACTION_CREATE_DOCUMENT</code> / <code>OPEN_DOCUMENT_TREE</code></td>
+<td>任意位置，返回 <code>content://</code> URI</td>
+<td><strong>不需要权限</strong>（用户主动授权 Uri）</td>
+<td>不删除</td>
+<td>不清理</td>
+<td>不包含</td>
+<td>用户选目录备份、导入导出任意文件</td>
+</tr>
+</tbody></table>
+<p>补充说明：</p>
+<ul>
+<li><strong><code>getExternalFilesDir(type)</code> 里的 <code>type</code></strong> 常用 <code>Environment.DIRECTORY_PICTURES</code> / <code>MOVIES</code> / <code>MUSIC</code> / <code>DOCUMENTS</code> / <code>DOWNLOAD</code> 等；传 <code>null</code> 得到 files 目录本身；</li>
+<li><strong><code>getExternalFilesDirs(type)</code></strong>（带 s）返回<strong>多卷</strong>，可以用来在外置 SD 卡上找空间；</li>
+<li><strong>Android 4.4（API 19）之前</strong>，连应用专属外部目录都要 <code>WRITE_EXTERNAL_STORAGE</code> 才能写，之后就不需要了。</li>
+</ul>
+<h2 id="三、常用-API-与使用方法"><a href="#三、常用-API-与使用方法" class="headerlink" title="三、常用 API 与使用方法"></a>三、常用 API 与使用方法</h2><h3 id="3-1-File-API-与-Context-各目录"><a href="#3-1-File-API-与-Context-各目录" class="headerlink" title="3.1 File API 与 Context 各目录"></a>3.1 File API 与 Context 各目录</h3><pre><code class="kotlin">// 内部私有目录：用户数据
+val file = File(context.filesDir, &quot;config.json&quot;)
+file.writeText(&quot;&quot;&quot;{&quot;theme&quot;:&quot;dark&quot;}&quot;&quot;&quot;)          // 小文件直接 writeText/readText
+val text = file.readText()
+
+// 内部缓存：可被系统清理，不要放重要数据
+val cache = File(context.cacheDir, &quot;images/cover.png&quot;)
+cache.parentFile?.mkdirs()                       // 父目录不存在要先建，否则写会失败
+
+// 不参与 Auto Backup 的私有目录
+val token = File(context.noBackupFilesDir, &quot;session.bin&quot;)
+
+// 应用专属外部目录（Android 4.4+ 无需权限）
+val picDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)</code></pre>
+<h3 id="3-2-openFileOutput-openFileInput（返回的是私有-files-目录下的流）"><a href="#3-2-openFileOutput-openFileInput（返回的是私有-files-目录下的流）" class="headerlink" title="3.2 openFileOutput / openFileInput（返回的是私有 files 目录下的流）"></a>3.2 <code>openFileOutput</code> / <code>openFileInput</code>（返回的是私有 files 目录下的流）</h3><pre><code class="kotlin">// 等价于在 filesDir 下开一个文件流，适合写二进制
+context.openFileOutput(&quot;data.bin&quot;, Context.MODE_PRIVATE).use { out -&gt;
+    out.write(payload)
+}
+context.openFileInput(&quot;data.bin&quot;).use { input -&gt;
+    val bytes = input.readBytes()
+}
+// MODE_PRIVATE：仅本 App 可读写（新项目已不再支持 MODE_WORLD_*，不要用）</code></pre>
+<h3 id="3-3-临时文件与流式拷贝（java-nio）"><a href="#3-3-临时文件与流式拷贝（java-nio）" class="headerlink" title="3.3 临时文件与流式拷贝（java.nio）"></a>3.3 临时文件与流式拷贝（java.nio）</h3><pre><code class="kotlin">// 在指定目录创建唯一临时文件（会真正创建空文件）
+val tmp = File.createTempFile(&quot;download&quot;, &quot;.tmp&quot;, context.cacheDir)
+
+// 流式拷贝：适合大文件，避免一次性读进内存
+context.contentResolver.openInputStream(uri)?.use { input -&gt;
+    FileOutputStream(tmp).use { output -&gt;
+        input.copyTo(output, bufferSize = 8 * 1024)     // Kotlin 扩展，内部循环读写
+    }
+}
+
+// 用 java.nio 拷贝（API 26+ 可用 Files；API 26 以下用 FileInputStream 通道）
+if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
+    java.nio.file.Files.copy(inputStream, tmp.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+}</code></pre>
+<h3 id="3-4-FileProvider：把私有文件安全地分享给别的-App"><a href="#3-4-FileProvider：把私有文件安全地分享给别的-App" class="headerlink" title="3.4 FileProvider：把私有文件安全地分享给别的 App"></a>3.4 FileProvider：把私有文件安全地分享给别的 App</h3><p><strong>为什么需要</strong>：直接传 <code>file://</code> URI 给别的 App 会触发 <code>FileUriExposedException</code>（Android 7.0 起），必须用 <code>content://</code> + FileProvider 授权。</p>
+<p>Manifest：</p>
+<pre><code class="xml">&lt;provider
+    android:name=&quot;androidx.core.content.FileProvider&quot;
+    android:authorities=&quot;${applicationId}.fileprovider&quot;
+    android:exported=&quot;false&quot;
+    android:grantUriPermissions=&quot;true&quot;&gt;
+    &lt;meta-data
+        android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;
+        android:resource=&quot;@xml/file_paths&quot; /&gt;
+&lt;/provider&gt;</code></pre>
+<p><code>res/xml/file_paths.xml</code>（声明哪些目录可以对外暴露，<code>path=&quot;.&quot;</code> 表示该目录全部）：</p>
+<pre><code class="xml">&lt;paths&gt;
+    &lt;files-path name=&quot;files&quot; path=&quot;.&quot; /&gt;               &lt;!-- filesDir --&gt;
+    &lt;cache-path name=&quot;cache&quot; path=&quot;.&quot; /&gt;               &lt;!-- cacheDir --&gt;
+    &lt;external-files-path name=&quot;ext_files&quot; path=&quot;.&quot; /&gt;  &lt;!-- getExternalFilesDir --&gt;
+    &lt;external-cache-path name=&quot;ext_cache&quot; path=&quot;.&quot; /&gt;  &lt;!-- getExternalCacheDir --&gt;
+&lt;/paths&gt;</code></pre>
+<p>分享：</p>
+<pre><code class="kotlin">val file = File(cacheDir, &quot;share/report.pdf&quot;)
+val uri = FileProvider.getUriForFile(this, &quot;$packageName.fileprovider&quot;, file)
+
+val intent = Intent(Intent.ACTION_SEND).apply {
+    type = &quot;application/pdf&quot;
+    putExtra(Intent.EXTRA_STREAM, uri)
+    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)    // 临时把读权限授给接收方 App
+}
+startActivity(Intent.createChooser(intent, null))</code></pre>
+<h3 id="3-5-MediaStore-往相册插入图片（Android-10-的正确写法）"><a href="#3-5-MediaStore-往相册插入图片（Android-10-的正确写法）" class="headerlink" title="3.5 MediaStore 往相册插入图片（Android 10+ 的正确写法）"></a>3.5 MediaStore 往相册插入图片（Android 10+ 的正确写法）</h3><pre><code class="kotlin">// ---------- Android 10（API 29）及以上：不需要存储权限 ----------
+val values = ContentValues().apply {
+    put(MediaStore.Images.Media.DISPLAY_NAME, &quot;IMG_${System.currentTimeMillis()}.jpg&quot;)
+    put(MediaStore.Images.Media.MIME_TYPE, &quot;image/jpeg&quot;)
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+        // 用 RELATIVE_PATH 指定&quot;相对共享目录的路径&quot;，不要再写绝对路径
+        put(MediaStore.Images.Media.RELATIVE_PATH, &quot;${Environment.DIRECTORY_PICTURES}/MyApp&quot;)
+        // IS_PENDING=1：先占位，写完再置 0，避免半成品被别人（相册）看到
+        put(MediaStore.Images.Media.IS_PENDING, 1)
+    }
+}
+
+val collection = if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+    MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+} else {
+    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+}
+
+val resolver = contentResolver
+val uri = resolver.insert(collection, values) ?: return
+try {
+    resolver.openOutputStream(uri)?.use { out -&gt;
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+    }
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+        values.clear()
+        values.put(MediaStore.Images.Media.IS_PENDING, 0)   // 写入完成，解除 pending
+        resolver.update(uri, values, null, null)
+    }
+} catch (e: Exception) {
+    resolver.delete(uri, null, null)     // 失败要清理掉这条空记录，否则相册里会出现坏图
+    throw e
+}</code></pre>
+<p>Android 9 及以下的老写法（<strong>需要 <code>WRITE_EXTERNAL_STORAGE</code>，且要自己给出绝对路径</strong>）：</p>
+<pre><code class="kotlin">val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+val file = File(dir, &quot;IMG_${System.currentTimeMillis()}.jpg&quot;)
+val values = ContentValues().apply {
+    put(MediaStore.Images.Media.DISPLAY_NAME, file.name)
+    put(MediaStore.Images.Media.MIME_TYPE, &quot;image/jpeg&quot;)
+    put(MediaStore.Images.Media.DATA, file.absolutePath)   // DATA 列已废弃，仅 ≤28 使用
+}
+contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)</code></pre>
+<h3 id="3-6-SAF：让用户选文件-选目录，并持久化授权"><a href="#3-6-SAF：让用户选文件-选目录，并持久化授权" class="headerlink" title="3.6 SAF：让用户选文件/选目录，并持久化授权"></a>3.6 SAF：让用户选文件/选目录，并持久化授权</h3><pre><code class="kotlin">// 选单个文件：ACTION_OPEN_DOCUMENT
+val openDoc = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri -&gt;
+    uri ?: return@registerForActivityResult
+    // 想让 Uri 在 App 重启后仍可用，必须申请持久化读权限
+    contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    contentResolver.openInputStream(uri)?.use { input -&gt;
+        File(context.filesDir, &quot;imported.dat&quot;).outputStream().use { input.copyTo(it) }
+    }
+}
+openDoc.launch(arrayOf(&quot;image/*&quot;, &quot;application/pdf&quot;))   // 传 MIME 数组，传 */* 表示任意类型
+
+// 选目录（用于备份）：ACTION_OPEN_DOCUMENT_TREE，返回的是目录树 Uri
+val openTree = registerForActivityResult(
+    ActivityResultContracts.OpenDocumentTree()
+) { treeUri -&gt;
+    treeUri ?: return@registerForActivityResult
+    contentResolver.takePersistableUriPermission(
+        treeUri,
+        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+    )
+    // 用 DocumentFile 把树 Uri 当&quot;目录&quot;来操作，别拼字符串路径
+    val root = DocumentFile.fromTreeUri(context, treeUri)
+    val out = root?.createFile(&quot;application/json&quot;, &quot;backup.json&quot;)
+    out?.uri?.let { contentResolver.openOutputStream(it)?.use { os -&gt; os.write(jsonBytes) } }
+}
+openTree.launch(null)
+
+// 导出新文件：ACTION_CREATE_DOCUMENT（ActivityResultContracts.CreateDocument(mime)）</code></pre>
+<p><strong>要点</strong>：<code>takePersistableUriPermission</code> 只能对 SAF 返回的（带 <code>FLAG_GRANT_PERSISTABLE_URI_PERMISSION</code> 的）Uri 生效，对 Photo Picker 返回的 Uri 通常不能持久化；重新读取持久化过的目录时用 <code>contentResolver.persistedUriPermissions</code> 查。</p>
+<h3 id="3-7-缓存统计与清理（只清自己能清的目录）"><a href="#3-7-缓存统计与清理（只清自己能清的目录）" class="headerlink" title="3.7 缓存统计与清理（只清自己能清的目录）"></a>3.7 缓存统计与清理（只清自己能清的目录）</h3><pre><code class="kotlin">// 递归统计一个目录的大小
+fun dirSize(dir: File?): Long =
+    dir?.listFiles()?.sumOf { if (it.isDirectory) dirSize(it) else it.length() } ?: 0L
+
+// 只清理 cacheDir / externalCacheDir；绝不能去删 filesDir 或共享目录
+fun clearCache(dir: File?) {
+    dir?.listFiles()?.forEach { f -&gt; if (f.isDirectory) clearCache(f) else f.delete() }
+}
+
+val cacheSize = dirSize(context.cacheDir) + dirSize(context.externalCacheDir)</code></pre>
+<h3 id="3-8-查询可用存储空间"><a href="#3-8-查询可用存储空间" class="headerlink" title="3.8 查询可用存储空间"></a>3.8 查询可用存储空间</h3><pre><code class="kotlin">// 方式一：StatFs 查某个路径所在分区的剩余空间
+val stat = StatFs(context.filesDir.path)
+val availableBytes = stat.availableBytes
+val totalBytes = stat.totalBytes
+
+// 方式二：StorageManager 的&quot;可分配空间&quot;（会把系统可回收的缓存也算进去，更准）
+if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
+    val sm = context.getSystemService(StorageManager::class.java)
+    val uuid = sm.getUuidForPath(context.filesDir)
+    val allocatable = sm.getAllocatableBytes(uuid)      // 当前还能腾出多少
+    if (allocatable &gt;= requiredBytes) {
+        sm.allocateBytes(uuid, requiredBytes)           // 预占空间，减少写入中途失败
+    }
+}</code></pre>
+<h2 id="四、使用场景"><a href="#四、使用场景" class="headerlink" title="四、使用场景"></a>四、使用场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐位置 / 做法</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>图片/视频缓存</strong></td>
+<td><code>cacheDir</code> 或 <code>getExternalCacheDir()</code></td>
+<td>会被系统清理，必须能重新下载；大图放外部专属缓存省内部空间</td>
+</tr>
+<tr>
+<td><strong>用户数据持久化（DB/配置）</strong></td>
+<td><code>filesDir</code>、<code>databases</code> 目录、SharedPreferences / DataStore</td>
+<td>不能放 <code>cacheDir</code>（会被清）；<code>filesDir</code> 默认进 Auto Backup</td>
+</tr>
+<tr>
+<td><strong>导出文件给用户</strong></td>
+<td>SAF <code>ACTION_CREATE_DOCUMENT</code>，或 MediaStore <code>Download</code></td>
+<td>让用户自己选位置，App 不需要存储权限</td>
+</tr>
+<tr>
+<td><strong>跨应用分享</strong></td>
+<td>FileProvider + <code>content://</code></td>
+<td>必须 <code>FLAG_GRANT_READ_URI_PERMISSION</code>；不能用 <code>file://</code></td>
+</tr>
+<tr>
+<td><strong>保存到相册</strong></td>
+<td>MediaStore（<code>RELATIVE_PATH</code> + <code>IS_PENDING</code>）</td>
+<td>Android 10+ 不需要权限；写完必须把 <code>IS_PENDING</code> 置 0</td>
+</tr>
+<tr>
+<td><strong>用户选择目录备份</strong></td>
+<td>SAF <code>OPEN_DOCUMENT_TREE</code> + DocumentFile</td>
+<td><code>takePersistableUriPermission</code> 让授权跨重启有效</td>
+</tr>
+<tr>
+<td><strong>日志文件</strong></td>
+<td><code>filesDir/logs</code> 或 <code>getExternalFilesDir(LOG)</code></td>
+<td><strong>不要放 cacheDir</strong>（随时被清）；要自己做轮转和大小上限</td>
+</tr>
+<tr>
+<td><strong>大文件下载临时文件</strong></td>
+<td>先下到 <code>cacheDir/xxx.tmp</code>，完成后再移到目标位置</td>
+<td>先写临时文件再 <code>renameTo</code>，避免用户拿到半成品</td>
+</tr>
+</tbody></table>
+<h2 id="五、常见坑与排查"><a href="#五、常见坑与排查" class="headerlink" title="五、常见坑与排查"></a>五、常见坑与排查</h2><h3 id="5-1-file-跨-App-传递直接崩：FileUriExposedException"><a href="#5-1-file-跨-App-传递直接崩：FileUriExposedException" class="headerlink" title="5.1 file:// 跨 App 传递直接崩：FileUriExposedException"></a>5.1 <code>file://</code> 跨 App 传递直接崩：<code>FileUriExposedException</code></h3><p>Android 7.0（API 24）起，任何把 <code>file://</code> URI 通过 Intent 传出去的行为都会抛 <code>FileUriExposedException</code>。原因是 <code>file://</code> 会让接收方绕过权限体系直接读文件。<strong>统一改用 FileProvider 生成 <code>content://</code> URI 并加 <code>FLAG_GRANT_READ_URI_PERMISSION</code>。</strong> 要临时放宽也可以用 <code>StrictMode.setVmPolicy</code>，但那是掩盖问题，正确解法是 FileProvider。</p>
+<h3 id="5-2-WRITE-EXTERNAL-STORAGE-在-Android-13-对媒体已失效"><a href="#5-2-WRITE-EXTERNAL-STORAGE-在-Android-13-对媒体已失效" class="headerlink" title="5.2 WRITE_EXTERNAL_STORAGE 在 Android 13+ 对媒体已失效"></a>5.2 <code>WRITE_EXTERNAL_STORAGE</code> 在 Android 13+ 对媒体已失效</h3><ul>
+<li>Android 13（API 33）起，读共享媒体要用 <code>READ_MEDIA_IMAGES</code> / <code>READ_MEDIA_VIDEO</code> / <code>READ_MEDIA_AUDIO</code>，<code>READ_EXTERNAL_STORAGE</code> 不再覆盖这些类型；</li>
+<li><strong>写入相册（自己创建的媒体）从 Android 10 起就不再需要任何存储权限</strong>，之前靠 <code>WRITE_EXTERNAL_STORAGE</code> 的写法在 33+ 上是多余的、申请也可能不被授予。</li>
+</ul>
+<h3 id="5-3-Android-11-起不能直接写-sdcard-根目录"><a href="#5-3-Android-11-起不能直接写-sdcard-根目录" class="headerlink" title="5.3 Android 11 起不能直接写 /sdcard 根目录"></a>5.3 Android 11 起不能直接写 <code>/sdcard</code> 根目录</h3><p>分区存储强制生效后，在 <code>/storage/emulated/0/</code> 根目录或共享目录里<strong>随意 <code>mkdir</code> / 写文件会失败</strong>（<code>EACCES</code>）。自己的东西写进 <code>getExternalFilesDir</code>，要放到共享区就走 MediaStore 或让用户用 SAF 选位置。</p>
+<h3 id="5-4-cacheDir-会被系统清理，不能放重要数据"><a href="#5-4-cacheDir-会被系统清理，不能放重要数据" class="headerlink" title="5.4 cacheDir 会被系统清理，不能放重要数据"></a>5.4 <code>cacheDir</code> 会被系统清理，不能放重要数据</h3><p>磁盘紧张时系统会清理 App 的 <code>cacheDir</code>（外部缓存同样可能被清）。<strong>重要数据（用户配置、未上传的草稿）必须放 <code>filesDir</code> 或 <code>noBackupFilesDir</code></strong>，缓存目录只放”丢了能重新拿”的内容。</p>
+<h3 id="5-5-filesDir-与-noBackupFilesDir-的备份差异"><a href="#5-5-filesDir-与-noBackupFilesDir-的备份差异" class="headerlink" title="5.5 filesDir 与 noBackupFilesDir 的备份差异"></a>5.5 <code>filesDir</code> 与 <code>noBackupFilesDir</code> 的备份差异</h3><p>Auto Backup 默认<strong>包含 <code>filesDir</code>、<code>databases</code>、SharedPreferences 等</strong>，但<strong>不包含 <code>cacheDir</code> 和 <code>noBackupFilesDir</code></strong>。有个常见坑：Auto Backup 有<strong>约 25MB 的每 App 配额</strong>，超出会被截断导致恢复不完整，所以 <strong>Log、大缓存、可重建的媒体文件要排除掉</strong>——用 <code>android:fullBackupContent</code>（Android 11 及以下）和 Android 12+ 的 <code>android:dataExtractionRules</code> 声明规则，或者干脆放到 <code>noBackupFilesDir</code>。</p>
+<h3 id="5-6-路径拼接必须用-File-separator-File-parent-child"><a href="#5-6-路径拼接必须用-File-separator-File-parent-child" class="headerlink" title="5.6 路径拼接必须用 File.separator / File(parent, child)"></a>5.6 路径拼接必须用 <code>File.separator</code> / <code>File(parent, child)</code></h3><p>Android 的路径分隔符是 <code>/</code>，但硬编码 <code>&quot;$dir/$name&quot;</code> 在跨平台（如单元测试跑在 JVM 上）时可能出问题。<strong>统一用 <code>File(parent, child)</code> 或 <code>File(parent, child).path</code></strong>，不要自己拼字符串。</p>
+<h3 id="5-7-renameTo-跨文件系统会失败，原子写要靠”同分区临时文件”"><a href="#5-7-renameTo-跨文件系统会失败，原子写要靠”同分区临时文件”" class="headerlink" title="5.7 renameTo 跨文件系统会失败，原子写要靠”同分区临时文件”"></a>5.7 <code>renameTo</code> 跨文件系统会失败，原子写要靠”同分区临时文件”</h3><p><code>File.renameTo()</code> 只有在<strong>源和目标在同一文件系统</strong>时才是原子的，跨分区（比如从 <code>cacheDir</code> 移到 <code>/sdcard</code>）会直接失败并返回 <code>false</code>。<strong>正确做法</strong>：在目标目录下先写一个 <code>.tmp</code> 文件，写完再 <code>renameTo</code> 成正式名，这样要么看到完整的新文件、要么看到旧文件，不会出现半截文件。注意 <code>renameTo</code> 返回 <code>false</code> 时要回退到”拷贝后删除”。</p>
+<pre><code class="kotlin">val target = File(context.filesDir, &quot;config.json&quot;)
+val tmp = File(context.filesDir, &quot;config.json.tmp&quot;)     // 和目标同目录，保证同分区
+tmp.writeText(json)
+if (!tmp.renameTo(target)) {                            // 兜底：拷贝 + 删除
+    tmp.copyTo(target, overwrite = true)
+    tmp.delete()
+}</code></pre>
+<h3 id="5-8-文件名非法字符与长度限制导致创建失败"><a href="#5-8-文件名非法字符与长度限制导致创建失败" class="headerlink" title="5.8 文件名非法字符与长度限制导致创建失败"></a>5.8 文件名非法字符与长度限制导致创建失败</h3><ul>
+<li>文件名里带 <code>/</code>、<code>\</code>、<code>:</code>、<code>*</code>、<code>?</code>、<code>&quot;</code>、<code>&lt;</code>、<code>&gt;</code>、<code>|</code> 等字符，或包含控制字符，会导致创建失败；</li>
+<li>文件名过长（超过文件系统单段名限制，通常 255 字节）也会失败；</li>
+<li>从网络/用户输入拿到的名字<strong>必须先做清洗</strong>（去掉非法字符、截断长度、去掉首尾空格和 <code>.</code>），否则表现为 <code>FileNotFoundException</code> 或 <code>IOException</code>。</li>
+</ul>
+<h3 id="5-9-多用户-多进程下路径不同"><a href="#5-9-多用户-多进程下路径不同" class="headerlink" title="5.9 多用户 / 多进程下路径不同"></a>5.9 多用户 / 多进程下路径不同</h3><ul>
+<li>多用户设备上私有目录是 <code>/data/user/&lt;userId&gt;/&lt;包名&gt;/</code>，主用户是 <code>0</code>，工作资料/访客用户可能是 <code>10</code> 等；<strong>不要硬编码 <code>/data/user/0/</code></strong>，永远用 <code>context.filesDir</code> 等 API 获取；</li>
+<li>多进程 App（<code>:remote</code> 进程）共享同一个 uid，但<strong>各自的 <code>Context</code> 指向同一个沙箱目录</strong>，所以文件是可见的，要注意并发写冲突，用文件锁或让单进程负责写。</li>
+</ul>
+<h3 id="5-10-写之前先检查可用空间"><a href="#5-10-写之前先检查可用空间" class="headerlink" title="5.10 写之前先检查可用空间"></a>5.10 写之前先检查可用空间</h3><p>大文件写入前应先查 <code>StatFs.availableBytes</code> 或 <code>StorageManager.getAllocatableBytes</code>，并<strong>留出余量</strong>（不要卡着剩余空间写），否则写到一半 <code>ENOSPC</code> 会留下残缺文件。推荐”先占位（<code>allocateBytes</code>）→ 写临时文件 → 成功后 rename”的流程。</p>
+<h3 id="5-11-Scoped-Storage-的心智模型：先问”用路径还是用-URI”"><a href="#5-11-Scoped-Storage-的心智模型：先问”用路径还是用-URI”" class="headerlink" title="5.11 Scoped Storage 的心智模型：先问”用路径还是用 URI”"></a>5.11 Scoped Storage 的心智模型：先问”用路径还是用 URI”</h3><p>遇到”读/写文件”的需求，先按这个顺序判断：</p>
+<ol>
+<li><strong>是不是自己的私有/专属目录？</strong> → 用 <code>File</code> 路径，随便读写；</li>
+<li><strong>是不是要写共享区（相册/下载）自己的媒体？</strong> → 用 MediaStore，写自己的<strong>不用权限</strong>；</li>
+<li><strong>是不是要读/改别人的共享文件，或用户指定位置的文件？</strong> → 用 <code>content://</code> URI（MediaStore 查询或 SAF 授权）；</li>
+<li><strong>是不是要分享给别的 App？</strong> → FileProvider 生成 <code>content://</code> + 授权 flag。</li>
+</ol>
+<p>只要记住”<strong>共享区一律用 URI，别指望路径</strong>“，分区存储相关的坑就基本躲开了。</p>
+<h2 id="六、面试追问速答"><a href="#六、面试追问速答" class="headerlink" title="六、面试追问速答"></a>六、面试追问速答</h2><p><strong>Q1：Android 10 分区存储到底改变了什么？</strong><br>它改变了”谁能读写共享存储”的规则。Android 10 之前，拿到 <code>WRITE_EXTERNAL_STORAGE</code> 就等于拿到整个共享盘的读写权，App 可以随意建目录、读别人文件、卸载留垃圾。分区存储之后，每个 App 在共享盘上默认只有三块能力：自己私有目录、自己的应用专属外部目录（<code>Android/data/&lt;包名&gt;/</code>）、以及通过 MediaStore 写入的、属于自己创建的媒体文件；要访问别人的共享文件必须走 MediaStore 查询或 SAF 授权。它同时解决了隐私泄露和存储混乱，代价是老代码里大量”绝对路径直接读写 sdcard”的写法全部要改。</p>
+<p><strong>Q2：为什么推荐 <code>content://</code> 而不是文件路径？</strong><br>因为在分区存储下，<strong>路径只是一个”位置描述”，不携带任何访问授权</strong>——你知道 <code>/storage/emulated/0/DCIM/a.jpg</code> 这个路径，不代表你能打开它。而 <code>content://</code> URI 是由系统/提供方签发的”访问凭据”，它背后带着授权信息：MediaStore 的 URI 表示”这是你被允许访问的媒体”，SAF 的 URI 表示”用户主动授权了这个文件”，FileProvider 的 URI 表示”我主动授权给你读这一份”。另外 URI 还能跨进程、跨 App、跨用户使用，且不暴露真实路径，安全性和可移植性都更好。</p>
+<p><strong>Q3：FileProvider 原理是什么？</strong><br>FileProvider 是一个 <code>ContentProvider</code>，它把 App 私有目录（在 <code>file_paths.xml</code> 里声明的那些路径）<strong>映射成一棵虚拟的 content 目录树</strong>。当 App 调 <code>FileProvider.getUriForFile()</code> 时，它会根据真实文件路径反查出对应的虚拟路径，生成一个 <code>content://&lt;authority&gt;/&lt;虚拟路径&gt;</code> 形式的 URI。别的 App 拿到这个 URI 后，通过 <code>ContentResolver</code> 请求 FileProvider 打开文件，FileProvider 校验发起方是否被授权（靠 Intent 上带的 <code>FLAG_GRANT_READ_URI_PERMISSION</code> 等），通过后代为读写真实文件。所以接收方<strong>永远看不到真实路径</strong>，权限粒度精确到单个文件，且可以随时收回。</p>
+<p><strong>Q4：Android 13 保存图片到相册需要什么权限？</strong><br><strong>不需要任何存储权限。</strong> 从 Android 10（API 29）分区存储开始，App 通过 MediaStore 插入<strong>自己创建的</strong>媒体文件（相册图片、视频）就无需 <code>WRITE_EXTERNAL_STORAGE</code>。正确写法是：<code>ContentValues</code> 里设置 <code>DISPLAY_NAME</code>、<code>MIME_TYPE</code>、<code>RELATIVE_PATH</code>，把 <code>IS_PENDING</code> 置 1 → <code>insert</code> 拿到 URI → 写入数据 → 再把 <code>IS_PENDING</code> 置 0。只有<strong>读取别的 App 创建的媒体</strong>才需要权限，Android 13+ 用 <code>READ_MEDIA_IMAGES</code> / <code>READ_MEDIA_VIDEO</code>，Android 12 及以下用 <code>READ_EXTERNAL_STORAGE</code>。</p>
+<p><strong>Q5：原子写文件怎么做？</strong><br>核心思路是”要么完整的新内容，要么保持旧内容，绝不出现写坏一半的文件”。做法是在<strong>目标文件的同一目录</strong>（保证同一文件系统）先写一个临时文件（如 <code>config.json.tmp</code>），把全部内容写完并 <code>flush</code>/<code>close</code> 后，再用 <code>renameTo</code> 把临时文件改名成正式文件名。同一文件系统上的 rename 是原子操作，所以外界要么看到旧文件、要么看到完整新文件。注意两点：临时文件<strong>必须和目标同目录</strong>（跨分区 rename 会失败，那就只能退化成”拷贝再删”，不再是原子的）；<code>renameTo</code> 返回 <code>false</code> 时要有兜底逻辑。</p>
+<p><strong>Q6：缓存目录和私有目录怎么选？</strong><br>判断标准就一条：<strong>这个数据丢了会不会造成损失？</strong> 会损失（用户配置、草稿、数据库、日志）→ 放私有目录 <code>filesDir</code>（或 <code>noBackupFilesDir</code>、<code>databases</code>）；不会损失、能重新获取（图片缓存、网络响应缓存、可重下的临时文件）→ 放 <code>cacheDir</code> 或 <code>getExternalCacheDir()</code>。区别在于 <code>cacheDir</code> 在磁盘紧张时<strong>会被系统主动清理</strong>，而 <code>filesDir</code> 不会被清，并且默认参与 Auto Backup。所以”为了省内部空间把用户数据挪到 cacheDir”是典型的错误优化。</p>
+<p><strong>Q7：卸载后哪些数据会保留？</strong><br>App 卸载时，<strong>私有目录（<code>/data/data/&lt;包名&gt;/</code> 整个）、应用专属外部目录（<code>/storage/emulated/0/Android/data/&lt;包名&gt;/</code> 整个）都会随卸载删除</strong>。会<strong>保留</strong>的是那些已经放进”用户共享区”的文件，比如通过 MediaStore 保存到相册的图片、通过 SAF 由用户选择位置导出的文件——这些文件的所有权属于用户，不属于 App，卸载不会动它们。同理，<code>cacheDir</code>、<code>filesDir</code>、<code>noBackupFilesDir</code> 这些都在沙箱内，一并删除。额外的坑是：<strong>Auto Backup 备份过的 <code>filesDir</code> 数据，在新设备/重装时可能被恢复</strong>，如果不想被恢复，要放 <code>noBackupFilesDir</code> 或用备份规则排除。</p>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2026/10/21/Android/Service/Android%20Service/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  Android Service：原理 / 使用场景 / 常用 API / 常见坑
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2026/10/21/Android/Flow/Kotlin%20Flow%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                Kotlin Flow：原理 / 使用场景 / 常用 API / 常见坑
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start"></span>-<span id="footerYear-end"></span>
+
+	
+	    <a href="/">Qin</a>
+	
+	
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//wujun.me" target="_blank">Wu Jun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-start').innerHTML = new Date().getFullYear() + '';
+</script>
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":50,"vOffset":30},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

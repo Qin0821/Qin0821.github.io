@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		Room：原理 / 使用场景 / 常用 API / 常见坑 | 
+	 
+	亲临其境
+	</title>
+	
+	<!-- keywords,description -->
+	
+	
+
+	<!-- favicon -->
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+	
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">亲临其境</a>
+
+	<ul id="menu">
+    
+
+    
+
+    
+
+    
+  
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="Press Enter to search">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AI
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/AI/Codex%E3%80%81Trae%E3%80%81DeepSeek%20Harness%E5%AF%B9%E6%AF%94/">
+                     
+										    Codex、Trae、DeepSeek Harness对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AndroidStudio
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/Windows%E9%80%82%E9%85%8DMacOS%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    Windows适配MacOS快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/%E5%A5%BD%E7%94%A8Plugin%E6%8E%A8%E8%8D%90/">
+                     
+										    好用Plugin推荐
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Flow
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Flow/Kotlin%20Flow%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Kotlin Flow原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Fragment
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										DialogFragment
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/DialogFragment/%E4%BC%98%E9%9B%85%E8%A7%A3%E5%86%B3DialogFragment%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    优雅解决DialogFragment常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+                     
+										    Fragment详细生命周期
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										IPC
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/IPC/Android%E8%B7%A8%E8%BF%9B%E7%A8%8BIPC/">
+                     
+										    Android跨进程IPC
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Jetpack
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Jetpack/Navigation/">
+                     
+										    Navigation
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Koin
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Koin/Koin%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Koin依赖注入原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										LRU
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/LRU/LRU%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    LRU原理与应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Media
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Media/Media3-ExoPlayer%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%9E%E6%88%98/">
+                     
+										    Media3-ExoPlayer介绍与实战
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Popup
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Popup/%E8%83%8C%E6%99%AF%E5%8F%98%E6%9A%97/">
+                     
+										    背景变暗
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										RecycleView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/RecycleView/RecycleView%20Feed%20%E6%B5%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                     
+										    RecycleView Feed 流性能优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/RecycleView/RecycleView%E7%BC%93%E5%AD%98%E5%92%8C%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6/">
+                     
+										    RecycleView缓存和复用机制
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Retrofit
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Retrofit/Retrofit%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Retrofit原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Room
+									</a>
+									
+							<ul>
+								<li class="file active">
+									<a href="/2026/10/21/Android/Room/Room%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Room原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Service
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Service/Android%20Service/">
+                     
+										    Android Service
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										TextView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/TextView/%E4%BD%BF%E7%94%A8%E5%AD%97%E4%BD%93%E6%8E%A7%E5%88%B6%E6%96%87%E5%AD%97%E7%B2%97%E7%BB%86/">
+                     
+										    使用字体控制文字粗细
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										UI开发
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/ConstraintLayout%E8%AF%A6%E8%A7%A3/">
+                     
+										    ConstraintLayout详解
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/merge%E7%9B%B8%E5%85%B3123/">
+                     
+										    merge相关123
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E5%A6%82%E4%BD%95%E5%85%A8%E5%B1%80%E5%8A%A8%E6%80%81%E8%AE%BE%E7%BD%AEFLAG_SECURE/">
+                     
+										    如何全局动态设置FLAG_SECURE
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E7%88%B6%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4clip%E7%AD%96%E7%95%A5%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/">
+                     
+										    父布局调整clip策略提高开发效率
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E8%AE%BE%E7%BD%AEView%E8%83%8C%E6%99%AF%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+                     
+										    设置View背景最佳实践
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										adb
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/adb/%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8BTopActivity/">
+                     
+										    一行命令查看TopActivity
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										动画
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/MotionLayout%E5%8A%A8%E7%94%BB%EF%BC%88%E4%B8%80%EF%BC%89/">
+                     
+										    MotionLayout动画（一）
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/%E4%BD%BF%E7%94%A8MotionLayout%E5%AE%9E%E7%8E%B0Tab/">
+                     
+										    使用MotionLayout实现Tab
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										协程
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E5%8D%8F%E7%A8%8B/Kotlin%E5%8D%8F%E7%A8%8B%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Kotlin协程原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										反编译
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8F%8D%E7%BC%96%E8%AF%91/%E5%8F%8D%E7%BC%96%E8%AF%91NewsBreak/">
+                     
+										    反编译NewsBreak
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图片加载
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/Glide%E4%B8%8ECoil%E5%AF%B9%E6%AF%94/">
+                     
+										    Glide与Coil对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图表
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E8%A1%A8/MPAndroidChart%E4%BD%BF%E7%94%A8/">
+                     
+										    MPAndroidChart使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										奇怪的问题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/%E5%91%BD%E5%90%8D%E5%86%B2%E7%AA%81/">
+                     
+										    命名冲突
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										弱网优化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E5%BC%B1%E7%BD%91%E4%BC%98%E5%8C%96/%E5%BC%B1%E7%BD%91%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">
+                     
+										    弱网优化策略
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										性能优化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%90%AF%E5%8A%A8%E9%A1%B5%E4%BC%98%E5%8C%96/">
+                     
+										    启动页优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E6%89%8B%E6%9C%BA%E6%A2%B5%E8%AE%AFApplication%E5%88%9D%E5%A7%8B%E5%8C%96%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/">
+                     
+										    手机梵讯Application初始化速度优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										数据库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
+                     
+										    Room、greenDao对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										文件系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/Android%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                     
+										    Android文件系统
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										时间格式化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/JodaTime/">
+                     
+										    JodaTime
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										权限管理
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/Android%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">
+                     
+										    Android权限管理
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										测试
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%B5%8B%E8%AF%95/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">
+                     
+										    弱网测试工具
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										热修复
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%83%AD%E4%BF%AE%E5%A4%8D/Android%E4%B8%BB%E6%B5%81%E7%83%AD%E4%BF%AE%E5%A4%8D/">
+                     
+										    Android主流热修复
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										版本适配
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android 10
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/Android%2010/Android%2010%E9%80%82%E9%85%8D/">
+                     
+										    Android 10适配
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/xapk%E5%AE%89%E8%A3%85%E5%8C%85%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85/">
+                     
+										    xapk安装包如何安装
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										网络
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%BD%91%E7%BB%9C/Windows%E3%80%81MacOS%E4%B8%ADCharles%E6%8A%93%E5%8C%85%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    Windows、MacOS中Charles抓包常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										规范
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%A7%84%E8%8C%83/Android%20Log%E8%A7%84%E8%8C%83/">
+                     
+										    Android Log规范
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										设计模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%AE%89%E5%8D%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    安卓设计模式常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                     
+										    常见的设计模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%B6%A3%E8%A7%A3%E5%B7%A5%E5%8E%82%E4%B8%89%E6%A8%A1%E5%BC%8F/">
+                     
+										    趣解工厂三模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										软件架构模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/Google%E6%8E%A8%E8%8D%90%E6%9E%B6%E6%9E%84%E5%88%86%E4%BA%AB/">
+                     
+										    Google推荐架构分享
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/MVC%E3%80%81MVP%E3%80%81MVVM%E3%80%81MVI/">
+                     
+										    MVC、MVP、MVVM、MVI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										面试题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/23%E4%B8%AD%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    23中设计模式及其应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Handler/">
+                     
+										    Handler
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/LinearLayout%E3%80%81RelativeLayout%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94/">
+                     
+										    LinearLayout、RelativeLayout性能对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Retrofit%E3%80%81okhttp/">
+                     
+										    Retrofit、okhttp
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/eventBus/">
+                     
+										    eventBus
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/glide/">
+                     
+										    glide
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%8E%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                     
+										    组件化与模块化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%87%AA%E5%AE%9A%E4%B9%89View/">
+                     
+										    自定义View
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%93%BE%E6%8E%A5%E6%B1%87%E6%80%BB/">
+                     
+										    面试题链接汇总
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Blog
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Github Pages + Hexo搭建个人博客
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Github%20Pages%20+%20Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E4%BD%BF%E7%94%A8VS%20Code%E7%AE%A1%E7%90%86%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/">
+                     
+										    使用VS Code管理博客项目
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Markdown%E8%AF%AD%E6%B3%95/">
+                     
+										    Markdown语法
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Game
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/Game/%E5%A7%94%E6%89%98%E4%B8%AD%E5%BF%83/">
+                     
+										    委托中心
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Git
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E7%BB%A9%E6%95%88%E5%BF%85%E5%A4%87%E7%BB%9F%E8%AE%A1%E5%91%BD%E4%BB%A4/">
+                     
+										    绩效必备统计命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E9%85%8D%E7%BD%AE.ignore/">
+                     
+										    配置.ignore
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										GrantEvents
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用第三方短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/GrantEvents/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用阿里云短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E6%8A%A5%E5%90%8D%E9%82%80%E8%AF%B7%E5%87%BD/">
+                     
+										    快速搭建简单报名邀请函
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										HormanyOS
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/KMP%E9%A1%B9%E7%9B%AE%E9%80%82%E9%85%8DHormanyOS/">
+                     
+										    KMP项目适配HormanyOS
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/%E4%BF%A1%E9%80%9A%E5%8D%AB%E5%A3%AB%E9%B8%BF%E8%92%99%E7%89%88%E6%9E%B6%E6%9E%84/">
+                     
+										    信通卫士鸿蒙版架构
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										rxjava
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Java/rxjava/just%20%E5%92%8C%20fromCallable%20%E5%8C%BA%E5%88%AB/">
+                     
+										    just 和 fromCallable 区别
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										VPN
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/VPN/Panda%20VPM/">
+                     
+										    Panda VPM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Web
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Web/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E5%8A%A8%E6%80%81%E7%BD%91%E7%AB%99/">
+                     
+										    静态网站动态网站
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Windows
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Windows/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%89%8D%E5%90%8E%E7%BC%80%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8Dbat%E6%89%B9%E5%A4%84%E7%90%86%E4%BB%A3%E7%A0%81/">
+                     
+										    文件加前后缀批量重命名bat批处理代码
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										ios
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/ios/%E5%88%9A%E4%B8%8B%E8%BD%BD%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E9%A2%84%E8%A7%88UI/">
+                     
+										    刚下载的项目无法预览UI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										命令行
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                     
+										    mac 常用命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
+                     
+										    解决mac中zsh的 adb command not found 问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										编译器
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20MD%20%E6%8F%92%E4%BB%B6/">
+                     
+										    VS Code MD 插件
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    VS Code 快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										老爸的文章
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										童年往事
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%90%83%E7%B3%96/">
+                     
+										    吃糖
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%99%A9%E6%A2%A6/">
+                     
+										    噩梦
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E8%BF%9C%E9%97%A8/">
+                     
+										    第一次出远门
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%90%BD%E6%B0%B4/">
+                     
+										    第一次落水
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content" class="content">
+		<h1 id="article-title">
+	Room：原理 / 使用场景 / 常用 API / 常见坑
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>Qin</span>
+	<span>2026-10-21 00:26:03</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<h1 id="Room：原理-使用场景-常用-API-常见坑"><a href="#Room：原理-使用场景-常用-API-常见坑" class="headerlink" title="Room：原理 / 使用场景 / 常用 API / 常见坑"></a>Room：原理 / 使用场景 / 常用 API / 常见坑</h1><blockquote>
+<p>一句话定位：Room 是 Jetpack 提供的<strong>SQLite 之上的 ORM 与类型安全封装</strong>——SQL 写在注解里，编译期就校验语法和字段映射，运行时通过 <code>SupportSQLiteOpenHelper</code> 操作 SQLite，查询返回 <code>Cursor</code> 再由生成的代码映射成实体。<br>提示：本文讲通用原理与常用写法，不绑定具体版本号；<code>@Upsert</code>、<code>autoMigrations</code> 等能力需要较新的 Room 版本，用前请确认你项目里的版本。</p>
+</blockquote>
+<hr>
+<h2 id="一、Room-是什么（原理）"><a href="#一、Room-是什么（原理）" class="headerlink" title="一、Room 是什么（原理）"></a>一、Room 是什么（原理）</h2><p><strong>一句话：Room = 编译期注解处理 + 生成的样板代码 + 一层 SQLite 封装，把”写 SQL 容易写错”这件事尽量堵在编译期。</strong></p>
+<h3 id="1-1-核心链路"><a href="#1-1-核心链路" class="headerlink" title="1.1 核心链路"></a>1.1 核心链路</h3><pre><code>@Entity / @Dao / @Query 注解
+        ↓  编译期（KSP 或 KAPT）注解处理器解析
+生成 XxxDao_Impl、XxxDatabase_Impl          ← SQL 语法、字段映射、返回类型在这里校验
+        ↓  运行时
+RoomDatabase → SupportSQLiteOpenHelper → SQLite（最终落在 .db 文件）
+        ↓
+查询返回 Cursor → 生成的代码把它映射成实体对象 / 列表
+        ↓
+@Query 返回 Flow / LiveData → 靠 InvalidationTracker 感知表变化后重新查询</code></pre><h3 id="1-2-四个必须记住的点"><a href="#1-2-四个必须记住的点" class="headerlink" title="1.2 四个必须记住的点"></a>1.2 四个必须记住的点</h3><p><strong>① 编译期校验是 Room 最大的价值</strong></p>
+<ul>
+<li>SQL 语句<strong>语法错误</strong>、引用了不存在的表/列、返回类型和查询列对不上……这些在<strong>编译期</strong>就报错（生成 <code>Dao_Impl</code> 时失败），不用等到运行时崩。</li>
+<li>生成代码里的列名和实体字段的映射也是编译期确定的，避免了手写 <code>Cursor.getColumnIndex</code> 拼错字段的下场。</li>
+<li>这就是为什么 Room 能取代大量手写 <code>SQLiteOpenHelper</code> 样板代码。</li>
+</ul>
+<p><strong>② 运行时到底怎么跑</strong></p>
+<p>Room 并不自己实现数据库引擎，底层还是 Android 系统的 SQLite。它通过 <code>SupportSQLiteOpenHelper</code> 这一层接口访问，好处是：</p>
+<ul>
+<li>能屏蔽不同 Android 版本的差异；</li>
+<li>能接入加密（SQLCipher）等第三方实现；</li>
+<li><code>RoomDatabase.Builder</code> 里的 <code>openHelperFactory</code> 就是换这一层的入口。</li>
+</ul>
+<p><strong>③ <code>Flow</code> / <code>LiveData</code> 查询怎么感知变化（面试高频）</strong></p>
+<p><code>@Query</code> 返回 <code>Flow&lt;List&lt;User&gt;&gt;</code> 时，Room 不是在做”增量推送”，而是<strong>失效重查</strong>：</p>
+<ol>
+<li>Room 用 <code>InvalidationTracker</code> 监听相关表（<code>@Query</code> 涉及的表会被登记）；</li>
+<li>任何写操作（Insert/Update/Delete）提交后，该表被标记为”失效”；</li>
+<li><code>InvalidationTracker</code> 触发重新执行原来的查询 SQL；</li>
+<li>新结果通过 <code>Flow</code> 发射出来。</li>
+</ol>
+<p>所以本质上：<strong>“写 → 表失效 → 重跑查询”</strong>，不是数据库变了只推变化的那一行。这也解释了为什么”一次写可能触发多次 emit”——后面常见坑里说。</p>
+<p><strong>④ WAL 提升并发</strong></p>
+<ul>
+<li>默认（rollback journal）模式下，写会阻塞读；</li>
+<li>开启 <strong>WAL（Write-Ahead Logging）</strong> 后，读写可以并发，只有”写与写”会互斥。Android 上可以通过给 <code>RoomDatabase.Builder</code> 设置 <code>setJournalMode(JournalMode.WRITE_AHEAD_LOGGING)</code>（Android 9+ 上 WAL 是默认行为之一）来获得更好的并发读写表现。</li>
+<li>结论：<strong>读多写多、并发访问频繁的场景，WAL 基本是必开项。</strong></li>
+</ul>
+<hr>
+<h2 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>为什么用它</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本地缓存 / 离线可用</td>
+<td>强类型 + 编译期校验，改字段不容易漏</td>
+<td>实体和网络 DTO 分开，避免耦合</td>
+</tr>
+<tr>
+<td>Feed 本地分页缓存</td>
+<td>用 <code>Paging</code> + Room 的 <code>PagingSource</code> 做本地分页</td>
+<td>注意列表更新用 <code>PagingSource.invalidate()</code></td>
+</tr>
+<tr>
+<td>消息本地存储</td>
+<td>需要事务、索引、按会话查询</td>
+<td><code>@Transaction</code> + 索引（会话 ID、时间）</td>
+</tr>
+<tr>
+<td>用户设置 / 配置</td>
+<td>结构简单的键值或小表</td>
+<td>量小也可考虑 DataStore，视需求</td>
+</tr>
+<tr>
+<td>埋点暂存（离线补传）</td>
+<td>先落库、联网后批量上传</td>
+<td>加”已上传”标记 + 定期清理</td>
+</tr>
+<tr>
+<td>关联查询（一对多）</td>
+<td><code>@Relation</code> + <code>@Transaction</code> 一次查出对象树</td>
+<td>必须配 <code>@Transaction</code> 保证一致</td>
+</tr>
+<tr>
+<td>全文检索</td>
+<td>FTS（<code>@Fts4</code>）支持关键词检索</td>
+<td>有条件使用，注意 FTS 表结构独立</td>
+</tr>
+</tbody></table>
+<h3 id="不适合的场景"><a href="#不适合的场景" class="headerlink" title="不适合的场景"></a>不适合的场景</h3><ul>
+<li><strong>存大二进制（图片、音视频）</strong>：应该存文件、数据库只存路径/URI，否则 db 文件爆炸、读写变慢。</li>
+<li><strong>超大规模数据的复杂分析查询</strong>：SQLite 不是分析型数据库，量级上去要考虑分表或换存储。</li>
+<li><strong>只需要简单键值</strong>：DataStore 更轻，杀鸡不必用牛刀。</li>
+<li><strong>需要多进程同时写</strong>：Room 默认不保证多进程安全，多进程场景要额外处理（或用单进程架构）。</li>
+</ul>
+<hr>
+<h2 id="三、常用-API-与使用方法"><a href="#三、常用-API-与使用方法" class="headerlink" title="三、常用 API 与使用方法"></a>三、常用 API 与使用方法</h2><h3 id="3-1-三件套：Entity-Dao-Database"><a href="#3-1-三件套：Entity-Dao-Database" class="headerlink" title="3.1 三件套：Entity + Dao + Database"></a>3.1 三件套：Entity + Dao + Database</h3><pre><code class="kotlin">// ① Entity：表结构 + 索引 + 外键
+@Entity(
+    tableName = &quot;user&quot;,
+    indices = [
+        Index(value = [&quot;userId&quot;]),                       // 普通索引
+        Index(value = [&quot;email&quot;], unique = true)          // 唯一索引
+    ]
+)
+data class UserEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @ColumnInfo(name = &quot;userId&quot;) val userId: String,
+    val name: String,
+    val email: String,
+    @Ignore val isSelected: Boolean = false              // 不落库的字段
+)
+
+// 外键 + 外键索引（外键列一定要建索引，否则查询慢）
+@Entity(
+    tableName = &quot;post&quot;,
+    foreignKeys = [
+        ForeignKey(
+            entity = UserEntity::class,
+            parentColumns = [&quot;id&quot;],
+            childColumns = [&quot;authorId&quot;],
+            onDelete = ForeignKey.CASCADE                    // 父删子也删
+        )
+    ],
+    indices = [Index(value = [&quot;authorId&quot;])]
+)
+data class PostEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val authorId: Long,
+    val title: String,
+    val content: String
+)</code></pre>
+<pre><code class="kotlin">// ② Dao：查询 / 插入 / 更新 / 删除
+@Dao
+interface UserDao {
+
+    @Query(&quot;SELECT * FROM user WHERE userId = :userId LIMIT 1&quot;)
+    suspend fun getUser(userId: String): UserEntity?
+
+    // 返回 Flow：表变化后自动重新查询（失效重查）
+    @Query(&quot;SELECT * FROM user ORDER BY name ASC&quot;)
+    fun observeUsers(): Flow&lt;List&lt;UserEntity&gt;&gt;
+
+    // 分页
+    @Query(&quot;SELECT * FROM post ORDER BY id DESC&quot;)
+    fun pagingPosts(): PagingSource&lt;Int, PostEntity&gt;
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)     // 冲突策略：先删后插
+    suspend fun insert(user: UserEntity): Long
+
+    @Upsert                                               // 存在就更新、不存在就插入
+    suspend fun upsert(users: List&lt;UserEntity&gt;)
+
+    @Update
+    suspend fun update(user: UserEntity)
+
+    @Delete
+    suspend fun delete(user: UserEntity)
+
+    // 事务：多步操作原子执行
+    @Transaction
+    suspend fun replaceAll(users: List&lt;UserEntity&gt;) {
+        deleteAll()
+        insertAll(users)
+    }
+
+    @Query(&quot;DELETE FROM user&quot;)
+    suspend fun deleteAll()
+
+    @Insert
+    suspend fun insertAll(users: List&lt;UserEntity&gt;)
+}</code></pre>
+<pre><code class="kotlin">// ③ Database：数据库入口 + 版本管理
+@Database(
+    entities = [UserEntity::class, PostEntity::class],
+    version = 1,
+    exportSchema = true            // 建议开启，产物用于比对 schema 变化
+)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun userDao(): UserDao
+    abstract fun postDao(): PostDao
+}</code></pre>
+<h3 id="3-2-一对多：-Embedded-Relation"><a href="#3-2-一对多：-Embedded-Relation" class="headerlink" title="3.2 一对多：@Embedded / @Relation"></a>3.2 一对多：<code>@Embedded</code> / <code>@Relation</code></h3><pre><code class="kotlin">// 「用户 + 他的所有帖子」：一次查出对象树
+data class UserWithPosts(
+    @Embedded val user: UserEntity,
+    @Relation(parentColumn = &quot;id&quot;, entityColumn = &quot;authorId&quot;)
+    val posts: List&lt;PostEntity&gt;
+)
+
+@Dao
+interface UserWithPostsDao {
+    // ⚠️ 必须加 @Transaction，否则两次查询之间数据可能被改动导致不一致
+    @Transaction
+    @Query(&quot;SELECT * FROM user&quot;)
+    suspend fun getUsersWithPosts(): List&lt;UserWithPosts&gt;
+}</code></pre>
+<blockquote>
+<p><code>@Relation</code> 会分两条 SQL 查（父查询 + 子查询），再在内存里拼装，所以<strong>它不会自动是原子的</strong>，靠 <code>@Transaction</code> 保证。</p>
+</blockquote>
+<h3 id="3-3-TypeConverter：复杂类型转换"><a href="#3-3-TypeConverter：复杂类型转换" class="headerlink" title="3.3 @TypeConverter：复杂类型转换"></a>3.3 <code>@TypeConverter</code>：复杂类型转换</h3><pre><code class="kotlin">class Converters {
+    private val fmt = SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;, Locale.getDefault())
+
+    @TypeConverter
+    fun dateToLong(date: Date?): Long? = date?.time
+
+    @TypeConverter
+    fun longToDate(value: Long?): Date? = value?.let { Date(it) }
+
+    @TypeConverter
+    fun listToString(list: List&lt;String&gt;?): String? = list?.joinToString(&quot;,&quot;)
+
+    @TypeConverter
+    fun stringToList(value: String?): List&lt;String&gt;? =
+        value?.takeIf { it.isNotEmpty() }?.split(&quot;,&quot;)
+}
+
+@Database(entities = [UserEntity::class, PostEntity::class], version = 1, exportSchema = true)
+@TypeConverters(Converters::class)
+abstract class AppDatabase : RoomDatabase() { /* ... */ }</code></pre>
+<h3 id="3-4-构建数据库-迁移-单例"><a href="#3-4-构建数据库-迁移-单例" class="headerlink" title="3.4 构建数据库 + 迁移 + 单例"></a>3.4 构建数据库 + 迁移 + 单例</h3><pre><code class="kotlin">// 单例：用 Koin / Hilt 提供，避免多处 new（多实例写冲突）
+val db = Room.databaseBuilder(context, AppDatabase::class.java, &quot;app.db&quot;)
+    .addMigrations(MIGRATION_1_2)
+    .setJournalMode(RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)  // WAL
+    // .fallbackToDestructiveMigration()   // ⚠️ 只在开发期用，会清库丢数据
+    .build()
+
+// 手写 Migration
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(&quot;ALTER TABLE user ADD COLUMN nickname TEXT&quot;)
+    }
+}</code></pre>
+<blockquote>
+<p>较新版本 Room 支持 <code>@AutoMigration(from = 1, to = 2)</code> 自动生成简单迁移（如加列），但涉及数据搬移、删列、改名等复杂变更仍需手写 <code>Migration</code>。</p>
+</blockquote>
+<h3 id="3-5-注入单例并接入-Repository-Flow"><a href="#3-5-注入单例并接入-Repository-Flow" class="headerlink" title="3.5 注入单例并接入 Repository + Flow"></a>3.5 注入单例并接入 Repository + Flow</h3><pre><code class="kotlin">// Koin
+val dataModule = module {
+    single { Room.databaseBuilder(androidContext(), AppDatabase::class.java, &quot;app.db&quot;).build() }
+    single { get&lt;AppDatabase&gt;().userDao() }
+    single { UserRepository(get()) }
+}
+
+class UserRepository(private val dao: UserDao) {
+    fun observeUsers(): Flow&lt;List&lt;UserEntity&gt;&gt; = dao.observeUsers()
+
+    suspend fun refresh() {
+        // 网络请求 → 落库（IO 调度在 Repository 或更外层切换）
+        val remote = api.fetchUsers()
+        dao.upsert(remote.map { it.toEntity() })
+    }
+}
+
+class HomeViewModel(private val repo: UserRepository) : ViewModel() {
+    val users: StateFlow&lt;List&lt;UserEntity&gt;&gt; =
+        repo.observeUsers().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+}</code></pre>
+<h3 id="3-6-注解-API-速查表"><a href="#3-6-注解-API-速查表" class="headerlink" title="3.6 注解 / API 速查表"></a>3.6 注解 / API 速查表</h3><table>
+<thead>
+<tr>
+<th>注解 / API</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Entity</code> / <code>@PrimaryKey</code> / <code>@ColumnInfo</code> / <code>@Ignore</code></td>
+<td>定义表、主键、列名映射、忽略字段</td>
+</tr>
+<tr>
+<td><code>@Entity(indices = [...])</code> / <code>ForeignKey</code></td>
+<td>索引 / 外键约束</td>
+</tr>
+<tr>
+<td><code>@Dao</code> / <code>@Query</code> / <code>@Insert</code> / <code>@Update</code> / <code>@Delete</code> / <code>@Upsert</code></td>
+<td>数据访问与增删改</td>
+</tr>
+<tr>
+<td><code>@Transaction</code></td>
+<td>多步操作原子化（<code>@Relation</code> 必须配）</td>
+</tr>
+<tr>
+<td><code>@Embedded</code> / <code>@Relation</code></td>
+<td>内嵌对象 / 一对多关系</td>
+</tr>
+<tr>
+<td><code>@TypeConverter</code> / <code>@TypeConverters</code></td>
+<td>复杂类型 ↔ SQLite 支持类型的转换</td>
+</tr>
+<tr>
+<td><code>OnConflictStrategy.REPLACE</code> / <code>IGNORE</code> / <code>ABORT</code></td>
+<td>冲突策略</td>
+</tr>
+<tr>
+<td><code>@Database</code> / <code>version</code> / <code>exportSchema</code></td>
+<td>数据库定义与版本</td>
+</tr>
+<tr>
+<td><code>RoomDatabase.Builder</code> / <code>databaseBuilder</code> / <code>addMigrations</code> / <code>setJournalMode</code> / <code>openHelperFactory</code></td>
+<td>构建、迁移、WAL、加密</td>
+</tr>
+<tr>
+<td><code>PagingSource</code></td>
+<td>配合 Paging 做本地分页</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、常见坑与排查"><a href="#四、常见坑与排查" class="headerlink" title="四、常见坑与排查"></a>四、常见坑与排查</h2><h3 id="4-1-主线程访问崩溃"><a href="#4-1-主线程访问崩溃" class="headerlink" title="4.1 主线程访问崩溃"></a>4.1 主线程访问崩溃</h3><pre><code>Cannot access database on the main thread...</code></pre><ul>
+<li>别用 <code>allowMainThreadQueries()</code>（那只是把炸弹藏起来，会卡 UI）；</li>
+<li>正确姿势：<code>@Dao</code> 方法声明成 <code>suspend</code>，或用 <code>withContext(Dispatchers.IO)</code>；Room 的 suspend 查询会自动切到内部执行器，不会阻塞主线程。</li>
+</ul>
+<h3 id="4-2-数据库必须单例"><a href="#4-2-数据库必须单例" class="headerlink" title="4.2 数据库必须单例"></a>4.2 数据库必须单例</h3><p><code>RoomDatabase</code> 实例<strong>应该全局唯一</strong>。多处 <code>databaseBuilder</code> 会创建多个连接池，WAL 下多写者会产生锁竞争甚至写冲突。做法：用 Koin <code>single</code> / Hilt <code>@Singleton</code> 提供同一个实例。</p>
+<h3 id="4-3-漏写-Migration-导致升级崩溃"><a href="#4-3-漏写-Migration-导致升级崩溃" class="headerlink" title="4.3 漏写 Migration 导致升级崩溃"></a>4.3 漏写 Migration 导致升级崩溃</h3><p>改了 <code>version</code> 却没给对应 <code>Migration</code>，启动就抛 <code>IllegalStateException: A migration from X to Y was required but not found</code>。</p>
+<ul>
+<li><strong>千万不要</strong>随手加 <code>fallbackToDestructiveMigration()</code> 图省事——它会<strong>删库重建、数据全丢</strong>，只能用于开发期；</li>
+<li>正确做法：改 schema 就补迁移；有条件的话对每个版本写迁移测试（Room 提供 <code>MigrationTestHelper</code>）。</li>
+</ul>
+<h3 id="4-4-REPLACE-冲突策略的隐藏行为"><a href="#4-4-REPLACE-冲突策略的隐藏行为" class="headerlink" title="4.4 REPLACE 冲突策略的隐藏行为"></a>4.4 <code>REPLACE</code> 冲突策略的隐藏行为</h3><p><code>OnConflictStrategy.REPLACE</code> 在遇到冲突时，是<strong>先 DELETE 再 INSERT</strong>，不是 UPDATE。后果：</p>
+<ul>
+<li>如果这张表被别的表用 <code>ForeignKey.CASCADE</code> 引用，<strong>删旧行会级联删掉子表数据</strong>；</li>
+<li>主键会重新分配（<code>autoGenerate</code> 情况下可能变化）。</li>
+</ul>
+<p>需要”存在则更新”的语义，优先用 <code>@Upsert</code> 或 <code>@Update</code>，别乱用 <code>REPLACE</code>。</p>
+<h3 id="4-5-缺索引导致慢查询"><a href="#4-5-缺索引导致慢查询" class="headerlink" title="4.5 缺索引导致慢查询"></a>4.5 缺索引导致慢查询</h3><p><code>WHERE</code> / <code>JOIN</code> / <code>ORDER BY</code> 用到的列没建索引，数据量一大就是全表扫描。排查方法：</p>
+<pre><code class="sql">EXPLAIN QUERY PLAN SELECT * FROM post WHERE authorId = 1;</code></pre>
+<p>看输出是 <code>SCAN TABLE</code>（全表扫）还是 <code>SEARCH TABLE ... USING INDEX</code>（走索引）。外键列<strong>务必</strong>建索引，否则父表删改时会全表扫子表。</p>
+<h3 id="4-6-Flow-查询可能重复-emit"><a href="#4-6-Flow-查询可能重复-emit" class="headerlink" title="4.6 Flow 查询可能重复 emit"></a>4.6 <code>Flow</code> 查询可能重复 emit</h3><p>前面说过，<code>Flow</code> 查询是”失效重查”，<strong>不会自动去重</strong>：一次事务里连续写多行，可能触发多次 emit，但查询结果是同一个。UI 层如果对相同数据也重建，会闪。</p>
+<p>解决：<code>distinctUntilChanged()</code>（配合 <code>data class</code> 的 <code>equals</code>），或者用 <code>conflate()</code> 合并高频发射。</p>
+<h3 id="4-7-TypeConverter-只管简单类型"><a href="#4-7-TypeConverter-只管简单类型" class="headerlink" title="4.7 @TypeConverter 只管简单类型"></a>4.7 <code>@TypeConverter</code> 只管简单类型</h3><p>它适合 <code>Date</code>、<code>List&lt;String&gt;</code>、枚举这类能映射到 <code>TEXT</code>/<code>INTEGER</code>/<code>REAL</code>/<code>BLOB</code> 的类型。<strong>不要</strong>用它序列化整个复杂对象树——那是反模式（查询、索引都没法用）。复杂对象应该拆成多表 + 关系。</p>
+<h3 id="4-8-Relation-没配-Transaction"><a href="#4-8-Relation-没配-Transaction" class="headerlink" title="4.8 @Relation 没配 @Transaction"></a>4.8 <code>@Relation</code> 没配 <code>@Transaction</code></h3><p><code>@Relation</code> 内部是”先查父、再查子”两条 SQL，中间若有写操作，两次结果可能不一致（查到的父子对不上）。<strong>加 <code>@Transaction</code></strong> 保证同一个事务内读写一致。</p>
+<h3 id="4-9-实体不要直接当网络-DTO"><a href="#4-9-实体不要直接当网络-DTO" class="headerlink" title="4.9 实体不要直接当网络 DTO"></a>4.9 实体不要直接当网络 DTO</h3><ul>
+<li>后端字段一变，数据库 schema 也得跟着升版本，改动面爆炸；</li>
+<li>后端下发的字段可能不需要落库、落库的字段可能需要额外结构；</li>
+<li>正确做法是三层模型分离：<strong>网络 DTO（Retrofit）→ 领域模型（Domain）→ 数据库 Entity（Room）</strong>，在不同层做映射。别图省事一个类打天下。</li>
+</ul>
+<h3 id="4-10-数据库加密"><a href="#4-10-数据库加密" class="headerlink" title="4.10 数据库加密"></a>4.10 数据库加密</h3><p>Room 本身<strong>不提供加密</strong>。需要对 db 文件加密，要引入 SQLCipher，通过 <code>openHelperFactory(SupportFactory(password))</code> 把 Room 的 open helper 换成 SQLCipher 的实现。</p>
+<h3 id="4-11-其它高频杂项"><a href="#4-11-其它高频杂项" class="headerlink" title="4.11 其它高频杂项"></a>4.11 其它高频杂项</h3><ul>
+<li><code>exportSchema = true</code> 时记得配置 schema 输出目录，否则会有编译警告；</li>
+<li>大列表 <code>@Insert</code> 建议分批（<code>insertAll</code> 里 chunk），避免单个事务过大；</li>
+<li>计数用 <code>SELECT COUNT(*)</code> 而不是查全表再 <code>.size</code>。</li>
+</ul>
+<hr>
+<h2 id="五、面试追问速答"><a href="#五、面试追问速答" class="headerlink" title="五、面试追问速答"></a>五、面试追问速答</h2><p><strong>Q1：Room 相对原生 SQLite 好在哪？</strong><br>原生 SQLite 要自己写 <code>SQLiteOpenHelper</code>、拼 SQL 字符串、手写 <code>Cursor</code> 到对象的映射，而且 SQL 写错、字段拼错只有运行时才崩。Room 把这些变成<strong>编译期校验</strong>：注解处理器生成 <code>Dao_Impl</code> 时会验证 SQL 语法、表/列是否存在、返回类型是否匹配，错了直接编译失败；同时自动生成 Cursor 映射、事务、<code>Flow</code>/<code>LiveData</code> 支持。代价是多了一层注解和生成代码。</p>
+<p><strong>Q2：编译期校验怎么做到的？</strong><br>Room 用 KSP（或 KAPT）注解处理器在编译期解析 <code>@Entity</code>、<code>@Dao</code>、<code>@Query</code>。处理器内部会真正解析 SQL 语句（判断语法、表名列名、参数绑定），并检查方法返回类型和查询列是否兼容，然后生成 <code>XxxDao_Impl</code> 的 Kotlin/Java 代码。任何一步不通过就编译报错。所以校验发生在<strong>编译期</strong>而不是运行时。</p>
+<p><strong>Q3：<code>Flow</code> 查询怎么感知数据变化？</strong><br>靠 <code>InvalidationTracker</code>。Room 会记录每条 <code>@Query</code> 依赖了哪些表，当这些表发生写操作并提交后，Tracker 将表标记为失效，然后<strong>重新执行原来的查询 SQL</strong>（失效重查），把新结果通过 <code>Flow</code> 发射出去。它不是”只推送变化的那一行”，所以在一次事务里写多行可能触发多次 emit，需要 <code>distinctUntilChanged</code> 去重。</p>
+<p><strong>Q4：数据库升级方案怎么设计？</strong><br>每次 schema 变更就 <code>version + 1</code>，并为旧版本到新版本提供 <code>Migration</code>（用 <code>execSQL</code> 做 <code>ALTER TABLE</code> 或建新表迁数据）。简单加列可以考虑 <code>@AutoMigration</code>。要开启 <code>exportSchema</code> 保留 schema 历史，并写迁移测试。<strong>严禁</strong>用 <code>fallbackToDestructiveMigration</code> 掩盖问题（会丢全部数据）。</p>
+<p><strong>Q5：多线程并发写怎么保证安全？</strong><br>一是保持 <code>RoomDatabase</code> <strong>单例</strong>，共享同一个连接池；二是开启 <strong>WAL</strong>，让读写可并发（只有写与写互斥）；三是用 <code>@Transaction</code>/<code>withTransaction</code> 把多步写包成原子事务；四是通过 suspend DAO 或 <code>Dispatchers.IO</code> 避免主线程访问。多进程场景 Room 默认不安全，需要单进程架构或额外处理。</p>
+<p><strong>Q6：为什么实体不应直接作为接口 DTO？</strong><br>因为两者变化的原因和频率不同：接口 DTO 跟随后端协议变，Entity 跟随本地表和查询需求变。合并成一个类会导致后端一改字段就得改数据库 schema、升版本、写迁移，还会把”仅用于网络的字段”和”仅用于本地的字段”混在一起。所以应该做三层模型（DTO / Domain / Entity）并在边界处映射，用一点样板代码换取两边的独立演进。</p>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2026/10/21/Android/%E5%8D%8F%E7%A8%8B/Kotlin%E5%8D%8F%E7%A8%8B%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  Kotlin 协程：原理 / 使用场景 / 常用 API / 常见坑
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2026/10/21/Android/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/Android%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">
+                Android 权限管理：原理 / 版本演进 / 使用场景 / 常用 API / 常见坑
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start"></span>-<span id="footerYear-end"></span>
+
+	
+	    <a href="/">Qin</a>
+	
+	
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//wujun.me" target="_blank">Wu Jun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-start').innerHTML = new Date().getFullYear() + '';
+</script>
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":50,"vOffset":30},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

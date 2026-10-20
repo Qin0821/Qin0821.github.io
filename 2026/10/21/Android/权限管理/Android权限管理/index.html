@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		Android 权限管理：原理 / 版本演进 / 使用场景 / 常用 API / 常见坑 | 
+	 
+	亲临其境
+	</title>
+	
+	<!-- keywords,description -->
+	
+	
+
+	<!-- favicon -->
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+	
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">亲临其境</a>
+
+	<ul id="menu">
+    
+
+    
+
+    
+
+    
+  
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="Press Enter to search">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AI
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/AI/Codex%E3%80%81Trae%E3%80%81DeepSeek%20Harness%E5%AF%B9%E6%AF%94/">
+                     
+										    Codex、Trae、DeepSeek Harness对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AndroidStudio
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/Windows%E9%80%82%E9%85%8DMacOS%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    Windows适配MacOS快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/%E5%A5%BD%E7%94%A8Plugin%E6%8E%A8%E8%8D%90/">
+                     
+										    好用Plugin推荐
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Flow
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Flow/Kotlin%20Flow%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Kotlin Flow原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Fragment
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										DialogFragment
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/DialogFragment/%E4%BC%98%E9%9B%85%E8%A7%A3%E5%86%B3DialogFragment%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    优雅解决DialogFragment常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+                     
+										    Fragment详细生命周期
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										IPC
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/IPC/Android%E8%B7%A8%E8%BF%9B%E7%A8%8BIPC/">
+                     
+										    Android跨进程IPC
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Jetpack
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Jetpack/Navigation/">
+                     
+										    Navigation
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Koin
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Koin/Koin%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Koin依赖注入原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										LRU
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/LRU/LRU%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    LRU原理与应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Media
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Media/Media3-ExoPlayer%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%9E%E6%88%98/">
+                     
+										    Media3-ExoPlayer介绍与实战
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Popup
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Popup/%E8%83%8C%E6%99%AF%E5%8F%98%E6%9A%97/">
+                     
+										    背景变暗
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										RecycleView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/RecycleView/RecycleView%20Feed%20%E6%B5%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                     
+										    RecycleView Feed 流性能优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/RecycleView/RecycleView%E7%BC%93%E5%AD%98%E5%92%8C%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6/">
+                     
+										    RecycleView缓存和复用机制
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Retrofit
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Retrofit/Retrofit%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Retrofit原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Room
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Room/Room%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Room原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Service
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/Service/Android%20Service/">
+                     
+										    Android Service
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										TextView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/TextView/%E4%BD%BF%E7%94%A8%E5%AD%97%E4%BD%93%E6%8E%A7%E5%88%B6%E6%96%87%E5%AD%97%E7%B2%97%E7%BB%86/">
+                     
+										    使用字体控制文字粗细
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										UI开发
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/ConstraintLayout%E8%AF%A6%E8%A7%A3/">
+                     
+										    ConstraintLayout详解
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/merge%E7%9B%B8%E5%85%B3123/">
+                     
+										    merge相关123
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E5%A6%82%E4%BD%95%E5%85%A8%E5%B1%80%E5%8A%A8%E6%80%81%E8%AE%BE%E7%BD%AEFLAG_SECURE/">
+                     
+										    如何全局动态设置FLAG_SECURE
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E7%88%B6%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4clip%E7%AD%96%E7%95%A5%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/">
+                     
+										    父布局调整clip策略提高开发效率
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E8%AE%BE%E7%BD%AEView%E8%83%8C%E6%99%AF%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+                     
+										    设置View背景最佳实践
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										adb
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/adb/%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8BTopActivity/">
+                     
+										    一行命令查看TopActivity
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										动画
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/MotionLayout%E5%8A%A8%E7%94%BB%EF%BC%88%E4%B8%80%EF%BC%89/">
+                     
+										    MotionLayout动画（一）
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/%E4%BD%BF%E7%94%A8MotionLayout%E5%AE%9E%E7%8E%B0Tab/">
+                     
+										    使用MotionLayout实现Tab
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										协程
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E5%8D%8F%E7%A8%8B/Kotlin%E5%8D%8F%E7%A8%8B%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                     
+										    Kotlin协程原理与使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										反编译
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8F%8D%E7%BC%96%E8%AF%91/%E5%8F%8D%E7%BC%96%E8%AF%91NewsBreak/">
+                     
+										    反编译NewsBreak
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图片加载
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/Glide%E4%B8%8ECoil%E5%AF%B9%E6%AF%94/">
+                     
+										    Glide与Coil对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图表
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E8%A1%A8/MPAndroidChart%E4%BD%BF%E7%94%A8/">
+                     
+										    MPAndroidChart使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										奇怪的问题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/%E5%91%BD%E5%90%8D%E5%86%B2%E7%AA%81/">
+                     
+										    命名冲突
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										弱网优化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E5%BC%B1%E7%BD%91%E4%BC%98%E5%8C%96/%E5%BC%B1%E7%BD%91%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">
+                     
+										    弱网优化策略
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										性能优化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%90%AF%E5%8A%A8%E9%A1%B5%E4%BC%98%E5%8C%96/">
+                     
+										    启动页优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E6%89%8B%E6%9C%BA%E6%A2%B5%E8%AE%AFApplication%E5%88%9D%E5%A7%8B%E5%8C%96%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/">
+                     
+										    手机梵讯Application初始化速度优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										数据库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
+                     
+										    Room、greenDao对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										文件系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/Android/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/Android%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                     
+										    Android文件系统
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										时间格式化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/JodaTime/">
+                     
+										    JodaTime
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										权限管理
+									</a>
+									
+							<ul>
+								<li class="file active">
+									<a href="/2026/10/21/Android/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/Android%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">
+                     
+										    Android权限管理
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										测试
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%B5%8B%E8%AF%95/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">
+                     
+										    弱网测试工具
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										热修复
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%83%AD%E4%BF%AE%E5%A4%8D/Android%E4%B8%BB%E6%B5%81%E7%83%AD%E4%BF%AE%E5%A4%8D/">
+                     
+										    Android主流热修复
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										版本适配
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android 10
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/Android%2010/Android%2010%E9%80%82%E9%85%8D/">
+                     
+										    Android 10适配
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/xapk%E5%AE%89%E8%A3%85%E5%8C%85%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85/">
+                     
+										    xapk安装包如何安装
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										网络
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%BD%91%E7%BB%9C/Windows%E3%80%81MacOS%E4%B8%ADCharles%E6%8A%93%E5%8C%85%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    Windows、MacOS中Charles抓包常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										规范
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%A7%84%E8%8C%83/Android%20Log%E8%A7%84%E8%8C%83/">
+                     
+										    Android Log规范
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										设计模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%AE%89%E5%8D%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    安卓设计模式常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                     
+										    常见的设计模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%B6%A3%E8%A7%A3%E5%B7%A5%E5%8E%82%E4%B8%89%E6%A8%A1%E5%BC%8F/">
+                     
+										    趣解工厂三模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										软件架构模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/Google%E6%8E%A8%E8%8D%90%E6%9E%B6%E6%9E%84%E5%88%86%E4%BA%AB/">
+                     
+										    Google推荐架构分享
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/MVC%E3%80%81MVP%E3%80%81MVVM%E3%80%81MVI/">
+                     
+										    MVC、MVP、MVVM、MVI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										面试题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/23%E4%B8%AD%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    23中设计模式及其应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Handler/">
+                     
+										    Handler
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/LinearLayout%E3%80%81RelativeLayout%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94/">
+                     
+										    LinearLayout、RelativeLayout性能对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Retrofit%E3%80%81okhttp/">
+                     
+										    Retrofit、okhttp
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/eventBus/">
+                     
+										    eventBus
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/glide/">
+                     
+										    glide
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%8E%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                     
+										    组件化与模块化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%87%AA%E5%AE%9A%E4%B9%89View/">
+                     
+										    自定义View
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%93%BE%E6%8E%A5%E6%B1%87%E6%80%BB/">
+                     
+										    面试题链接汇总
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Blog
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Github Pages + Hexo搭建个人博客
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Github%20Pages%20+%20Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E4%BD%BF%E7%94%A8VS%20Code%E7%AE%A1%E7%90%86%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/">
+                     
+										    使用VS Code管理博客项目
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Markdown%E8%AF%AD%E6%B3%95/">
+                     
+										    Markdown语法
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Game
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/Game/%E5%A7%94%E6%89%98%E4%B8%AD%E5%BF%83/">
+                     
+										    委托中心
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Git
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E7%BB%A9%E6%95%88%E5%BF%85%E5%A4%87%E7%BB%9F%E8%AE%A1%E5%91%BD%E4%BB%A4/">
+                     
+										    绩效必备统计命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E9%85%8D%E7%BD%AE.ignore/">
+                     
+										    配置.ignore
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										GrantEvents
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用第三方短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/GrantEvents/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用阿里云短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E6%8A%A5%E5%90%8D%E9%82%80%E8%AF%B7%E5%87%BD/">
+                     
+										    快速搭建简单报名邀请函
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										HormanyOS
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/KMP%E9%A1%B9%E7%9B%AE%E9%80%82%E9%85%8DHormanyOS/">
+                     
+										    KMP项目适配HormanyOS
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/%E4%BF%A1%E9%80%9A%E5%8D%AB%E5%A3%AB%E9%B8%BF%E8%92%99%E7%89%88%E6%9E%B6%E6%9E%84/">
+                     
+										    信通卫士鸿蒙版架构
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										rxjava
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Java/rxjava/just%20%E5%92%8C%20fromCallable%20%E5%8C%BA%E5%88%AB/">
+                     
+										    just 和 fromCallable 区别
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										VPN
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/VPN/Panda%20VPM/">
+                     
+										    Panda VPM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Web
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Web/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E5%8A%A8%E6%80%81%E7%BD%91%E7%AB%99/">
+                     
+										    静态网站动态网站
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Windows
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Windows/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%89%8D%E5%90%8E%E7%BC%80%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8Dbat%E6%89%B9%E5%A4%84%E7%90%86%E4%BB%A3%E7%A0%81/">
+                     
+										    文件加前后缀批量重命名bat批处理代码
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										ios
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/ios/%E5%88%9A%E4%B8%8B%E8%BD%BD%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E9%A2%84%E8%A7%88UI/">
+                     
+										    刚下载的项目无法预览UI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										命令行
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                     
+										    mac 常用命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
+                     
+										    解决mac中zsh的 adb command not found 问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										编译器
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20MD%20%E6%8F%92%E4%BB%B6/">
+                     
+										    VS Code MD 插件
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    VS Code 快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										老爸的文章
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										童年往事
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%90%83%E7%B3%96/">
+                     
+										    吃糖
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%99%A9%E6%A2%A6/">
+                     
+										    噩梦
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E8%BF%9C%E9%97%A8/">
+                     
+										    第一次出远门
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%90%BD%E6%B0%B4/">
+                     
+										    第一次落水
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content" class="content">
+		<h1 id="article-title">
+	Android 权限管理：原理 / 版本演进 / 使用场景 / 常用 API / 常见坑
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>Qin</span>
+	<span>2026-10-21 00:25:44</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<h1 id="Android-权限管理：原理-版本演进-使用场景-常用-API-常见坑"><a href="#Android-权限管理：原理-版本演进-使用场景-常用-API-常见坑" class="headerlink" title="Android 权限管理：原理 / 版本演进 / 使用场景 / 常用 API / 常见坑"></a>Android 权限管理：原理 / 版本演进 / 使用场景 / 常用 API / 常见坑</h1><blockquote>
+<p>一句话定位：Android 权限本质是”内核 uid 隔离 + 包管理器记账 + 用户授权”三件事，从 Android 6.0 起由”装完就给”变成”用的时候再问”，之后每一代系统都在把权限切得更细、管得更严。<br>版本口径：下表按 Android 6（API 23）到 Android 15（API 35）梳理，行为差异一律写清”从哪个版本开始变”，具体细节以官方文档和真机为准。</p>
+</blockquote>
+<hr>
+<h2 id="一、Android-权限是什么（原理）"><a href="#一、Android-权限是什么（原理）" class="headerlink" title="一、Android 权限是什么（原理）"></a>一、Android 权限是什么（原理）</h2><h3 id="1-1-底座：Linux-的-uid-gid-与应用沙箱"><a href="#1-1-底座：Linux-的-uid-gid-与应用沙箱" class="headerlink" title="1.1 底座：Linux 的 uid / gid 与应用沙箱"></a>1.1 底座：Linux 的 uid / gid 与应用沙箱</h3><p>Android 跑在 Linux 内核上，权限体系的地基就是 Linux 那套：</p>
+<ul>
+<li><strong>每个 App 装上去就分配一个独立的 uid</strong>（比如 <code>u0_a123</code>），不同 App 默认互相看不到对方的文件；</li>
+<li><strong>每个 App 在 <code>/data/data/&lt;包名&gt;/</code>（真实路径 <code>/data/user/0/&lt;包名&gt;/</code>）下有自己的私有目录</strong>，别的 App 的 uid 没权限读，这就是”应用沙箱”；</li>
+<li>历史上有 <code>android:sharedUserId</code> 可以让多个 App 共用一个 uid 互相访问数据，<strong>已废弃</strong>，新项目不要用；</li>
+<li>应用要访问系统资源（相机、位置、网络），就是向内核/系统服务申请对应的 gid 或能力，这一步由系统在安装/授权时统一发牌。</li>
+</ul>
+<p>所以”权限”不是 Android 发明的概念，<strong>它是把 Linux 的 uid/gid 机制包装成用户能看懂的一张张许可单</strong>。</p>
+<h3 id="1-2-关键转折：Android-6-0-的运行时权限"><a href="#1-2-关键转折：Android-6-0-的运行时权限" class="headerlink" title="1.2 关键转折：Android 6.0 的运行时权限"></a>1.2 关键转折：Android 6.0 的运行时权限</h3><p>Android 6.0（API 23）之前，权限是<strong>安装时一次性授予</strong>的：装的时候弹一屏”这个 App 要这些权限”，要么全同意，要么别装。用户根本不会细看。</p>
+<p>Android 6.0 起引入<strong>运行时权限（Runtime Permission）</strong>：</p>
+<ul>
+<li>App <strong>装的时候不再索要</strong>危险权限；</li>
+<li>第一次真正用到某个能力时，App 主动弹窗申请，用户当场决定；</li>
+<li>用户随时可以在系统设置里关掉某个权限；</li>
+<li><strong>对 <code>targetSdkVersion &gt;= 23</code> 的 App 强制生效</strong>；老 App（target &lt; 23）走兼容逻辑，安装时授予。</li>
+</ul>
+<p>一句话记忆：<strong>“安装时授权” → “使用时申请 + 随时可撤”</strong>。</p>
+<h3 id="1-3-权限的四种类型（protection-level）"><a href="#1-3-权限的四种类型（protection-level）" class="headerlink" title="1.3 权限的四种类型（protection level）"></a>1.3 权限的四种类型（protection level）</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>授予方式</th>
+<th>典型权限</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>normal（普通）</strong></td>
+<td>安装时自动授予</td>
+<td><code>INTERNET</code>、<code>ACCESS_NETWORK_STATE</code>、<code>VIBRATE</code>、<code>FOREGROUND_SERVICE</code></td>
+<td>不涉及隐私，用户无感知，<strong>申请了就有</strong></td>
+</tr>
+<tr>
+<td><strong>dangerous（危险）</strong></td>
+<td>运行时弹窗申请</td>
+<td><code>CAMERA</code>、<code>RECORD_AUDIO</code>、<code>ACCESS_FINE_LOCATION</code>、<code>POST_NOTIFICATIONS</code>、<code>READ_MEDIA_IMAGES</code> 等</td>
+<td>涉及用户隐私，<strong>必须运行时申请，用户可拒绝/撤销</strong></td>
+</tr>
+<tr>
+<td><strong>signature（签名）</strong></td>
+<td>系统签名一致才授予</td>
+<td>系统级/厂商内部权限</td>
+<td>普通 App 拿不到，多用于系统 App 间</td>
+</tr>
+<tr>
+<td><strong>special（特殊）</strong></td>
+<td><strong>不弹标准权限框，走系统设置页</strong></td>
+<td><code>SYSTEM_ALERT_WINDOW</code>（悬浮窗）、<code>REQUEST_INSTALL_PACKAGES</code>（装未知来源）、<code>WRITE_SETTINGS</code>、勿扰访问、<code>SCHEDULE_EXACT_ALARM</code>（精确闹钟）</td>
+<td>需要用户手动去设置页开，<code>requestPermissions</code> 申请不了</td>
+</tr>
+</tbody></table>
+<p><strong>面试最容易踩的坑</strong>：悬浮窗、安装未知应用这类”特殊权限”，你调 <code>requestPermissions</code> 是<strong>永远拿不到的</strong>，必须跳设置页。</p>
+<h3 id="1-4-权限状态存在哪，怎么查"><a href="#1-4-权限状态存在哪，怎么查" class="headerlink" title="1.4 权限状态存在哪，怎么查"></a>1.4 权限状态存在哪，怎么查</h3><p>系统在<strong>包管理器（PackageManagerService）</strong>里维护每个包的权限授予状态，App 通过两个 API 查询：</p>
+<pre><code class="kotlin">// 1) 当前是否已授予
+val granted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        == PackageManager.PERMISSION_GRANTED
+
+// 2) 是否需要向用户解释&quot;为什么需要这个权限&quot;
+val needExplain = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)</code></pre>
+<p><code>shouldShowRequestPermissionRationale</code> 的返回值是面试重点，它有三种状态（见 3.3）。</p>
+<h2 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>需要的权限</th>
+<th>目标 API 版本注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>拍照</strong></td>
+<td><code>CAMERA</code>（危险，运行时）</td>
+<td>自己调 Camera/CameraX 必须申请；<strong>用系统相机 Intent（<code>ACTION_IMAGE_CAPTURE</code>）且 Manifest 没声明 <code>CAMERA</code> 时可免申请</strong></td>
+</tr>
+<tr>
+<td><strong>定位（前台）</strong></td>
+<td><code>ACCESS_FINE_LOCATION</code> / <code>ACCESS_COARSE_LOCATION</code></td>
+<td>Android 12+ 用户可选”大致位置”，只给 <code>COARSE</code>；<strong>请求 <code>FINE</code> 时必须同时请求 <code>COARSE</code></strong></td>
+</tr>
+<tr>
+<td><strong>定位（后台）</strong></td>
+<td>前台定位权限 + <code>ACCESS_BACKGROUND_LOCATION</code></td>
+<td>Android 10 起引入；<strong>Android 11 起不能和前台定位一起弹窗</strong>，必须先拿到前台定位，再引导用户去设置页选”始终允许”</td>
+</tr>
+<tr>
+<td><strong>通知</strong></td>
+<td><code>POST_NOTIFICATIONS</code></td>
+<td><strong>Android 13（API 33）起是运行时权限</strong>；13 以下不需要申请，但用户仍可在设置里关闭</td>
+</tr>
+<tr>
+<td><strong>读取媒体</strong></td>
+<td>Android 13+：<code>READ_MEDIA_IMAGES</code> / <code>READ_MEDIA_VIDEO</code> / <code>READ_MEDIA_AUDIO</code>；Android 12 及以下：<code>READ_EXTERNAL_STORAGE</code></td>
+<td>Android 13 起媒体权限<strong>按类型拆分</strong>，取代 <code>READ_EXTERNAL_STORAGE</code></td>
+</tr>
+<tr>
+<td><strong>只访问部分照片</strong></td>
+<td><code>READ_MEDIA_VISUAL_USER_SELECTED</code></td>
+<td><strong>Android 14 起</strong>，用户可只授权”选中的照片”，App 要处理”部分访问”</td>
+</tr>
+<tr>
+<td><strong>蓝牙</strong></td>
+<td>Android 12+：<code>BLUETOOTH_CONNECT</code> / <code>BLUETOOTH_SCAN</code>（运行时）；Android 11 及以下：<code>BLUETOOTH</code> / <code>BLUETOOTH_ADMIN</code>（normal）</td>
+<td><strong>Android 12 起旧蓝牙权限被拆成运行时权限</strong>，老代码不改造会直接拿不到</td>
+</tr>
+<tr>
+<td><strong>悬浮窗</strong></td>
+<td><code>SYSTEM_ALERT_WINDOW</code>（special）</td>
+<td>走 <code>Settings.ACTION_MANAGE_OVERLAY_PERMISSION</code>，必须用户手动开</td>
+</tr>
+<tr>
+<td><strong>安装未知来源应用</strong></td>
+<td><code>REQUEST_INSTALL_PACKAGES</code>（special）</td>
+<td>走 <code>ACTION_MANAGE_UNKNOWN_APP_SOURCES</code> 设置页</td>
+</tr>
+<tr>
+<td><strong>录音</strong></td>
+<td><code>RECORD_AUDIO</code>（危险，运行时）</td>
+<td>Android 11+ 若在后台用麦克风，还要配套前台服务类型</td>
+</tr>
+</tbody></table>
+<p><strong>不适合用”权限”解决的场景</strong>：只是想拿一张图给用户选？<strong>别申请读媒体权限，用 Photo Picker</strong>；只是想展示一个悬浮提示？<strong>优先用应用内 UI，别为了悬浮窗去要 <code>SYSTEM_ALERT_WINDOW</code></strong>（上架审核也会问用途）。权限越少，过审越稳。</p>
+<h3 id="2-1-版本演进总表（面试必背）"><a href="#2-1-版本演进总表（面试必背）" class="headerlink" title="2.1 版本演进总表（面试必背）"></a>2.1 版本演进总表（面试必背）</h3><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>API</th>
+<th>权限/存储的关键变化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Android 6</strong></td>
+<td>23</td>
+<td><strong>引入运行时权限</strong>：dangerous 权限改为使用时申请、可随时撤销</td>
+</tr>
+<tr>
+<td><strong>Android 10</strong></td>
+<td>29</td>
+<td><strong>分区存储（Scoped Storage）</strong>默认开启（可用 <code>requestLegacyExternalStorage</code> 临时退回）；引入 <strong><code>ACCESS_BACKGROUND_LOCATION</code></strong>；定位弹窗改为”仅在使用时允许/始终允许”；<code>ACTIVITY_RECOGNITION</code> 变为运行时权限</td>
+</tr>
+<tr>
+<td><strong>Android 11</strong></td>
+<td>30</td>
+<td><strong>一次性授权</strong>（仅此一次）；<strong>长期不用的 App 权限自动重置</strong>；<strong>请求后台定位必须跳设置页</strong>（不能与前台定位同时申请）；拒绝两次视为”不再询问”；分区存储<strong>强制执行</strong>（<code>requestLegacyExternalStorage</code> 被忽略），文件管理器类 App 改用 <code>MANAGE_EXTERNAL_STORAGE</code></td>
+</tr>
+<tr>
+<td><strong>Android 12</strong></td>
+<td>31</td>
+<td><strong>精确/大致位置分离</strong>（用户可选只给大致位置）；<strong>蓝牙权限拆分为 <code>BLUETOOTH_CONNECT</code> / <code>BLUETOOTH_SCAN</code>（+ <code>BLUETOOTH_ADVERTISE</code>）运行时权限</strong>；<strong>精确闹钟 <code>SCHEDULE_EXACT_ALARM</code></strong>（另有免申请的 <code>USE_EXACT_ALARM</code>，仅限闹钟/日历类）；麦克风/摄像头增加使用指示器与全局开关</td>
+</tr>
+<tr>
+<td><strong>Android 13</strong></td>
+<td>33</td>
+<td><strong><code>POST_NOTIFICATIONS</code> 通知运行时权限</strong>；<strong>媒体权限按类型拆分：<code>READ_MEDIA_IMAGES</code> / <code>READ_MEDIA_VIDEO</code> / <code>READ_MEDIA_AUDIO</code> 取代 <code>READ_EXTERNAL_STORAGE</code></strong>；新增 <code>NEARBY_WIFI_DEVICES</code>、<code>BODY_SENSORS_BACKGROUND</code></td>
+</tr>
+<tr>
+<td><strong>Android 14</strong></td>
+<td>34</td>
+<td><strong>前台服务必须声明类型并申请对应 <code>FOREGROUND_SERVICE_*</code> 权限</strong>（如 <code>FOREGROUND_SERVICE_LOCATION</code> / <code>_CAMERA</code> / <code>_MICROPHONE</code> / <code>_MEDIA_PROJECTION</code> 等）；<strong><code>READ_MEDIA_VISUAL_USER_SELECTED</code>：用户可只授权”选中的部分照片”</strong></td>
+</tr>
+<tr>
+<td><strong>Android 15</strong></td>
+<td>35</td>
+<td>权限层没有面向普通 App 的重大新运行时权限，重点是<strong>后台行为进一步收紧</strong>：对部分前台服务类型（如 <code>dataSync</code>、<code>mediaProcessing</code>）增加运行时长上限、后台启动前台服务限制更严。具体细节随版本调整，以官方文档为准</td>
+</tr>
+</tbody></table>
+<h2 id="三、常用-API-与使用方法"><a href="#三、常用-API-与使用方法" class="headerlink" title="三、常用 API 与使用方法"></a>三、常用 API 与使用方法</h2><h3 id="3-1-Activity-Result-API-申请单个权限（推荐）"><a href="#3-1-Activity-Result-API-申请单个权限（推荐）" class="headerlink" title="3.1 Activity Result API 申请单个权限（推荐）"></a>3.1 Activity Result API 申请单个权限（推荐）</h3><p>老的 <code>ActivityCompat.requestPermissions</code> + <code>onRequestPermissionsResult</code> 已被官方标记为过时，<strong>统一改用 Activity Result API</strong>：</p>
+<pre><code class="kotlin">class CameraFragment : Fragment() {
+
+    // 必须作为属性初始化（或至少在 onCreate 中）注册，绝不能等到点击时才注册
+    private val requestCamera = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted: Boolean -&gt;
+        if (granted) openCamera() else onCameraDenied()
+    }
+
+    private fun ensureCamera() {
+        when {
+            // 1) 已授权，直接用
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED -&gt; openCamera()
+
+            // 2) 用户拒绝过但没勾&quot;不再询问&quot;：先解释再申请
+            shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -&gt;
+                showRationaleDialog { requestCamera.launch(Manifest.permission.CAMERA) }
+
+            // 3) 从未申请过 或 永久拒绝
+            else -&gt; {
+                if (prefs.getBoolean(&quot;camera_requested&quot;, false)) {
+                    guideToAppSettings()                       // 永久拒绝：只能引导设置页
+                } else {
+                    prefs.edit().putBoolean(&quot;camera_requested&quot;, true).apply()
+                    requestCamera.launch(Manifest.permission.CAMERA)
+                }
+            }
+        }
+    }
+}</code></pre>
+<h3 id="3-2-一次申请多个权限"><a href="#3-2-一次申请多个权限" class="headerlink" title="3.2 一次申请多个权限"></a>3.2 一次申请多个权限</h3><pre><code class="kotlin">private val requestMultiple = registerForActivityResult(
+    ActivityResultContracts.RequestMultiplePermissions()
+) { result: Map&lt;String, Boolean&gt; -&gt;
+    // result 是&quot;权限 -&gt; 是否授予&quot;的 Map，部分授予是允许的
+    val fineOk  = result[Manifest.permission.ACCESS_FINE_LOCATION] == true
+    val coarseOk = result[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+    when {
+        fineOk   -&gt; getPreciseLocation()
+        coarseOk -&gt; getApproximateLocation()     // Android 12+ 用户可能只给大致位置
+        else     -&gt; onLocationDenied()
+    }
+}
+
+// 注意：请求 FINE 时一定要带上 COARSE，否则在 Android 12+ 上会被直接忽略
+requestMultiple.launch(arrayOf(
+    Manifest.permission.ACCESS_FINE_LOCATION,
+    Manifest.permission.ACCESS_COARSE_LOCATION
+))</code></pre>
+<h3 id="3-3-shouldShowRequestPermissionRationale-的三种状态（必考）"><a href="#3-3-shouldShowRequestPermissionRationale-的三种状态（必考）" class="headerlink" title="3.3 shouldShowRequestPermissionRationale 的三种状态（必考）"></a>3.3 <code>shouldShowRequestPermissionRationale</code> 的三种状态（必考）</h3><table>
+<thead>
+<tr>
+<th>情况</th>
+<th><code>checkSelfPermission</code></th>
+<th><code>shouldShow...Rationale</code></th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>从未申请过</strong></td>
+<td>DENIED</td>
+<td><strong>false</strong></td>
+<td>直接 <code>launch()</code> 申请</td>
+</tr>
+<tr>
+<td><strong>拒绝过一次</strong>（没勾不再询问）</td>
+<td>DENIED</td>
+<td><strong>true</strong></td>
+<td>先弹解释弹窗，用户同意后再申请</td>
+</tr>
+<tr>
+<td><strong>永久拒绝</strong>（勾了不再询问 / Android 11 拒两次）</td>
+<td>DENIED</td>
+<td><strong>false</strong></td>
+<td><strong><code>launch()</code> 会立刻回调 denied</strong>，必须引导去设置页</td>
+</tr>
+</tbody></table>
+<p><strong>关键点</strong>：第 1 种和第 3 种的返回值<strong>都是 false，光靠系统 API 分不出来</strong>。所以你必须<strong>自己用一个标记（SharedPreferences 等）记录”是否申请过”</strong>，才能区分”第一次”和”永久拒绝”。这是面试最爱追的点。</p>
+<h3 id="3-4-永久拒绝后引导去应用详情设置页"><a href="#3-4-永久拒绝后引导去应用详情设置页" class="headerlink" title="3.4 永久拒绝后引导去应用详情设置页"></a>3.4 永久拒绝后引导去应用详情设置页</h3><pre><code class="kotlin">private fun guideToAppSettings() {
+    AlertDialog.Builder(this)
+        .setTitle(&quot;需要相机权限&quot;)
+        .setMessage(&quot;您已拒绝且不再询问，请到系统设置中手动开启。&quot;)
+        .setPositiveButton(&quot;去设置&quot;) { _, _ -&gt;
+            startActivity(
+                Intent(
+                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.fromParts(&quot;package&quot;, packageName, null)
+                )
+            )
+        }
+        .setNegativeButton(&quot;取消&quot;, null)
+        .show()
+}</code></pre>
+<h3 id="3-5-特殊权限：悬浮窗（走设置页，不走权限框）"><a href="#3-5-特殊权限：悬浮窗（走设置页，不走权限框）" class="headerlink" title="3.5 特殊权限：悬浮窗（走设置页，不走权限框）"></a>3.5 特殊权限：悬浮窗（走设置页，不走权限框）</h3><pre><code class="kotlin">if (!Settings.canDrawOverlays(this)) {
+    startActivity(
+        Intent(
+            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+            Uri.parse(&quot;package:$packageName&quot;)     // 直接定位到本 App 的开关
+        )
+    )
+}
+// 用户从设置页回来后再查一次 canDrawOverlays，因为这里是异步的</code></pre>
+<p>其它特殊权限的查询/跳转 API（同样”申请了不代表有，用时必查”）：</p>
+<table>
+<thead>
+<tr>
+<th>特殊权限</th>
+<th>查询 API</th>
+<th>跳转 Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>悬浮窗</td>
+<td><code>Settings.canDrawOverlays(context)</code></td>
+<td><code>ACTION_MANAGE_OVERLAY_PERMISSION</code></td>
+</tr>
+<tr>
+<td>修改系统设置</td>
+<td><code>Settings.System.canWrite(context)</code></td>
+<td><code>ACTION_MANAGE_WRITE_SETTINGS</code></td>
+</tr>
+<tr>
+<td>安装未知来源应用</td>
+<td><code>packageManager.canRequestPackageInstalls()</code></td>
+<td><code>ACTION_MANAGE_UNKNOWN_APP_SOURCES</code></td>
+</tr>
+<tr>
+<td>精确闹钟</td>
+<td><code>alarmManager.canScheduleExactAlarms()</code></td>
+<td><code>ACTION_REQUEST_SCHEDULE_EXACT_ALARM</code></td>
+</tr>
+<tr>
+<td>勿扰访问</td>
+<td><code>notificationManager.isNotificationPolicyAccessGranted</code></td>
+<td><code>ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS</code></td>
+</tr>
+<tr>
+<td>所有文件访问</td>
+<td><code>Environment.isExternalStorageManager()</code></td>
+<td><code>ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION</code></td>
+</tr>
+</tbody></table>
+<h3 id="3-6-拍照与相册：优先”零权限”方案"><a href="#3-6-拍照与相册：优先”零权限”方案" class="headerlink" title="3.6 拍照与相册：优先”零权限”方案"></a>3.6 拍照与相册：优先”零权限”方案</h3><p><strong>① Photo Picker（Android 13+ 原生，低版本由 Activity Result API 兜底）—— 选图完全不需要权限</strong></p>
+<pre><code class="kotlin">val pickImage = registerForActivityResult(
+    ActivityResultContracts.PickVisualMedia()
+) { uri: Uri? -&gt;
+    uri?.let { showPreview(it) }        // 拿到用户主动选中的 Uri，无需 READ_MEDIA_*
+}
+
+pickImage.launch(
+    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+)
+// 多选：ActivityResultContracts.PickMultipleVisualMedia(maxItems = 9)</code></pre>
+<p><strong>② 拍照写到自己指定的 Uri（系统相机 + FileProvider）</strong></p>
+<pre><code class="kotlin">// 事先准备一个 FileProvider 授权的目标 Uri（见文件系统篇）
+val photoUri: Uri = FileProvider.getUriForFile(
+    this, &quot;$packageName.fileprovider&quot;, File(cacheDir, &quot;photo/${System.currentTimeMillis()}.jpg&quot;)
+)
+
+val takePicture = registerForActivityResult(
+    ActivityResultContracts.TakePicture()
+) { success: Boolean -&gt;
+    if (success) { /* 照片已写入 photoUri，直接读取即可 */ }
+}
+takePicture.launch(photoUri)</code></pre>
+<p><strong>③ 让用户选文件/选目录（SAF，无需权限）</strong></p>
+<pre><code class="kotlin">val createDoc = registerForActivityResult(
+    ActivityResultContracts.CreateDocument(&quot;application/pdf&quot;)
+) { uri -&gt; uri?.let { writePdfTo(it) } }
+createDoc.launch(&quot;report.pdf&quot;)</code></pre>
+<h2 id="四、常见坑与排查"><a href="#四、常见坑与排查" class="headerlink" title="四、常见坑与排查"></a>四、常见坑与排查</h2><h3 id="4-1-权限回调时-Activity-Fragment-可能被系统重建"><a href="#4-1-权限回调时-Activity-Fragment-可能被系统重建" class="headerlink" title="4.1 权限回调时 Activity / Fragment 可能被系统重建"></a>4.1 权限回调时 Activity / Fragment 可能被系统重建</h3><p>申请权限时 App 可能被系统回收（低内存），回来时 <strong>Activity 是新的实例</strong>，你的匿名回调如果绑在旧实例上就会丢。</p>
+<ul>
+<li><strong>用 Activity Result API 会自动处理</strong>：它在 <code>onCreate</code> 前重新注册，回调能正确派发；</li>
+<li>自己用 <code>onRequestPermissionsResult</code> 时，要<strong>把”申请了什么、拿到后要干什么”存进 <code>savedInstanceState</code> 或 ViewModel</strong>，回调里做幂等处理，别假设内存里的临时变量还在。</li>
+</ul>
+<h3 id="4-2-Fragment-里注册时机不对会直接崩"><a href="#4-2-Fragment-里注册时机不对会直接崩" class="headerlink" title="4.2 Fragment 里注册时机不对会直接崩"></a>4.2 Fragment 里注册时机不对会直接崩</h3><p><code>registerForActivityResult</code> <strong>必须在 Fragment/Activity 进入 STARTED 之前完成注册</strong>（通常在属性初始化或 <code>onCreate</code> 中）。如果在点击事件或 <code>onStart</code> 之后才注册，会抛：</p>
+<pre><code>LifecycleOwner is attempting to register while current state is RESUMED.</code></pre><p><strong>在 Fragment 里不要用 <code>requireActivity().registerForActivityResult(...)</code></strong>（容易和宿主 Activity 的注册时机打架），直接用 Fragment 自己的。</p>
+<h3 id="4-3-永久拒绝后-launch-直接回调-denied"><a href="#4-3-永久拒绝后-launch-直接回调-denied" class="headerlink" title="4.3 永久拒绝后 launch() 直接回调 denied"></a>4.3 永久拒绝后 <code>launch()</code> 直接回调 denied</h3><p>第 3.3 节说过，永久拒绝时再申请，系统<strong>不再弹框</strong>，直接回调 <code>false</code>。很多人误以为”再点一次就好”，结果用户狂点没反应。<strong>必须检测并引导去设置页。</strong></p>
+<h3 id="4-4-升级-targetSdk-后权限没适配-→-功能静默失败-上架被拒"><a href="#4-4-升级-targetSdk-后权限没适配-→-功能静默失败-上架被拒" class="headerlink" title="4.4 升级 targetSdk 后权限没适配 → 功能静默失败 / 上架被拒"></a>4.4 升级 targetSdk 后权限没适配 → 功能静默失败 / 上架被拒</h3><ul>
+<li>升到 <strong>33</strong>：<code>POST_NOTIFICATIONS</code> 没申请，通知全不发（不崩溃，静默失败）；</li>
+<li>升到 <strong>33</strong>：还在用 <code>READ_EXTERNAL_STORAGE</code> 读图，拿不到数据；</li>
+<li>升到 <strong>31</strong>：还在用 <code>BLUETOOTH</code>，扫描设备直接失败；</li>
+<li>升到 <strong>34</strong>：前台服务没声明类型 / 没申请 <code>FOREGROUND_SERVICE_*</code>，起服务抛异常；</li>
+<li>上架层面：Google Play 会检查<strong>权限用途说明</strong>（如 <code>QUERY_ALL_PACKAGES</code>、<code>MANAGE_EXTERNAL_STORAGE</code>、<code>SYSTEM_ALERT_WINDOW</code>），理由不充分会被拒。</li>
+</ul>
+<p><strong>排查手段</strong>：<code>adb shell dumpsys package &lt;包名&gt; | grep -i permission</code> 看授予状态；真机逐个版本（尤其 11 / 12 / 13 / 14）回归。</p>
+<h3 id="4-5-Android-10-后台启动-Activity-受限"><a href="#4-5-Android-10-后台启动-Activity-受限" class="headerlink" title="4.5 Android 10+ 后台启动 Activity 受限"></a>4.5 Android 10+ 后台启动 Activity 受限</h3><p>从 Android 10 起，App 在后台<strong>不能随意直接 <code>startActivity</code> 弹页面</strong>（会被拦截）。常见踩坑：</p>
+<ul>
+<li>通知点击跳转：<strong>只能用 <code>PendingIntent</code></strong>，系统认为这是”用户主动触发”，才放行；</li>
+<li>悬浮窗里想直接拉起一个 Activity：<strong>同样受限</strong>，通常要结合 <code>SYSTEM_ALERT_WINDOW</code> 权限或让用户先点悬浮窗（视为用户交互）；</li>
+<li>定时任务里 <code>startActivity</code>：基本必失败，改用通知。</li>
+</ul>
+<h3 id="4-6-通知权限被拒要有降级策略"><a href="#4-6-通知权限被拒要有降级策略" class="headerlink" title="4.6 通知权限被拒要有降级策略"></a>4.6 通知权限被拒要有降级策略</h3><p>Android 13+ 用户拒绝 <code>POST_NOTIFICATIONS</code> 后，<code>notify()</code> 不报错、也不显示。<strong>不能”死等用户开权限”</strong>：</p>
+<ul>
+<li>关键提醒改走<strong>应用内横幅 / 红点 / 弹窗</strong>；</li>
+<li>在合适的时机（如用户开启某个提醒开关时）<strong>再解释并引导申请</strong>，别一进 App 就硬要；</li>
+<li>判断是否被拒：<code>NotificationManagerCompat.areNotificationsEnabled()</code>。</li>
+</ul>
+<h3 id="4-7-“申请了就一定有”是错觉"><a href="#4-7-“申请了就一定有”是错觉" class="headerlink" title="4.7 “申请了就一定有”是错觉"></a>4.7 “申请了就一定有”是错觉</h3><p>用户<strong>随时</strong>能在设置里关掉权限。所以：</p>
+<ul>
+<li><strong>每次使用前都要 <code>checkSelfPermission</code></strong>，不要缓存在一个变量里当永久有效；</li>
+<li>关权限后系统会<strong>杀掉进程</strong>（iOS 是这样，Android 部分场景也会重建），回来时状态要重新算。</li>
+</ul>
+<h3 id="4-8-隐私合规（GDPR-CCPA）场景"><a href="#4-8-隐私合规（GDPR-CCPA）场景" class="headerlink" title="4.8 隐私合规（GDPR / CCPA）场景"></a>4.8 隐私合规（GDPR / CCPA）场景</h3><p>权限是”技术授权”，合规还要求”可拒绝、可撤回、说得清用途”：</p>
+<ul>
+<li><strong>同意与拒绝都要能走通</strong>：拒绝定位后 App 核心功能仍可用（不能”不给权限就不让用”）；</li>
+<li><strong>要能撤回</strong>：设置里关掉权限后，App 内采集行为要立即停止；</li>
+<li><strong>用途要明示</strong>：申请前的说明、隐私政策里的描述要和实际行为一致；</li>
+<li><strong>最小必要</strong>：只申请真正用到的权限（这也是上架审核的硬要求）。</li>
+</ul>
+<h2 id="五、面试追问速答"><a href="#五、面试追问速答" class="headerlink" title="五、面试追问速答"></a>五、面试追问速答</h2><p><strong>Q1：为什么 Android 6.0 要改成运行时权限？</strong><br>安装时授权的问题有三个：一是用户根本看不懂那一屏权限也不看，等于没同意；二是”全给或全不给”太粗暴，用户因为一个定位权限要被迫同意所有权限；三是 App 一旦装上就长期持有全部权限，用户后续无法收回。改成运行时权限后，App 在真正用到某个能力时才申请，用户能结合当下场景判断是否合理，而且能随时在设置里撤销。技术上它依赖的是 Linux uid/gid 沙箱加包管理器的权限记账，Android 6 之前只是”安装时一次性发牌”，之后变成”用一张发一张、可随时收回”。</p>
+<p><strong>Q2：为什么 Android 10 要分区存储（Scoped Storage）？</strong><br>Android 10 之前，App 拿到 <code>WRITE_EXTERNAL_STORAGE</code> 就能对整个共享存储读写，于是出现了大量乱建目录、把用户 SD 卡塞满、卸载后留一堆垃圾、甚至偷偷读取其它 App 文件的问题；同时很多 App 滥用存储权限采集用户数据。分区存储的核心是：App 默认只能自由访问自己的应用专属目录和通过 MediaStore 写入自己的媒体文件，访问别人的共享文件必须走 MediaStore 或 SAF，从”给一把全盘钥匙”改成”按需申请具体文件”。它同时解决了隐私和存储混乱两个问题。</p>
+<p><strong>Q3：Photo Picker 解决了什么问题？</strong><br>它解决了”只想让用户挑一张图，却要申请整个相册读取权限”的权限过高问题。以前要用 <code>ACTION_GET_CONTENT</code> 或 <code>READ_EXTERNAL_STORAGE</code>，前者在部分版本仍会暴露权限，后者等于把用户整个相册都交出去。Photo Picker 由系统提供，用户选中的那个文件通过 Uri 临时授权给 App，<strong>App 全程不需要任何存储/媒体权限</strong>，只拿到用户主动选的内容。Android 13 起它是系统原生组件，低版本由 Activity Result API 自动兜底（走 OpenDocument 或 Play 服务提供的 backport）。</p>
+<p><strong>Q4：永久拒绝（勾了不再询问 / 拒两次）怎么处理？</strong><br>先要能识别出来：<code>shouldShowRequestPermissionRationale</code> 在”从未申请”和”永久拒绝”时都返回 false，所以必须自己用一个标记记录是否申请过，标记为 true 且 rationale 为 false 且权限未授予，就是永久拒绝。处理方式是<strong>不再调用 <code>launch()</code></strong>（调了也只会立刻回 denied），而是弹一个说明弹窗，引导用户点击跳到 <code>ACTION_APPLICATION_DETAILS_SETTINGS</code> 应用详情页手动开启；用户从设置页回来后在 <code>onResume</code> 里重新 <code>checkSelfPermission</code> 验证结果，成功则继续原流程，失败则给出降级方案。</p>
+<p><strong>Q5：targetSdk 升级要注意哪些权限变更？</strong><br>33 起要加通知权限 <code>POST_NOTIFICATIONS</code>；33 起读图/视频/音频的媒体权限拆成 <code>READ_MEDIA_IMAGES/VIDEO/AUDIO</code>；34 起前台服务必须声明类型并申请对应 <code>FOREGROUND_SERVICE_*</code> 权限；31 起蓝牙改用 <code>BLUETOOTH_CONNECT/SCAN</code> 运行时权限、定位区分精确/大致、精确闹钟改走 <code>SCHEDULE_EXACT_ALARM</code> 设置页；30 起请求后台定位必须先有前台定位再跳设置页、分区存储强制生效。核心心法：<strong>每次升级先跑一遍”权限变更清单”，真机回归通知、定位、媒体、蓝牙、前台服务这五类功能。</strong></p>
+<p><strong>Q6：用户拒绝通知权限后你怎么办？</strong><br>首先接受现实——通知权限被拒不代表功能坏了。策略分三步：一是<strong>降级</strong>，把重要提醒改成应用内横幅、红点、角标或弹窗，保证用户仍能感知；二是<strong>找时机再请求</strong>，不要立刻再弹，等用户主动开启某个提醒开关、或完成一次关键操作时，结合具体收益再解释一次；三是<strong>兜底引导</strong>，如果确实需要，提供”去设置开启通知”的入口。全程要注意用 <code>NotificationManagerCompat.areNotificationsEnabled()</code> 判断状态，而不是假设申请过就有。</p>
+<p><strong>Q7：权限和隐私合规是什么关系？</strong><br>权限是系统层面的”技术开关”，合规是法律层面的”用户对个人信息处理有知情权、同意权和撤回权”，两者是<strong>手段与目标</strong>的关系，但权限到手不等于合规。合规要求在权限之外还要做到：获取前有清晰告知（隐私政策 + 场景内说明）、目的正当且最小必要（只收真正用得上的数据和权限）、同意和拒绝都能正常使用核心功能、用户能随时撤回（撤回后采集必须立即停止）、数据跨境/共享要额外告知。所以”我申请到权限了”只是合法处理的第一步，不等于用户就一定合规地同意了你采集数据。</p>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2026/10/21/Android/Room/Room%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  Room：原理 / 使用场景 / 常用 API / 常见坑
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2026/10/21/Android/Koin/Koin%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                Koin：原理 / 使用场景 / 常用 API / 常见坑
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start"></span>-<span id="footerYear-end"></span>
+
+	
+	    <a href="/">Qin</a>
+	
+	
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//wujun.me" target="_blank">Wu Jun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-start').innerHTML = new Date().getFullYear() + '';
+</script>
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":50,"vOffset":30},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
