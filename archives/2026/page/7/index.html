@@ -89,10 +89,32 @@
 	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
 	
 	<div id="site-toc">
-		<input id="search-input" class="search-input" type="search" placeholder="Press Enter to search">
+		<input id="search-input" class="search-input" type="search" placeholder="Aramak için Enter&#39;a basın">
 		<div id="tree">
 			
 
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AI
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/AI/Codex%E3%80%81Trae%E3%80%81DeepSeek%20Harness%E5%AF%B9%E6%AF%94/">
+                     
+										    Codex、Trae、DeepSeek Harness对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
 			
 							<ul>
 								<li class="directory">
@@ -1291,14 +1313,13 @@
 		<div id="index">
 	
 		<div class="index-li">
-			<a href="/2026/10/20/Android/adb/%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8BTopActivity/">
+			<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E8%AE%BE%E7%BD%AEView%E8%83%8C%E6%99%AF%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
 				<h2 class="index-title">
-					Android/adb/一行命令查看TopActivity
+					Android/UI开发/设置View背景最佳实践
 				</h2>
 				<div class="index-brief">
-					以往我都是运行自己写的CurrentActivity app来实时查看当前Activity，如今换电脑了，暂时没有该工具项目代码，上网找一个又嫌麻烦和不安全，偶然发现可以通过命令来查询
-查询命令 adb shell dumpsys activity top | grep ACTIVITY
-可能遇见的
+					app:shape_corners_radius=”8dp”        app:shape_enabled_solid_color=”@color/primary_color_10”        app:shape_solid_color=”#EEEEEE”
+
 					...
 				</div>
 			</a>
@@ -1311,13 +1332,33 @@
 		</div>	
 	
 		<div class="index-li">
-			<a href="/2026/10/20/Android/Popup/%E8%83%8C%E6%99%AF%E5%8F%98%E6%9A%97/">
+			<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E7%88%B6%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4clip%E7%AD%96%E7%95%A5%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/">
 				<h2 class="index-title">
-					Android/Popup/背景变暗
+					Android/UI开发/父布局调整clip策略提高开发效率
 				</h2>
 				<div class="index-brief">
-					https://blog.csdn.net/jxq1994/article/details/80157694
-
+					在 Android 中，clipChildren 和 clipToPadding 是布局容器的两个属性，它们分别用于控制子视图在绘制时的裁剪行为。
+clipChildren：作用：clipChildren 是一个布尔值属性，用于指定是否裁剪容器内的子视图，以确保它们不会超出容器的边界范围。默认值：默
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2026-10-20</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2026/10/20/Android/adb/%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8BTopActivity/">
+				<h2 class="index-title">
+					Android/adb/一行命令查看TopActivity
+				</h2>
+				<div class="index-brief">
+					以往我都是运行自己写的CurrentActivity app来实时查看当前Activity，如今换电脑了，暂时没有该工具项目代码，上网找一个又嫌麻烦和不安全，偶然发现可以通过命令来查询
+查询命令 adb shell dumpsys activity top | grep ACTIVITY
+可能遇见的
 					...
 				</div>
 			</a>
