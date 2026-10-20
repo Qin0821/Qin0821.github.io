@@ -26,7 +26,6 @@
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
     "live2d-widget-model-shizuku": "^1.0.5",
-    "markdown-it": "^10.0.0",
-    "shizuku": "0.0.6"
+    "markdown-it": "^10.0.0"
   }
 }
