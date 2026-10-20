@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		RecyclerView 缓存与复用机制 | 
+	 
+	亲临其境
+	</title>
+	
+	<!-- keywords,description -->
+	
+	
+
+	<!-- favicon -->
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+	
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">亲临其境</a>
+
+	<ul id="menu">
+    
+
+    
+
+    
+
+    
+  
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="Press Enter to search">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AI
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/21/AI/Codex%E3%80%81Trae%E3%80%81DeepSeek%20Harness%E5%AF%B9%E6%AF%94/">
+                     
+										    Codex、Trae、DeepSeek Harness对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										AndroidStudio
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/Windows%E9%80%82%E9%85%8DMacOS%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    Windows适配MacOS快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/AndroidStudio/%E5%A5%BD%E7%94%A8Plugin%E6%8E%A8%E8%8D%90/">
+                     
+										    好用Plugin推荐
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Fragment
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										DialogFragment
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/DialogFragment/%E4%BC%98%E9%9B%85%E8%A7%A3%E5%86%B3DialogFragment%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    优雅解决DialogFragment常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Fragment/Fragment%E8%AF%A6%E7%BB%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+                     
+										    Fragment详细生命周期
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Jetpack
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Jetpack/Navigation/">
+                     
+										    Navigation
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										LRU
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/LRU/LRU%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    LRU原理与应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Media
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Media/Media3-ExoPlayer%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%9E%E6%88%98/">
+                     
+										    Media3-ExoPlayer介绍与实战
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Popup
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/Popup/%E8%83%8C%E6%99%AF%E5%8F%98%E6%9A%97/">
+                     
+										    背景变暗
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										RecycleView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/RecycleView/RecycleView%20Feed%20%E6%B5%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                     
+										    RecycleView Feed 流性能优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2026/10/21/Android/RecycleView/RecycleView%E7%BC%93%E5%AD%98%E5%92%8C%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6/">
+                     
+										    RecycleView缓存和复用机制
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										TextView
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/TextView/%E4%BD%BF%E7%94%A8%E5%AD%97%E4%BD%93%E6%8E%A7%E5%88%B6%E6%96%87%E5%AD%97%E7%B2%97%E7%BB%86/">
+                     
+										    使用字体控制文字粗细
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										UI开发
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/ConstraintLayout%E8%AF%A6%E8%A7%A3/">
+                     
+										    ConstraintLayout详解
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/merge%E7%9B%B8%E5%85%B3123/">
+                     
+										    merge相关123
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E5%A6%82%E4%BD%95%E5%85%A8%E5%B1%80%E5%8A%A8%E6%80%81%E8%AE%BE%E7%BD%AEFLAG_SECURE/">
+                     
+										    如何全局动态设置FLAG_SECURE
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E7%88%B6%E5%B8%83%E5%B1%80%E8%B0%83%E6%95%B4clip%E7%AD%96%E7%95%A5%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/">
+                     
+										    父布局调整clip策略提高开发效率
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/UI%E5%BC%80%E5%8F%91/%E8%AE%BE%E7%BD%AEView%E8%83%8C%E6%99%AF%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+                     
+										    设置View背景最佳实践
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										adb
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/adb/%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8BTopActivity/">
+                     
+										    一行命令查看TopActivity
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										动画
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/MotionLayout%E5%8A%A8%E7%94%BB%EF%BC%88%E4%B8%80%EF%BC%89/">
+                     
+										    MotionLayout动画（一）
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8A%A8%E7%94%BB/%E4%BD%BF%E7%94%A8MotionLayout%E5%AE%9E%E7%8E%B0Tab/">
+                     
+										    使用MotionLayout实现Tab
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										反编译
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%8F%8D%E7%BC%96%E8%AF%91/%E5%8F%8D%E7%BC%96%E8%AF%91NewsBreak/">
+                     
+										    反编译NewsBreak
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图片加载
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/Glide%E4%B8%8ECoil%E5%AF%B9%E6%AF%94/">
+                     
+										    Glide与Coil对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										图表
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%9B%BE%E8%A1%A8/MPAndroidChart%E4%BD%BF%E7%94%A8/">
+                     
+										    MPAndroidChart使用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										奇怪的问题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/%E5%91%BD%E5%90%8D%E5%86%B2%E7%AA%81/">
+                     
+										    命名冲突
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										性能优化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%90%AF%E5%8A%A8%E9%A1%B5%E4%BC%98%E5%8C%96/">
+                     
+										    启动页优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E6%89%8B%E6%9C%BA%E6%A2%B5%E8%AE%AFApplication%E5%88%9D%E5%A7%8B%E5%8C%96%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/">
+                     
+										    手机梵讯Application初始化速度优化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										数据库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%95%B0%E6%8D%AE%E5%BA%93/Room%E3%80%81greenDao%E5%AF%B9%E6%AF%94/">
+                     
+										    Room、greenDao对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										时间格式化
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/JodaTime/">
+                     
+										    JodaTime
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										测试
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E6%B5%8B%E8%AF%95/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">
+                     
+										    弱网测试工具
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										热修复
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%83%AD%E4%BF%AE%E5%A4%8D/Android%E4%B8%BB%E6%B5%81%E7%83%AD%E4%BF%AE%E5%A4%8D/">
+                     
+										    Android主流热修复
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										版本适配
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Android 10
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/Android%2010/Android%2010%E9%80%82%E9%85%8D/">
+                     
+										    Android 10适配
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%89%88%E6%9C%AC%E9%80%82%E9%85%8D/xapk%E5%AE%89%E8%A3%85%E5%8C%85%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85/">
+                     
+										    xapk安装包如何安装
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										网络
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E7%BD%91%E7%BB%9C/Windows%E3%80%81MacOS%E4%B8%ADCharles%E6%8A%93%E5%8C%85%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    Windows、MacOS中Charles抓包常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										规范
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%A7%84%E8%8C%83/Android%20Log%E8%A7%84%E8%8C%83/">
+                     
+										    Android Log规范
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										设计模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%AE%89%E5%8D%93%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+                     
+										    安卓设计模式常见问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                     
+										    常见的设计模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%B6%A3%E8%A7%A3%E5%B7%A5%E5%8E%82%E4%B8%89%E6%A8%A1%E5%BC%8F/">
+                     
+										    趣解工厂三模式
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										软件架构模式
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/Google%E6%8E%A8%E8%8D%90%E6%9E%B6%E6%9E%84%E5%88%86%E4%BA%AB/">
+                     
+										    Google推荐架构分享
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/MVC%E3%80%81MVP%E3%80%81MVVM%E3%80%81MVI/">
+                     
+										    MVC、MVP、MVVM、MVI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										面试题
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/23%E4%B8%AD%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+                     
+										    23中设计模式及其应用场景
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Handler/">
+                     
+										    Handler
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/LinearLayout%E3%80%81RelativeLayout%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94/">
+                     
+										    LinearLayout、RelativeLayout性能对比
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/Retrofit%E3%80%81okhttp/">
+                     
+										    Retrofit、okhttp
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/eventBus/">
+                     
+										    eventBus
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/glide/">
+                     
+										    glide
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%8E%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                     
+										    组件化与模块化
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%87%AA%E5%AE%9A%E4%B9%89View/">
+                     
+										    自定义View
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Android/%E9%9D%A2%E8%AF%95%E9%A2%98/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%93%BE%E6%8E%A5%E6%B1%87%E6%80%BB/">
+                     
+										    面试题链接汇总
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Blog
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Github Pages + Hexo搭建个人博客
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Github%20Pages%20+%20Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E4%BD%BF%E7%94%A8VS%20Code%E7%AE%A1%E7%90%86%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/">
+                     
+										    使用VS Code管理博客项目
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Blog/Markdown%E8%AF%AD%E6%B3%95/">
+                     
+										    Markdown语法
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Game
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/Game/%E5%A7%94%E6%89%98%E4%B8%AD%E5%BF%83/">
+                     
+										    委托中心
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Git
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E7%BB%A9%E6%95%88%E5%BF%85%E5%A4%87%E7%BB%9F%E8%AE%A1%E5%91%BD%E4%BB%A4/">
+                     
+										    绩效必备统计命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Git/%E9%85%8D%E7%BD%AE.ignore/">
+                     
+										    配置.ignore
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										GrantEvents
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用第三方短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/GrantEvents/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1-PHP/">
+                     
+										    使用阿里云短信-PHP
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2016/03/30/GrantEvents/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E6%8A%A5%E5%90%8D%E9%82%80%E8%AF%B7%E5%87%BD/">
+                     
+										    快速搭建简单报名邀请函
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										HormanyOS
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/KMP%E9%A1%B9%E7%9B%AE%E9%80%82%E9%85%8DHormanyOS/">
+                     
+										    KMP项目适配HormanyOS
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/HormanyOS/%E4%BF%A1%E9%80%9A%E5%8D%AB%E5%A3%AB%E9%B8%BF%E8%92%99%E7%89%88%E6%9E%B6%E6%9E%84/">
+                     
+										    信通卫士鸿蒙版架构
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										rxjava
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Java/rxjava/just%20%E5%92%8C%20fromCallable%20%E5%8C%BA%E5%88%AB/">
+                     
+										    just 和 fromCallable 区别
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										VPN
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/VPN/Panda%20VPM/">
+                     
+										    Panda VPM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Web
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Web/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E5%8A%A8%E6%80%81%E7%BD%91%E7%AB%99/">
+                     
+										    静态网站动态网站
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Windows
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/Windows/%E6%96%87%E4%BB%B6%E5%8A%A0%E5%89%8D%E5%90%8E%E7%BC%80%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8Dbat%E6%89%B9%E5%A4%84%E7%90%86%E4%BB%A3%E7%A0%81/">
+                     
+										    文件加前后缀批量重命名bat批处理代码
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										ios
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/ios/%E5%88%9A%E4%B8%8B%E8%BD%BD%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E9%A2%84%E8%A7%88UI/">
+                     
+										    刚下载的项目无法预览UI
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										命令行
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                     
+										    mac 常用命令
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E5%91%BD%E4%BB%A4%E8%A1%8C/%E8%A7%A3%E5%86%B3mac%E4%B8%ADzsh%E7%9A%84%20adb%20command%20not%20found%20%E9%97%AE%E9%A2%98/">
+                     
+										    解决mac中zsh的 adb command not found 问题
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										编译器
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20MD%20%E6%8F%92%E4%BB%B6/">
+                     
+										    VS Code MD 插件
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E7%BC%96%E8%AF%91%E5%99%A8/VS%20Code%20%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                     
+										    VS Code 快捷键
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										老爸的文章
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										童年往事
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%90%83%E7%B3%96/">
+                     
+										    吃糖
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E5%99%A9%E6%A2%A6/">
+                     
+										    噩梦
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E8%BF%9C%E9%97%A8/">
+                     
+										    第一次出远门
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2026/10/20/%E8%80%81%E7%88%B8%E7%9A%84%E6%96%87%E7%AB%A0/%E7%AB%A5%E5%B9%B4%E5%BE%80%E4%BA%8B/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%90%BD%E6%B0%B4/">
+                     
+										    第一次落水
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content" class="content">
+		<h1 id="article-title">
+	RecyclerView 缓存与复用机制
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>Qin</span>
+	<span>2026-10-21 00:09:42</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<h1 id="RecyclerView-缓存与复用机制"><a href="#RecyclerView-缓存与复用机制" class="headerlink" title="RecyclerView 缓存与复用机制"></a>RecyclerView 缓存与复用机制</h1><blockquote>
+<p>对应面试题 Q027（P0）。第一部分是完整的答题内容，第二部分起补充五个容器的精确定义、布局阶段和 bind 的作用。</p>
+</blockquote>
+<hr>
+<h2 id="一、四级缓存到底是什么（先把容易记错的属性分清）"><a href="#一、四级缓存到底是什么（先把容易记错的属性分清）" class="headerlink" title="一、四级缓存到底是什么（先把容易记错的属性分清）"></a>一、四级缓存到底是什么（先把容易记错的属性分清）</h2><table>
+<thead>
+<tr>
+<th>层</th>
+<th>存活周期</th>
+<th>容量</th>
+<th>命中后</th>
+<th>匹配依据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mAttachedScrap</td>
+<td><strong>一次 layout 内</strong>（pre/post 之间）</td>
+<td>无限，随本次布局</td>
+<td>不 bind</td>
+<td>layoutPosition + viewType 校验</td>
+</tr>
+<tr>
+<td>mChangedScrap</td>
+<td>pre-layout 到 post-layout</td>
+<td>同上</td>
+<td><strong>post-layout 要 bind</strong></td>
+<td>仅 viewType 不变者</td>
+</tr>
+<tr>
+<td>mCachedViews</td>
+<td>跨 layout 长期存在</td>
+<td><strong>全局默认 2</strong>（不是每类型 2）</td>
+<td><strong>不 bind</strong></td>
+<td>无 stable id 按 layoutPosition；有则按 id</td>
+</tr>
+<tr>
+<td>ViewCacheExtension</td>
+<td>自己管</td>
+<td>自己管</td>
+<td>自己定</td>
+<td>自己实现有效性判断</td>
+</tr>
+<tr>
+<td>RecycledViewPool</td>
+<td>进程内长期</td>
+<td><strong>每个 viewType 默认 5</strong></td>
+<td><strong>必须 bind</strong></td>
+<td>仅按 viewType 分桶</td>
+</tr>
+</tbody></table>
+<p>两个高频误答先排掉：<code>mCachedViews</code> 的 2 是<strong>整个 RecyclerView 共享 2 个</strong>，而 pool 的 5 才是<strong>按 viewType 各 5 个</strong>；还有 <code>onViewRecycled</code> <strong>只在进 pool 时调用，进 mCachedViews 时不调用</strong>——因为 cache 里的 view 还保有绑定状态，告诉 Adapter“已回收”是错的。</p>
+<h2 id="二、取一个-ViewHolder-的完整查找链"><a href="#二、取一个-ViewHolder-的完整查找链" class="headerlink" title="二、取一个 ViewHolder 的完整查找链"></a>二、取一个 ViewHolder 的完整查找链</h2><p><code>tryGetViewHolderForPositionByDeadline</code> 的顺序：</p>
+<ol>
+<li><code>mChangedScrap</code>：仅当处于 pre-layout 或数据有 change 时查。</li>
+<li><code>mAttachedScrap</code>：要求 <code>layoutPosition</code> 精确相等、<code>!isInvalid()</code>、非 removed；命中就打上 <code>FLAG_RETURNED_FROM_SCRAP</code>。</li>
+<li><strong>hidden view</strong>：<code>mChildHelper.findHiddenNonRemovedView(position)</code>——被 remove 但还在跑动画、仍然 attached 的 view 也算“可复用”，这正是方法名里 <code>OrHidden</code> 的来历。</li>
+<li><code>mCachedViews</code>：同样按 layoutPosition 匹配，命中就 <code>remove(i)</code> 并从缓存中摘出。</li>
+<li><code>ViewCacheExtension</code>。</li>
+<li><code>RecycledViewPool.getRecycledView(viewType)</code>。</li>
+<li>都没有 → <code>createViewHolder()</code>。</li>
+</ol>
+<p>第 2、4 步命中后还有一道闸：<code>validateViewHolderForOffsetPosition(holder)</code>。它专门校验三件事——holder 是不是被标记 removed、<code>mPosition</code> 是否越界（越界会直接抛异常，这就是“复用到已不存在位置”的报错来源）、<strong>以及 viewType 是否发生变化</strong>（<code>mAdapter.getItemViewType(holder.mPosition) != holder.getItemViewType()</code> 则判定失效）。校验不过就把 holder 扔回去并强制 rebind。</p>
+<h2 id="三、判断“要不要重新-bind”的三个开关"><a href="#三、判断“要不要重新-bind”的三个开关" class="headerlink" title="三、判断“要不要重新 bind”的三个开关"></a>三、判断“要不要重新 bind”的三个开关</h2><p>命中一个 holder 之后，真正决定 bind 与否的是：</p>
+<ul>
+<li><code>!holder.isBound()</code>：<code>FLAG_BOUND</code> 没置位 → 必须 bind。</li>
+<li><code>holder.needsUpdate()</code>：<code>FLAG_UPDATE</code> 被置 → 必须 bind。</li>
+<li><code>holder.isInvalid()</code>：<code>FLAG_INVALID</code> 被置，<strong>或者 position 为负</strong>（位置信息不可信）→ 必须 bind。</li>
+</ul>
+<p>所以正确的心智模型是：<strong>scrap/cache 命中 = 省掉 create + bind，但要过有效性校验；pool 命中 = 只省掉 create，bind 一定发生</strong>（pool 在 <code>putRecycledView</code> 时已经 <code>resetInternal()</code> 清掉了 <code>FLAG_BOUND</code> 和数据引用）。</p>
+<p>一个关键差异：<code>mCachedViews</code> 的匹配<strong>在 Adapter 有 stable id（<code>setHasStableIds(true)</code>）时改为按 id 匹配</strong>，走 <code>getScrapOrCachedViewForId</code>，并且要求该 id 出现在 <code>mUnmodifiedIds</code> 里——<code>notifyItemChanged</code> 会把 id 从这里移除，于是这个 view 即使还在 cache 里也不会被复用，必须重建。这就是“stable id 提升复用率”的确切含义。</p>
+<h2 id="四、回收侧：什么进-cache、什么进-pool"><a href="#四、回收侧：什么进-cache、什么进-pool" class="headerlink" title="四、回收侧：什么进 cache、什么进 pool"></a>四、回收侧：什么进 cache、什么进 pool</h2><p><code>recycleViewHolderInternal</code> 的判定顺序是：</p>
+<ul>
+<li>带 <code>FLAG_INVALID / FLAG_REMOVED / FLAG_IGNORE / FLAG_RETURNED_FROM_SCRAP</code> 的，<strong>直接跳过 cache 进 pool</strong>（甚至直接丢弃）。<code>FLAG_RETURNED_FROM_SCRAP</code> 专指“动画还没跑完的 view 不能被抢走”，这是动画正确性的保护。</li>
+<li>否则进 <code>mCachedViews</code>；若 cache 已满，就把<strong>队首（最旧的）</strong>弹出 → <code>addViewHolderToRecycledViewPool</code> → 此时才 <code>dispatchViewRecycled</code> → 回调 <code>onViewRecycled</code>。</li>
+</ul>
+<p>注意 <code>detach</code> 与 <code>remove</code> 的区别：<code>detach</code> 只是从父容器摘下、view 仍被 RecyclerView 持有（可进 scrap/cache），<code>remove</code> 才是彻底走回收。这解释了为什么动画期间 view 还在，却已经不参与正常复用了。</p>
+<h2 id="五、刷新（notify）各走哪条路"><a href="#五、刷新（notify）各走哪条路" class="headerlink" title="五、刷新（notify）各走哪条路"></a>五、刷新（notify）各走哪条路</h2><ul>
+<li><strong>结构变更</strong>（insert/remove/move）：<code>mStructureChanged</code> 置位，并且会调用 <code>offsetPositionRecordsForInsert/Remove/Move</code> 去<strong>同步修正 <code>mCachedViews</code> 里每个 holder 的 position</strong>。所以插入数据不会让 cache 整体失效，命中依然不 bind——这正是“位置一致”必须由 Adapter 维护的原因。</li>
+<li><strong>内容变更</strong>（notifyItemChanged）：走 <strong>pre-layout + post-layout 两遍布局</strong>。第一遍用旧位置算动画起止点；变化但 viewType 不变的 view 落进 <code>mChangedScrap</code>，第二遍真正布局时重 bind。</li>
+<li><strong>全量变更</strong>（notifyDataSetChanged）：设 <code>mStructureChanged</code>，跳过 pre-layout，<strong>所有 view 失效</strong>，全部 rebind、无动画、无明显复用。</li>
+<li><code>setAdapter / swapAdapter</code>：cache 与 pool 会被清空。</li>
+<li>高版本还有 <code>GapWorker</code> 的 <strong>prefetch</strong>：在上一帧空闲时提前把下一个 item 取出来 bind，本质上也是往 cache/pool 里预热。</li>
+</ul>
+<h2 id="六、追问一：滚动和刷新时各层怎么用"><a href="#六、追问一：滚动和刷新时各层怎么用" class="headerlink" title="六、追问一：滚动和刷新时各层怎么用"></a>六、追问一：滚动和刷新时各层怎么用</h2><p>滚动的关键是 <strong>cache 是 FIFO 且只有 2 个</strong>，所以命中率有方向性：</p>
+<ul>
+<li>小幅来回滚动（上下抖）——刚离屏的 view 恰好还躺在 cache 里，命中后<strong>不 bind</strong>，不掉帧。</li>
+<li>快速同向滚动——需要的 position 早就被挤进 pool 了，命中后<strong>要 bind</strong>，然后是 create。这就是“快速滑动卡顿”的机制性来源。</li>
+</ul>
+<p>所以调 <code>setItemViewCacheSize()</code> 只对“就近回滚”有效，对大幅滚动几乎无用；大幅滚动要做的是<strong>降低 bind 成本</strong>（bind 里别做重活），不是加大缓存。</p>
+<p>刷新时按上面三条路分别说：结构变更靠 position offset 保住 cache；内容变更靠 pre/post layout + <code>mChangedScrap</code> 保动画、post 阶段重 bind；全量变更等于放弃复用。</p>
+<h2 id="七、追问二：共享-pool-的四个前提"><a href="#七、追问二：共享-pool-的四个前提" class="headerlink" title="七、追问二：共享 pool 的四个前提"></a>七、追问二：共享 pool 的四个前提</h2><p>pool <strong>只按 viewType 分桶、且只有 pool 能跨 Adapter/RecyclerView 共享，cache 不行</strong>。能共享的前提：</p>
+<ol>
+<li><strong>viewType 在全局唯一映射到同一种 item</strong>。两个 Adapter 各自从 0 开始编号就会串味，建议用全局枚举分配 viewType。</li>
+<li><strong>LayoutParams 约束兼容</strong>。复用过来的 view 带着原 parent 的 LayoutParams，横向列表若宽度依赖父约束，换列表就错——要么只共享同构列表，要么让 item 自适应宽度。</li>
+<li><strong>回收清理对称</strong>。<code>onViewRecycled</code> 里必须解绑 listener、停动画、清图片，否则 A 列表的状态会带到 B。</li>
+<li><strong>容量要重算</strong>。共享后驻留时间变长，用 <code>setMaxRecycledViews(viewType, n)</code> 按类型收紧，避免内存膨胀。</li>
+</ol>
+<p>收益是嵌套 RV 的 inflate 和首次 bind 大幅减少；翻车症状固定是三件套：<strong>内容串行、高度跳变、点击位置错</strong>。</p>
+<p>额外一句：stable ID 与缓存不是同一件事——它解决的是“notify 之后能否按 id 找回同一个 holder”，改变不了绑定契约，也<strong>不能用 position 当业务 id</strong>，否则 <code>mUnmodifiedIds</code>、position offset、diff 动画会连环错位。</p>
+<hr>
+<h2 id="八、补充一：五个容器分别是什么"><a href="#八、补充一：五个容器分别是什么" class="headerlink" title="八、补充一：五个容器分别是什么"></a>八、补充一：五个容器分别是什么</h2><h3 id="1-mAttachedScrap（ArrayList-lt-ViewHolder-gt-）"><a href="#1-mAttachedScrap（ArrayList-lt-ViewHolder-gt-）" class="headerlink" title="1. mAttachedScrap（ArrayList&lt;ViewHolder&gt;）"></a>1. mAttachedScrap（<code>ArrayList&lt;ViewHolder&gt;</code>）</h3><ul>
+<li><strong>定义</strong>：一次布局过程中，临时存放“本来 attached 在 RecyclerView 上、被 detach 下来等待重新摆放”的 ViewHolder。</li>
+<li><strong>进入条件（什么情况的 item 会进来）</strong>：<ul>
+<li>布局开始时<strong>仍 attached 在 RecyclerView 上</strong>的所有子 view。<code>dispatchLayoutStep1/2</code> 在调用 <code>LayoutManager.onLayoutChildren</code> 之前会执行 <code>detachAndScrapAttachedViews(recycler)</code>，把当前屏幕上的孩子逐个摘进 scrap——所以进入者是“<strong>这一帧还在屏幕上、需要在本次布局里重新摆放</strong>的 view”。</li>
+<li>布局过程中被 LayoutManager 主动临时摘下的 view（<code>detachAndScrapView</code>），例如为了先测后摆或调整锚点。</li>
+<li>判定分支在 <code>Recycler.scrapView</code>：holder 带 <code>FLAG_REMOVED / FLAG_INVALID</code>，或<strong>未被标为 updated</strong>，或 <code>canReuseUpdatedViewHolder(holder)</code> 为真（change 带了 payload、动画认为可以直接复用同一个 holder）→ 进 <code>mAttachedScrap</code>；否则进 <code>mChangedScrap</code>。</li>
+</ul>
+</li>
+<li><strong>不会进来</strong>：<strong>已经划出屏幕的 view</strong>。滑动出界的 child 会在 fill 阶段被 <code>removeAndRecycleView</code> 交回 Recycler，走 recycle 路径进 <code>mCachedViews</code> 或 pool；处在动画中、带 <code>FLAG_RETURNED_FROM_SCRAP</code> 的 view 也不会被再次取用。</li>
+<li><strong>命中条件</strong>：<code>layoutPosition</code> 完全相等、未标 invalid、未被 remove。命中后直接重新 attach，<strong>不触发 onBindViewHolder，也不回调 onViewRecycled</strong>。</li>
+<li><strong>生命周期</strong>：只在 <code>dispatchLayout</code> 内有效，布局结束即清空——它不是跨帧缓存。</li>
+<li><strong>本质</strong>：它是“布局算法的工作区”，用于支持布局过程中对同一批 view 的反复摆放（例如 LinearLayoutManager 先测后摆）。</li>
+</ul>
+<blockquote>
+<p><strong>问：mAttachedScrap 会存放“原本可见、但现在被划出屏幕”的 item 吗？</strong></p>
+<p><strong>答：不会。</strong> 它只装“本次布局开始时仍 attached 的 view”。一个原本可见的 view 确实会在布局开始时先被摘进 scrap，但如果随后在 fill 阶段被判定为出界，它会被从 scrap 取出并走 recycle 进 <code>mCachedViews</code>/pool，<strong>最终不会留在 scrap 里</strong>。跨帧保存“刚划出屏幕”的 view 是 <code>mCachedViews</code> 的职责。</p>
+</blockquote>
+<h3 id="2-mChangedScrap（ArrayList-lt-ViewHolder-gt-）"><a href="#2-mChangedScrap（ArrayList-lt-ViewHolder-gt-）" class="headerlink" title="2. mChangedScrap（ArrayList&lt;ViewHolder&gt;）"></a>2. mChangedScrap（<code>ArrayList&lt;ViewHolder&gt;</code>）</h3><ul>
+<li><strong>定义</strong>：<code>mAttachedScrap</code> 的兄弟容器，专门放<strong>内容被 notify 改动、需要参与预测动画</strong>的 ViewHolder。</li>
+<li><strong>进入条件（什么情况的 item 会进来）</strong>：<code>Recycler.scrapView</code> 的另一条分支——holder 被标为 <strong>updated</strong>（<code>FLAG_UPDATE</code>，即经历过 <code>notifyItemChanged</code> 这类“内容变了”的更新）、不带 <code>FLAG_REMOVED / FLAG_INVALID</code>，并且 <code>canReuseUpdatedViewHolder(holder)</code> 为 <strong>false</strong>（默认 <code>DefaultItemAnimator</code> 在<strong>没有 payload</strong> 时返回 false）→ 进 <code>mChangedScrap</code>。<ul>
+<li>换句话说：<strong>“内容变了、又没有 payload、需要做旧→新过渡动画”的 view 才来这里</strong>；带 payload 的 change 会被判定为可复用，走 <code>mAttachedScrap</code>，只做局部重绑。</li>
+<li>另一个前提是 pre-layout 已经启用，否则这个容器根本不会被填充。</li>
+</ul>
+</li>
+<li><strong>与 attachedScrap 的分工</strong>：<code>mAttachedScrap</code> 中的 holder 在 pre-layout 与 post-layout 之间不能复用（因为布局位置会变，视为已失效）；<code>mChangedScrap</code> 中的 holder 恰恰是<strong>唯一允许跨 pre/post 两段保留</strong>的，因为动画需要它从旧状态过渡到新状态。</li>
+<li><strong>限制</strong>：只有 viewType 未变的 view 才会进这里；viewType 变了就没有稳定的过渡形态，只能重建。</li>
+<li><strong>结局</strong>：pre-layout 结束后，post-layout 布局时这些 holder 会被重新 bind（内容已经变了），因此它命中不 bind 这条规律对它不成立。</li>
+<li><strong>可见性</strong>：只在 <code>mState.mInPreLayout</code> 为 true 时才去查它（<code>getChangedScrapViewForPosition</code> 先按 layoutPosition 找，有 stable id 时再按 id 找）。</li>
+</ul>
+<h3 id="3-mCachedViews（ArrayList-lt-ViewHolder-gt-）"><a href="#3-mCachedViews（ArrayList-lt-ViewHolder-gt-）" class="headerlink" title="3. mCachedViews（ArrayList&lt;ViewHolder&gt;）"></a>3. mCachedViews（<code>ArrayList&lt;ViewHolder&gt;</code>）</h3><ul>
+<li><strong>定义</strong>：第一级真正意义上的“复用缓存”，保存刚刚离开屏幕、<strong>位置连续</strong>的 ViewHolder，且<strong>保留完整绑定状态</strong>。</li>
+<li><strong>进入条件（什么情况的 item 会进来）</strong>：入口是 <code>Recycler.recycleViewHolderInternal</code>，触发者是滑动/布局中 <code>removeAndRecycleView</code> 一类的回收动作。典型画像就是——<strong>刚刚离开屏幕、状态仍然有效（<code>FLAG_BOUND</code> 未被破坏）、没有 remove/invalid 标记、且 cache 未满</strong>的 view。<ul>
+<li>被排除、直接丢进 pool 的情况：容量为 0（<code>setItemViewCacheSize(0)</code>）；带 <code>FLAG_INVALID / FLAG_REMOVED / FLAG_IGNORE / FLAG_RETURNED_FROM_SCRAP</code>；带 <code>FLAG_NOT_RECYCLABLE</code>（直接丢弃，连 pool 都不进）。</li>
+<li>数据变更的影响：<code>notifyItemInserted/Removed/Moved</code> 会通过 <code>offsetPositionRecordsForInsert/Remove/Move</code> <strong>修正 cache 里 holder 的 position</strong>，让它们仍然对应同一条数据；<code>notifyItemChanged</code> 会把对应 id 从 <code>mUnmodifiedIds</code> 移除（有 stable id 时），使这个 holder 虽然还在 cache 里也命中不了；<code>setAdapter / swapAdapter</code> 会整体清空。</li>
+<li>在里面的 view 一定是“位置连续、紧邻可见区”的那几个，这正是容量只有 2 的原因。</li>
+</ul>
+</li>
+<li><strong>容量</strong>：<code>DEFAULT_CACHE_SIZE = 2</code>，用 <code>setItemViewCacheSize(int)</code> 调整；它是<strong>整个 RecyclerView 共享的 2 个，不是每个 viewType 2 个</strong>。</li>
+<li><strong>FIFO 语义</strong>：满了以后从队首（最旧的）弹出，走 <code>resetInternal</code> 后进 pool。</li>
+<li><strong>命中效果</strong>：直接 attach，<strong>不 bind</strong>；即便如此仍要过 <code>validateViewHolderForOffsetPosition</code>。</li>
+<li><strong>匹配规则</strong>：Adapter 无 stable id 时按 <code>layoutPosition</code> 精确相等匹配；有 stable id 时按 id 匹配并额外校验该 id 属于 <code>mUnmodifiedIds</code>。</li>
+<li><strong>注意</strong>：进 cache <strong>不会</strong>触发 <code>onViewRecycled</code>，因为它还“有主”。</li>
+</ul>
+<h3 id="4-ViewCacheExtension（抽象类）"><a href="#4-ViewCacheExtension（抽象类）" class="headerlink" title="4. ViewCacheExtension（抽象类）"></a>4. ViewCacheExtension（抽象类）</h3><ul>
+<li><strong>定义</strong>：开发者挂钩点，<code>getViewForPositionAndType(Recycler, position, type)</code> 返回一个 view 或 null。</li>
+<li><strong>位置</strong>：在查找链的第 5 位——cache 之后、pool 之前。</li>
+<li><strong>特点</strong>：RecyclerView 完全不校验你返回的 view 是否正确，有效性与状态清理全部由实现者负责；一旦返回错误的 view，症状是内容错位且极难排查。因此实践中基本无人使用，属于“知道它存在、知道为什么不用”的层次。</li>
+</ul>
+<h3 id="5-RecycledViewPool（SparseArray-lt-ScrapData-gt-）"><a href="#5-RecycledViewPool（SparseArray-lt-ScrapData-gt-）" class="headerlink" title="5. RecycledViewPool（SparseArray&lt;ScrapData&gt;）"></a>5. RecycledViewPool（<code>SparseArray&lt;ScrapData&gt;</code>）</h3><ul>
+<li><strong>定义</strong>：按 viewType 分桶的 ViewHolder 池，是<strong>唯一支持跨 Adapter、跨 RecyclerView 共享</strong>的一层。</li>
+<li><strong>容量</strong>：<code>DEFAULT_MAX_SCRAP = 5</code>，<strong>每种 viewType 各自 5 个</strong>；用 <code>setMaxRecycledViews(viewType, max)</code> 按类型调整。</li>
+<li><strong>入池时</strong>：<code>putRecycledView</code> 会先 <code>resetInternal()</code>——清空 <code>FLAG_BOUND</code>、数据引用、<code>mPosition</code>，并 <code>dispatchViewRecycled</code> 回调 <code>onViewRecycled</code>；带 <code>FLAG_RETURNED_FROM_SCRAP</code> 的 view 不会被放入。</li>
+<li><strong>出池时</strong>：只按 viewType 取，<strong>取出后必须 <code>bindViewHolder</code></strong>，因为边界状态已经清干净了。</li>
+<li><strong>使用方式</strong>：<code>RecyclerView.setRecycledViewPool(sharedPool)</code>、<code>LayoutManager.setRecycledViewPool()</code>；嵌套列表的常见优化就是内层复用外层的 pool。</li>
+<li><strong>代价</strong>：共享后 view 驻留时间变长，内存占用上升，需要配合容量调整。</li>
+</ul>
+<blockquote>
+<p>记忆主线：<strong>scrap 是布局内的临时工作区，cache 是跨帧的“带数据复用”，extension 是自定义钩子，pool 是跨类型/跨列表的“空壳复用”。</strong></p>
+</blockquote>
+<h3 id="6-一张表区分“同一批-view-在不同时刻去哪”"><a href="#6-一张表区分“同一批-view-在不同时刻去哪”" class="headerlink" title="6. 一张表区分“同一批 view 在不同时刻去哪”"></a>6. 一张表区分“同一批 view 在不同时刻去哪”</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>走哪个容器</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>布局开始，屏幕上原有的 view 要重新摆放</td>
+<td><code>mAttachedScrap</code></td>
+<td>仍 attached，本次布局还要用</td>
+</tr>
+<tr>
+<td>布局/滚动中被判定出界、滑出屏幕</td>
+<td><code>mCachedViews</code>（满了转 pool）</td>
+<td>走 recycle 路径，跨帧保留状态</td>
+</tr>
+<tr>
+<td><code>notifyItemChanged</code> 且<strong>无 payload</strong>、需要过渡动画</td>
+<td><code>mChangedScrap</code></td>
+<td>要保留旧形态做动画，post-layout 再 bind</td>
+</tr>
+<tr>
+<td><code>notifyItemChanged</code> 且<strong>带 payload</strong></td>
+<td><code>mAttachedScrap</code></td>
+<td>判定可复用同一 holder，只做局部重绑</td>
+</tr>
+<tr>
+<td><code>notifyItemRemoved</code> 后仍在跑动画</td>
+<td>hidden view（<code>findHiddenNonRemovedView</code>）+ <code>FLAG_RETURNED_FROM_SCRAP</code></td>
+<td>被保护，不许被抢用</td>
+</tr>
+<tr>
+<td>被回收且 cache 已满、或状态已失效</td>
+<td><code>RecycledViewPool</code></td>
+<td>状态已 reset，只能按 viewType 复用</td>
+</tr>
+<tr>
+<td><code>notifyDataSetChanged</code> / <code>setAdapter</code> 之后</td>
+<td>全部失效，直接 create + bind</td>
+<td>没有可信的位置与旧状态</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="九、补充二：布局的各个阶段"><a href="#九、补充二：布局的各个阶段" class="headerlink" title="九、补充二：布局的各个阶段"></a>九、补充二：布局的各个阶段</h2><h3 id="1-三个官方布局阶段（dispatchLayout）"><a href="#1-三个官方布局阶段（dispatchLayout）" class="headerlink" title="1. 三个官方布局阶段（dispatchLayout）"></a>1. 三个官方布局阶段（<code>dispatchLayout</code>）</h3><p>RecyclerView 一次布局会依次走 <code>dispatchLayoutStep1/2/3</code>：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>名称</th>
+<th>做什么</th>
+<th>关键标志</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dispatchLayoutStep1</td>
+<td>pre-layout（预测布局 / 预测动画准备）</td>
+<td>用<strong>旧数据</strong>跑一次 <code>onLayoutChildren</code>，记录每个 view 的“动画前位置”；把变化中的 view 放进 <code>mChangedScrap</code>；算出消失/出现/移动的集合供动画使用</td>
+<td><code>mState.mInPreLayout = mState.mRunPredictiveAnimations</code></td>
+</tr>
+<tr>
+<td>dispatchLayoutStep2</td>
+<td>post-layout（真实布局）</td>
+<td><code>mState.mInPreLayout = false</code>，用<strong>新数据</strong>真正摆放所有 view，必要时重新 bind；这一步才是用户看到的最终布局</td>
+<td><code>mState.mItemCount</code> 更新</td>
+</tr>
+<tr>
+<td>dispatchLayoutStep3</td>
+<td>动画与收尾</td>
+<td>处理“pre-layout 时可见、真实布局后消失”的 view 的回收；执行 <code>mItemAnimator.runPendingAnimations()</code>；<code>mLayout.onLayoutCompleted()</code>；清空 scrap、清理 <code>ViewInfoStore</code>、回收动画遗留的 view</td>
+<td><code>mState.mDeletedInvisibleItemCountSincePreviousLayout</code></td>
+</tr>
+</tbody></table>
+<p>为什么必须两遍布局：只有一个 View 在一帧内既保留旧位置又知道新位置，<code>ItemAnimator</code> 才能算出位移/渐变的起止点。这也是 <code>notifyItemChanged</code> 能有“原地淡入淡出”的原因。</p>
+<p>补充两个前提条件（很多人说不清）：</p>
+<ul>
+<li><code>mRunSimpleAnimations</code>：有 <code>ItemAnimator</code>、且数据集发生的是会被感知的变化时才为真。</li>
+<li><code>mRunPredictiveAnimations</code>：在简单动画的基础上，<strong>还要求 LayoutManager 支持预测动画</strong>（<code>supportsPredictiveItemAnimations()</code>，Linear/Grid 支持，部分自定义 LM 不支持）；只有它为真，pre-layout 才真正启用，<code>mChangedScrap</code> 才会被查询。</li>
+</ul>
+<h3 id="2-除-pre-layout-post-layout-之外，还有哪些阶段"><a href="#2-除-pre-layout-post-layout-之外，还有哪些阶段" class="headerlink" title="2. 除 pre-layout / post-layout 之外，还有哪些阶段"></a>2. 除 pre-layout / post-layout 之外，还有哪些阶段</h3><ul>
+<li><strong>onMeasure 中的提前布局</strong>：如果 <code>onMeasure</code> 时还来不及布局，会在这里直接跑 <code>dispatchLayoutStep1/2</code>，把布局提前到测量阶段完成。</li>
+<li><strong>帧间隙的 prefetch（预取）</strong>：<code>GapWorker</code> 在下一帧到来前的空闲时间调用 <code>LayoutManager.collectAdjacentPrefetchPositions</code>，提前把即将进入屏幕的 item 取出来并 bind。它发生在布局之外，是 25.1 之后新增的“抢在滑动前把活干完”的机制。</li>
+<li><strong>动画阶段（ItemAnimator）</strong>：<code>animateAppearance / animateDisappearance / animateChange / animateMove</code> + <code>runPendingAnimations</code>；动画期间相关 view 带 <code>FLAG_RETURNED_FROM_SCRAP</code>，受到“不被拿走”的保护，动画结束后才允许回收。</li>
+<li><strong>回收阶段（recycle）</strong>：滑动中 <code>removeAndRecycleView</code> 触发 detach → cache → pool 的迁移，与布局阶段交错发生，是“滚动时缓存一直在换手”的原因。</li>
+<li><strong>绘制阶段（onDraw / onDrawOver）</strong>：<code>ItemDecoration</code> 的两层绘制分别画在 item 之下与之上；不属于布局，但同属 measure-layout-draw 一次遍历。</li>
+</ul>
+<h3 id="3-常被问到的-ViewHolder-状态位"><a href="#3-常被问到的-ViewHolder-状态位" class="headerlink" title="3. 常被问到的 ViewHolder 状态位"></a>3. 常被问到的 ViewHolder 状态位</h3><table>
+<thead>
+<tr>
+<th>标志</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FLAG_BOUND</td>
+<td>已绑定，位置可信</td>
+</tr>
+<tr>
+<td>FLAG_UPDATE</td>
+<td>数据可能变了，需要重 bind</td>
+</tr>
+<tr>
+<td>FLAG_INVALID</td>
+<td>必须重 bind，且不能直接复用</td>
+</tr>
+<tr>
+<td>FLAG_REMOVED</td>
+<td>已被移除（动画期间仍可能存在）</td>
+</tr>
+<tr>
+<td>FLAG_RETURNED_FROM_SCRAP</td>
+<td>来自 scrap / 动画中，不许被抢用</td>
+</tr>
+<tr>
+<td>FLAG_NOT_RECYCLABLE</td>
+<td>不可回收，直接丢弃</td>
+</tr>
+<tr>
+<td>FLAG_ADAPTER_POSITION_UNKNOWN</td>
+<td>在真实布局前 position 未知</td>
+</tr>
+<tr>
+<td>FLAG_MOVED</td>
+<td>发生了移动动画</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="十、补充三：bind-的作用是什么"><a href="#十、补充三：bind-的作用是什么" class="headerlink" title="十、补充三：bind 的作用是什么"></a>十、补充三：bind 的作用是什么</h2><p><strong>一句话：bind 是“把复用的空壳 View 变成代表某个 position 数据的那一帧视图”的动作。</strong></p>
+<h3 id="1-调用链与它到底改了什么"><a href="#1-调用链与它到底改了什么" class="headerlink" title="1. 调用链与它到底改了什么"></a>1. 调用链与它到底改了什么</h3><pre><code>Recycler.tryGetViewHolderForPositionByDeadline
+  → bindViewHolder(holder, position)
+       holder.mPosition = position            // 位置生效
+       holder.mItemId = getItemId(position)   // 有 stable id 时
+       holder.setFlags(FLAG_BOUND,
+           FLAG_BOUND | FLAG_UPDATE | FLAG_INVALID | FLAG_ADAPTER_POSITION_UNKNOWN)
+                                              // 置 BOUND，清掉三个“需要重来”的标志
+       adapter.bindViewHolder(holder, position)
+            → onBindViewHolder(holder, position, payloads)</code></pre><p>它做的事情可以归为三类：</p>
+<ol>
+<li><strong>数据 → 视图的投影</strong>：<code>createViewHolder</code> 只负责 inflate 和 <code>findViewById</code>，拿到一个没有任何数据的空壳；bind 才把 item 数据显示到各个子 view 上。</li>
+<li><strong>维护 holder 的状态与身份</strong>：写入 <code>mPosition</code>、<code>mItemId</code>，置 <code>FLAG_BOUND</code> 并清掉 <code>FLAG_UPDATE / FLAG_INVALID / FLAG_ADAPTER_POSITION_UNKNOWN</code>。<strong>bind 完成后这个 holder 才被认为是“位置可信、可直接复用”的</strong>——这也解释了第三节那三个开关的来历：它们检的就是 bind 有没有被失效掉。</li>
+<li><strong>承载局部刷新</strong>：带 payload 的 <code>notifyItemChanged(pos, payload)</code> 会走到三参 <code>onBindViewHolder</code>，只更新变化的部分，避免整块重绑。</li>
+</ol>
+<h3 id="2-为什么必须有-bind"><a href="#2-为什么必须有-bind" class="headerlink" title="2. 为什么必须有 bind"></a>2. 为什么必须有 bind</h3><p>屏幕上只有 M 个 View，数据有 N 条，且 <code>M ≪ N</code>。复用机制解决的是“View 不够用”的问题，而 <strong>bind 解决的是“这个 View 现在代表哪条数据”的问题</strong>——没有 bind，池子里捞出来的 view 依然是上一条数据的样子。create 是昂贵的（inflate + 查找子 view），bind 是廉价的，所以复用的价值在于<strong>把 create 摊薄</strong>。</p>
+<h3 id="3-什么时候一定会-bind"><a href="#3-什么时候一定会-bind" class="headerlink" title="3. 什么时候一定会 bind"></a>3. 什么时候一定会 bind</h3><ul>
+<li>pool 命中（状态已被 <code>resetInternal</code> 清空）；</li>
+<li><strong>viewType 与当前位置要求的不一致</strong>（<code>validateViewHolderForOffsetPosition</code> 判定失效）；</li>
+<li>holder 被标 <code>FLAG_UPDATE</code> 或 <code>FLAG_INVALID</code>，或 <code>mPosition</code> 为负、越界；</li>
+<li>新建 holder；</li>
+<li><code>notifyDataSetChanged</code> / <code>setAdapter</code> 之后的全量重绑。</li>
+</ul>
+<h3 id="4-工程约束（面试常追问“bind-里能做什么”）"><a href="#4-工程约束（面试常追问“bind-里能做什么”）" class="headerlink" title="4. 工程约束（面试常追问“bind 里能做什么”）"></a>4. 工程约束（面试常追问“bind 里能做什么”）</h3><ul>
+<li>bind 在<strong>主线程执行</strong>，只做映射与轻量格式化；IO、图片解码、复杂计算都应异步化或前置缓存，否则直接体现为滚动掉帧（顺接 Q028）。</li>
+<li>不要用 <code>onCreateViewHolder</code> 里的 <code>position</code>，也不要在 bind 时把 <code>position</code> 捕获进 listener 闭包——用 <code>getBindingAdapterPosition()</code> / <code>getAbsoluteAdapterPosition()</code>，否则复用后点击错位。</li>
+<li>重活交给 <code>DiffUtil</code> / payload 局部更新，而不是靠加大缓存掩盖。</li>
+<li>清理动作的对称点在 <code>onViewRecycled</code>（仅对进 pool 的 view 触发），bind 里加的监听、动画、图片请求要在这里或 <code>onViewDetachedFromWindow</code> 对应释放。</li>
+<li>若在 bind 中做过一次性的昂贵初始化，用 <code>onViewAttachedToWindow</code>/首次 bind 标记区分，而不是每次 bind 重复执行。</li>
+</ul>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2026/10/21/AI/Codex%E3%80%81Trae%E3%80%81DeepSeek%20Harness%E5%AF%B9%E6%AF%94/">
+                AI/Codex、Trae、DeepSeek Harness对比
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start"></span>-<span id="footerYear-end"></span>
+
+	
+	    <a href="/">Qin</a>
+	
+	
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//wujun.me" target="_blank">Wu Jun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-start').innerHTML = new Date().getFullYear() + '';
+</script>
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":50,"vOffset":30},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
